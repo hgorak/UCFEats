@@ -19,7 +19,6 @@ function Login() {
 						<span>Forgot password?</span>
 						<span>Need an account?</span>
 					</form>
-					<div></div>
 				</div>
 			</div>
 		</div>
