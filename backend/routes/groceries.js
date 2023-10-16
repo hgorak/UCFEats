@@ -6,8 +6,12 @@ const {
   deleteGrocery,
   updateGrocery
 } = require('../controllers/groceryController');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
+
+// Require authentication for all grocery routes
+router.use(requireAuth);
 
 // Get all groceries
 router.get('/', getGroceries);

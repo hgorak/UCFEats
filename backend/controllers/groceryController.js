@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 
 // Get all groceries
 const getGroceries = async (req, res) => {
+  const user_id = req.user._id;
+
   // Sorts all groceries in descending order
-  const groceries = await GroceryList.find({}).sort({name: 1}).collation({ locale: "en", caseLevel: true });
+  const groceries = await GroceryList.find({ user_id }).sort({name: 1}).collation({ locale: "en", caseLevel: true });
 
   res.status(200).json(groceries);
 };
@@ -43,7 +45,8 @@ const createGrocery = async (req, res) => {
 
   try
   {
-    const item = await GroceryList.create({name, quantity, brand});
+    const user_id = req.user._id;
+    const item = await GroceryList.create({name, quantity, brand, user_id});
     res.status(200).json(item);
   }
 

@@ -8,13 +8,20 @@ const grocerySchema = new Schema({
     type: String,
     required: true
   },
+
   quantity:
   {
     type: Number,
     required: true
   },
+
   brand:
   {
+    type: String,
+    required: true
+  },
+
+  user_id: {
     type: String,
     required: true
   }
