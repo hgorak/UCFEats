@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { VscAccount } from "react-icons/vsc";
+import { IconContext } from "react-icons";
 
 import "../styles.scss";
 
@@ -11,7 +13,11 @@ function Navbar() {
 					<h1>UCFEats</h1>
 				</div>
 				<div className="links">
-					<a>Login/Register</a>
+					<IconContext.Provider value={{ size: "35px" }}>
+						<div>
+							<VscAccount />
+						</div>
+					</IconContext.Provider>
 				</div>
 			</div>
 		</div>
