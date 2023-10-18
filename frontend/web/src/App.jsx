@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
