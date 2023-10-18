@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "../styles.scss";
 
@@ -10,8 +11,7 @@ function Navbar() {
 					<h1>UCFEats</h1>
 				</div>
 				<div className="links">
-					<a>Log In</a>
-					<a>Register</a>
+					<a>Login/Register</a>
 				</div>
 			</div>
 		</div>

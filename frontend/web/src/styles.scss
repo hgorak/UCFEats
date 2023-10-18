@@ -3,11 +3,11 @@ body {
 }
 
 :root {
-    background-image: linear-gradient(to bottom right,  #5865F2, #ACB2F9);
+    background-image: linear-gradient(to bottom right,  red, #ACB2F9);
     min-height: 100vh;
     
     .app {
-        font-family: Open Sans, sans-serif;
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
         display: flex;
         justify-content: center;
         color: white;
@@ -26,21 +26,32 @@ body {
 
                 .navbar-container {
                     width: 100%;
-                    background-color: white;
+                    // background-color: black;
                     color: black;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
     
                     .navbar {
-                        color: #5865F2;
+                        color: white;
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         // border: solid 1px black;
                         width: 1024px;
                         height: 75px;
-    
+                        
+                        .title {
+                            h1 {
+                                font-size: 40px;
+                                font-weight: 300;
+                            }
+                        }
+
+                        .links {
+                            font-size: 18px;
+                        }
+                        
                     }
                 }
 
@@ -56,17 +67,18 @@ body {
                         flex-direction: column;
                         flex: 3;
                         justify-content: center;
-                        align-items: center;
+                        align-items: left;
 
                         .description {
                             h1 {
-                                font-size: 60px;
+                                font-size: 80px;
                                 font-weight: bold;
                                 margin-bottom: 5px;
                             }
 
                             span {
                                 font-size: 60px;
+                                font-weight: 100;
                             }
                         }
                     }
