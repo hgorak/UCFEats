@@ -13,6 +13,23 @@
             width: 100%;
             justify-content: center;
             
+            .navbar-container {
+                width: 1024px;
+
+                .navbar {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .title {
+                        //text-align: left;
+                    }
+
+                    .links {
+                        //text-align: right;
+                    }
+                }
+            }
             // login page
             .login {
                 display: flex;
