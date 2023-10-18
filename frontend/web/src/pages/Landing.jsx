@@ -1,7 +1,7 @@
 import React from "react";
 
 import Navbar from "../components/Navbar.jsx";
-import Phone from "../images/phone.jpg";
+import Phone from "../images/phone.png";
 import "../styles.scss";
 
 function Landing() {
@@ -13,6 +13,7 @@ function Landing() {
 					<div className="description">
 						<h1>Find good eats</h1>
 						<span>with UCFEats</span>
+						<span></span>
 					</div>
 				</div>
 				<div className="container-2">
