@@ -30,10 +30,10 @@ app.use('/api/user', userRoutes);
 if (process.env.NODE_ENV === 'production')
 {
   // Set static folder
-  app.use(express.static(path.resolve(__dirname, 'frontend/web/build')));
+  app.use(express.static(path.resolve(__dirname, 'frontend/web/dev')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend/web/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'frontend/web/dev', 'index.html'));
   });
 }
 
