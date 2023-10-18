@@ -2,8 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const groceryRoutes = require('./backend/routes/groceries');
-const userRoutes = require('./backend/routes/user');
+const groceryRoutes = require('./routes/groceries');
+const userRoutes = require('./routes/user');
 
 // 
 const PORT = process.env.PORT || 4000;
