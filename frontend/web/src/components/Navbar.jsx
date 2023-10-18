@@ -6,7 +6,9 @@ function Navbar() {
 	return (
 		<div className="navbar-container">
 			<div className="navbar">
-				<div className="title">LOGO UCFEats</div>
+				<div className="title">
+					<h1>UCFEats</h1>
+				</div>
 				<div className="links">
 					<a>Log In</a>
 					<a>Register</a>
