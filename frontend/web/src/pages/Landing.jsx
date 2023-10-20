@@ -14,11 +14,16 @@ function Landing() {
 			<Navbar />
 			<div className="hero">
 				<div className="container-1">
-					<div className="description">
+					<div className="header">
 						<h1>Find good eats</h1>
 						<span>with UCFEats</span>
-						<span></span>
 					</div>
+					<span>
+						Find food on UCF campus and track your caloric and macronutrient intake.
+					</span>
+					<Link to="/login">
+						<button type="button">START TODAY</button>
+					</Link>
 				</div>
 				<div className="container-2">
 					<img src={Phone} alt="phone" />
