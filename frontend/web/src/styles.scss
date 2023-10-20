@@ -3,7 +3,8 @@ body {
 }
 
 :root {
-    background-image: linear-gradient(to bottom right,  red, #ACB2F9);
+    // background-image: linear-gradient(to bottom right,  red, #ACB2F9);
+    background-color: #ff958e;
     min-height: 100vh;
     
     .app {
@@ -49,8 +50,8 @@ body {
                         }
 
                         .links {
-                            .icon {
-                                width: 100px;
+                            a:visited {
+                                color: white;
                             }
                         }
                         
@@ -90,9 +91,54 @@ body {
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        filter: drop-shadow(35px 25px 15px #cc7771);
 
                         img {
-                            height: 500px;
+                            height: 450px;
+                        }
+
+                        
+                    }
+                }
+
+                .reviews {
+                    background-color: white;
+                    height: 400px;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    .container {
+                        width: 1024px;
+                        color: black;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+
+                        .stars {
+                            display: flex;
+                            flex-direction: row;
+                        }
+
+                        h1 {
+                            margin-top: 10px;
+                            margin-bottom: 30px;
+                            font-size: 60px;
+                            font-weight: bold;
+                        }
+                        
+                        .review {
+                            font-size: 24px;
+                            font-weight: 300;
+                            margin-bottom: 10px;
+                        }
+
+                        .name {
+                            font-size: 16px;
+
                         }
                     }
                 }

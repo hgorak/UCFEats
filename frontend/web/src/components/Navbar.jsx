@@ -14,9 +14,9 @@ function Navbar() {
 				</div>
 				<div className="links">
 					<IconContext.Provider value={{ size: "35px" }}>
-						<div>
+						<Link to="/login">
 							<VscAccount />
-						</div>
+						</Link>
 					</IconContext.Provider>
 				</div>
 			</div>
