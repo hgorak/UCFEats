@@ -32,7 +32,7 @@ function Landing() {
 			<div className="reviews">
 				<div className="container">
 					<div className="stars">
-						<IconContext.Provider value={{ size: "30px" }}>
+						<IconContext.Provider value={{ size: "30px", className: "star" }}>
 							<AiFillStar />
 							<AiFillStar />
 							<AiFillStar />

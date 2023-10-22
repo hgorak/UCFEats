@@ -159,6 +159,11 @@ body {
                         .stars {
                             display: flex;
                             flex-direction: row;
+                            gap: 5px;
+
+                            .star {
+                                color: goldenrod;
+                            }
                         }
 
                         h1 {
