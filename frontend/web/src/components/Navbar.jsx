@@ -28,8 +28,8 @@ function Navbar() {
 					<IconContext.Provider
 						value={
 							color
-								? { size: "35px", color: "black" }
-								: { size: "35px", color: "white" }
+								? { size: "35px", color: "#1a434d" }
+								: { size: "35px", color: "#F5ece4" }
 						}
 					>
 						<Link to="/login">
