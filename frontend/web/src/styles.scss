@@ -26,15 +26,17 @@ body {
                 align-items: center;
 
                 .navbar-container {
+                    position: fixed;
+                    top: 0;
+                    z-index: 1;
                     width: 100%;
-                    // background-color: black;
-                    color: black;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-    
+                    transition: .1s ease-in;
+
                     .navbar {
-                        color: white;
+                        z-index: 2;
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
@@ -56,6 +58,13 @@ body {
                         }
                         
                     }
+                }
+
+                .navbar-container-bg {
+                    background-color: white;
+                    color: black;
+
+                    
                 }
 
                 .footer-container {
