@@ -52,93 +52,94 @@ function Landing() {
 			</div>
 			<div className="about">
 				<div className="container">
-					<h1>Meet the team.</h1>
-					<span></span>
-					<div className="row">
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
-							</div>
-							<div className="desc">
-								<h2>
-									Darren<br></br>Bansil
-								</h2>
-								<span>Web Developer</span>
-								<div className="links">Github Linkedin</div>
-							</div>
-						</div>
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
-							</div>
-							<div className="desc">
-								<h2>
-									Akil<br></br>Mohideen
-								</h2>
-								<span>Web Developer</span>
-								<div className="links">Github Linkedin</div>
-							</div>
-						</div>
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
-							</div>
-							<div className="desc">
-								<h2>
-									Jose<br></br>Cuyugan
-								</h2>
-								<span>Mobile Developer</span>
-								<div className="links">Github Linkedin</div>
-							</div>
-						</div>
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
-							</div>
-							<div className="desc">
-								<h2>
-									Jacob<br></br>Dioso
-								</h2>
-								<span>Mobile Developer</span>
-								<div className="links">Github Linkedin</div>
-							</div>
-						</div>
+					<div className="header">
+						<h1>Meet the team</h1>
+						<span>
+							Not only is our team passionate and dedicated, they're also extremely
+							good-looking.
+						</span>
 					</div>
-					<div className="row">
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
+
+					<div className="team">
+						<div className="row">
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Darren<br></br>Bansil
+									</h2>
+									<span>Web Developer</span>
+								</div>
 							</div>
-							<div className="desc">
-								<h2>
-									Hailey<br></br>Gorak
-								</h2>
-								<span>API Developer</span>
-								<div className="links">Github Linkedin</div>
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Akil<br></br>Mohideen
+									</h2>
+									<span>Web Developer</span>
+								</div>
+							</div>
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Jose<br></br>Cuyugan
+									</h2>
+									<span>Mobile Developer</span>
+								</div>
+							</div>
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Jacob<br></br>Dioso
+									</h2>
+									<span>Mobile Developer</span>
+								</div>
 							</div>
 						</div>
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
+						<div className="row">
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Hailey<br></br>Gorak
+									</h2>
+									<span>API Developer</span>
+								</div>
 							</div>
-							<div className="desc">
-								<h2>
-									Brendan<br></br>Smith
-								</h2>
-								<span>Mobile Developer</span>
-								<div className="links">Github Linkedin</div>
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Brendan<br></br>Smith
+									</h2>
+									<span>Mobile Developer</span>
+								</div>
 							</div>
-						</div>
-						<div className="member">
-							<div className="head">
-								<img src={darrenHead} alt="darren headshot" />
-							</div>
-							<div className="desc">
-								<h2>
-									Alex<br></br>Cruz
-								</h2>
-								<span>Database Developer</span>
-								<div className="links">Github Linkedin</div>
+							<div className="member">
+								<div className="head">
+									<img src={darrenHead} alt="darren headshot" />
+								</div>
+								<div className="desc">
+									<h2>
+										Alex<br></br>Cruz
+									</h2>
+									<span>Database Developer</span>
+								</div>
 							</div>
 						</div>
 					</div>
