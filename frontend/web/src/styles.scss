@@ -197,7 +197,7 @@ body {
 
                 .about {
                     background-color: #10282e;
-                    height: 800px;
+                    height: 900px;
                     width: 100%;
                     display: flex;
                     flex-direction: column;
@@ -220,6 +220,7 @@ body {
                             justify-content: center;
                             h1 {
                                 font-size: 60px;
+                                margin-top: 5px;
                                 margin-bottom: 5px;
                             }
     
@@ -255,8 +256,8 @@ body {
                                         border-radius: 75px;
         
                                         img {
-                                            zoom: 10%;
-                                            margin: -1000px 0px 0px -400px;
+                                            zoom: 6.5%;
+                                            margin: -400px 0px 0px 0px;
                                         }
                                     }
         
@@ -274,7 +275,7 @@ body {
     
                                         span {
                                             font-size: 14px;
-                                            font-weight: 600;
+                                            font-weight: 800;
                                         }
                                     }
                                 }

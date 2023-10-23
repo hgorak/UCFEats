@@ -67,10 +67,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Darren<br></br>Bansil
-									</h2>
-									<span>Web Developer</span>
+									<h2>Darren Bansil</h2>
+									<span>Frontend Web</span>
 								</div>
 							</div>
 							<div className="member">
@@ -78,10 +76,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Akil<br></br>Mohideen
-									</h2>
-									<span>Web Developer</span>
+									<h2>Akil Mohideen</h2>
+									<span>Frontend Web</span>
 								</div>
 							</div>
 							<div className="member">
@@ -89,10 +85,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Jose<br></br>Cuyugan
-									</h2>
-									<span>Mobile Developer</span>
+									<h2>Jose Cuyugan</h2>
+									<span>Frontend Mobile</span>
 								</div>
 							</div>
 							<div className="member">
@@ -100,10 +94,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Jacob<br></br>Dioso
-									</h2>
-									<span>Mobile Developer</span>
+									<h2>Jacob Dioso</h2>
+									<span>Frontend Mobile</span>
 								</div>
 							</div>
 						</div>
@@ -113,10 +105,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Hailey<br></br>Gorak
-									</h2>
-									<span>API Developer</span>
+									<h2>Hailey Gorak</h2>
+									<span>API</span>
 								</div>
 							</div>
 							<div className="member">
@@ -124,10 +114,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Brendan<br></br>Smith
-									</h2>
-									<span>Mobile Developer</span>
+									<h2>Brendan Smith</h2>
+									<span>API</span>
 								</div>
 							</div>
 							<div className="member">
@@ -135,10 +123,8 @@ function Landing() {
 									<img src={darrenHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
-									<h2>
-										Alex<br></br>Cruz
-									</h2>
-									<span>Database Developer</span>
+									<h2>Alex Cruz</h2>
+									<span>Database</span>
 								</div>
 							</div>
 						</div>
