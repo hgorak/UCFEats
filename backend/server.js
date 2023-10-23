@@ -1,20 +1,25 @@
 require('dotenv').config();
 
+// HTTPS vars
+const fs = require('fs');
+const https = require('https');
+const hostname = 'api-weather.com';
+const PORT = 443;
+
+// App setup vars
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
+// Routes
 const groceryRoutes = require('./routes/groceries');
 const userRoutes = require('./routes/user');
-
-// 
-const PORT = process.env.PORT || 4000;
 
 // Creates an express app
 const app = express();
 
-// set PORT
-app.set('port', (process.env.PORT || 4000));
-
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -26,23 +31,23 @@ app.use((req, res, next) => {
 app.use('/api/groceries', groceryRoutes);
 app.use('/api/user', userRoutes);
 
-// Server static assets if in production
-if (process.env.NODE_ENV === 'production')
-{
-  // Set static folder
-  app.use(express.static(path.resolve(__dirname, 'frontend/web/build')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend/web/build', 'index.html'));
-  });
-}
+// HTTPS Setup
+const httpsOptions = {
+  cert: fs.readFileSync('./ssl/api-weather_com.crt'),
+  ca: fs.readFileSync('./ssl/api-weather_com.ca-bundle'),
+  key: fs.readFileSync('./ssl/api-weather_com.key')
+};
+
+// Create server
+const httpsServer = https.createServer(httpsOptions, app);
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     // Listen for requests
-    app.listen(PORT || 4000, () => {
-      console.log("Connected to db & listening on port", PORT);
+    httpsServer.listen(PORT, hostname, () => {
+      console.log(`Listening on port ${PORT}`);
     });
   })
 
