@@ -23,7 +23,7 @@ function Landing() {
 					<span>
 						Find food on UCF campus and track your caloric and macronutrient intake.
 					</span>
-					<Link to="/login">
+					<Link to="/register">
 						<button type="button">START TODAY</button>
 					</Link>
 				</div>
