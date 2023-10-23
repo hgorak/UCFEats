@@ -1,17 +1,20 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "../styles.scss";
 
 function Register() {
 	return (
 		<div className="login">
-			<div className="hero">
-				<h1>UCFEats</h1>
-				<span>Keeping UCF Students Healthy</span>
+			<div className="navbar-container navbar-container-bg">
+				<div className="navbar">
+					<div className="title">
+						<h1>UCFEats</h1>
+					</div>
+				</div>
 			</div>
-			<div className="form">
+			<div className="container">
 				<div className="reg-box">
-					<h1>Register</h1>
+					<h1>New Member</h1>
 					<form>
 						<input className="login-input" placeholder="First Name" />
 						<input className="login-input" placeholder="Last Name" />
@@ -19,8 +22,13 @@ function Register() {
 						<input className="login-input" placeholder="Confirm Email Address" />
 						<input className="login-input" placeholder="Password" />
 						<input className="login-input" placeholder="Confirm Password" />
-						<button type="submit">Submit</button>
-						<span>Have an account?</span>
+
+						<button type="submit">Register</button>
+						<div style={{ alignSelf: "center" }}>
+							<Link to="/login">
+								<span>Have an account?</span>
+							</Link>
+						</div>
 					</form>
 				</div>
 			</div>
