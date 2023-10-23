@@ -5,11 +5,11 @@ body {
 :root {
     // background-image: linear-gradient(to bottom right,  red, #ACB2F9);
     // background-color: #ff958e;
-    background-color: #1a434d;
+    background-color: #e03440;
     min-height: 100vh;
     
     .app {
-        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+        font-family: Roboto, sans-serif;
         display: flex;
         justify-content: center;
         color: #F5ece4;
@@ -19,6 +19,7 @@ body {
             width: 100%;
             justify-content: center;
 
+            // root or landing page
             .landing {
                 display: flex;
                 width: 100%;
@@ -26,6 +27,7 @@ body {
                 flex-direction: column;
                 align-items: center;
 
+                // navbar
                 .navbar-container {
                     position: fixed;
                     top: 0;
@@ -61,11 +63,13 @@ body {
                     }
                 }
 
+                // change navbar color on scroll
                 .navbar-container-bg {
                     background-color: #F5ece4;
                     color: #1a434d;
                 }
 
+                // footer
                 .footer-container {
                     display: flex;
                     width: 100%;
@@ -83,6 +87,7 @@ body {
                     }
                 }
 
+                // main hero section
                 .hero {
                     width: 1024px;
                     // border: solid 1px black;
@@ -148,6 +153,7 @@ body {
                     }
                 }
 
+                // review section
                 .reviews {
                     background-color: #F5ece4;
                     height: 400px;
@@ -195,6 +201,7 @@ body {
                     }
                 }
 
+                // team section
                 .about {
                     background-color: #10282e;
                     height: 900px;
@@ -288,50 +295,56 @@ body {
             // login page
             .login {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 align-items: center;
-                justify-content: center;
                 height: 100vh;
                 width: 100%;
+                background-color: #F5ece4;
                 
-                .hero {
-                    flex: 4;
+                .navbar-container {
+                    width: 100%;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
 
-                    h1 {
-                        font-size: 60px;
-                        font-weight: bold;
-                        margin-bottom: 0px;
+                    .navbar {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 1024px;
+                        height: 75px;
+                        color: #1a434d;
+                        
+                        .title {
+                            h1 {
+                                font-size: 40px;
+                                font-weight: 200;
+                            }
+                        }
                     }
-
-                    span {
-                        font-size: 24px;
-                    }
-
                 }
 
-                .form {
+                .container {
                     display: flex;
                     flex-direction: column;
-                    flex: 3;
-                    justify-content: center;
                     align-items: center;
-                    
+                    justify-content: center;
+                    height: 100%;
+
                     .login-box {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        background-color: white;
-                        width: 400px;
-                        height: 400px;
+                        background-color: #F5ece4;
+                        width: 500px;
+                        height: 500px;
                         border-radius: 12px;
+                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
                         h1 {
                             color: black;
-                            margin-top: 40px;
-                            
+                            font-size: 24px;
+                            margin-top: 40px; 
                         }
 
                         form {
@@ -339,23 +352,37 @@ body {
                             align-items: center;
                             flex-direction: column;
                             margin-top: 10px;
+                            gap:10px;
         
                             input {
                                 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                                border: none;
-                                border-bottom: solid 2px black;
+                                border: solid 1px black;
+                                border-radius: 5px;
                                 height: 50px;
-                                width: 250px;
-                                font-size: 18px;
+                                width: 350px;
+                                font-size: 16px;
+                                box-sizing: border-box;
+                                padding-left: 10px;
                                 gap: 10px;
+                                background-color: #F5ece4;
+                                
                             }
 
-                            span {
-                                margin-bottom: 2px;
-                                font-size: 14px;
-                                color: black;
-                                align-self: center;
+                            input:focus {
+                                outline-color: #1a434d;
+                                border: solid 1px #1a434d; 
                             }
+
+                            div {
+                                align-self: first baseline;
+                                span {
+                                    margin-bottom: 2px;
+                                    font-size: 14px;
+                                    color: black;
+                                    align-self: first baseline;
+                                }
+                            }
+                            
 
                             button {
                                 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -363,8 +390,12 @@ body {
                                 margin-bottom: 20px;
                                 border: none;
                                 border-radius: 5px; 
-                                height: 40px;
-                                width: 250px;
+                                background-color: #1a434d;
+                                color: #F5ece4;
+                                height: 50px;
+                                width: 350px;
+                                font-weight: 600;
+                                font-size: 18px;
                             }
                             
                         }
@@ -420,9 +451,8 @@ body {
                             
                         }
                     }
-
-                    
                 }
+                
                 
             }
         }   
