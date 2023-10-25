@@ -1,8 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext.jsx";
+
 import "../styles.scss";
 
 function Login() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
+
+	const { login } = useContext(AuthContext);
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		try {
+			await login(email, password);
+			navigate("/dashboard");
+		} catch (err) {
+			setError(err);
+		}
+	};
+
 	return (
 		<div className="login">
 			<div className="navbar-container navbar-container-bg">
@@ -16,20 +36,41 @@ function Login() {
 				<div className="login-box">
 					<h1>Member Login</h1>
 					<form>
-						<input className="login-input" placeholder="Email Address" />
-						<input className="login-input" placeholder="Password" />
+						<input
+							required
+							type="email"
+							onChange={(e) => {
+								setEmail(e.target.value);
+							}}
+							value={email}
+							className="login-input"
+							placeholder="Email Address"
+						/>
+						<input
+							required
+							type="password"
+							onChange={(e) => {
+								setPassword(e.target.value);
+							}}
+							value={password}
+							className="login-input"
+							placeholder="Password"
+						/>
 						<div>
 							<Link>
 								<span>Forgot password?</span>
 							</Link>
 						</div>
 
-						<button type="submit">Log In</button>
+						<button onClick={handleSubmit} type="submit">
+							Log In
+						</button>
 						<div style={{ alignSelf: "center" }}>
 							<Link to="/register">
 								<span>Need an account?</span>
 							</Link>
 						</div>
+						{error && <div className="error">{error}</div>}
 					</form>
 				</div>
 			</div>

@@ -404,6 +404,16 @@ body {
                                 width: 350px;
                                 font-weight: 600;
                                 font-size: 18px;
+                                cursor: pointer;
+                                transition-duration: .2s;
+                            }
+
+                            button:hover {
+                                background-color: #9d242d;
+                            }
+
+                            .error {
+                                color: $primary-color;
                             }
                             
                         }
@@ -474,6 +484,10 @@ body {
                                 width: 350px;
                                 font-weight: 600;
                                 font-size: 18px;
+                            }
+
+                            .error {
+                                color: $primary-color;
                             }
                             
                         }
