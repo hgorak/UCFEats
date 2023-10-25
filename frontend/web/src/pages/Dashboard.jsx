@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
 
 function Dashboard() {
-	const { logout } = useContext(AuthContext);
-
+	const { logout, currentUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const handleClick = () => {
 		logout();
@@ -13,7 +12,7 @@ function Dashboard() {
 
 	return (
 		<>
-			<>dashboard</>
+			<h1>hello {currentUser.name}</h1>
 			<button onClick={handleClick}>log out</button>
 		</>
 	);
