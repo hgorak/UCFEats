@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { API_URL } from "../../api.js";
+import { AuthContext } from "../context/AuthContext.jsx";
+
 import "../styles.scss";
 
 function Login() {
@@ -9,36 +10,16 @@ function Login() {
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
 
-	const doLogin = async (event) => {
-		setError(null);
+	const { login } = useContext(AuthContext);
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const response = await fetch(API_URL + "/api/user/login", {
-			method: "POST",
-			body: JSON.stringify({ email, password }),
-			headers: { "Content-Type": "application/JSON" },
-		});
-
-		const json = await response.json();
-
-		// if (!response.ok) {
-		// 	setIsLoading(false);
-		// 	setError(json.error);
-		// }
-		if (!response.ok) {
-			setError(json.error);
-		}
-
-		if (response.ok) {
-			// Save user to local storage
-			localStorage.setItem("user", JSON.stringify(json));
-
-			// Update auth context
-			// dispatch({ type: "LOGIN", payload: json });
-
-			// setIsLoading(false);
-
-			navigate("/");
+		try {
+			await login(email, password);
+			navigate("/dashboard");
+		} catch (err) {
+			setError(err);
 		}
 	};
 
@@ -81,7 +62,7 @@ function Login() {
 							</Link>
 						</div>
 
-						<button onClick={doLogin} type="submit">
+						<button onClick={handleSubmit} type="submit">
 							Log In
 						</button>
 						<div style={{ alignSelf: "center" }}>
