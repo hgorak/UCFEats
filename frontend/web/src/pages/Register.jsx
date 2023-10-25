@@ -4,13 +4,12 @@ import { API_URL } from "../../api.js";
 import "../styles.scss";
 
 function Register() {
-	// const [first, setFirst] = useState("");
-	// const [last, setLast] = useState("");
-	const [name, setName] = useState("");
+	const [first, setFirst] = useState("");
+	const [last, setLast] = useState("");
 	const [email, setEmail] = useState("");
-	// const [email2, setEmail2] = useState("");
+	const [email2, setEmail2] = useState("");
 	const [password, setPassword] = useState("");
-	// const [password2, setPassword2] = useState("");
+	const [password2, setPassword2] = useState("");
 	const [error, setError] = useState("");
 
 	const navigate = useNavigate();
@@ -20,7 +19,7 @@ function Register() {
 
 		const response = await fetch(API_URL + "/api/user/register", {
 			method: "POST",
-			body: JSON.stringify({ email, password, name }),
+			body: JSON.stringify({ email, password, first_name: first, last_name: last }),
 			headers: { "Content-Type": "application/JSON" },
 		});
 
@@ -51,13 +50,21 @@ function Register() {
 						<input
 							className="login-input"
 							type="text"
-							placeholder="Name"
+							placeholder="First Name"
 							onChange={(e) => {
-								setName(e.target.value);
+								setFirst(e.target.value);
 							}}
-							value={name}
+							value={first}
 						/>
-						{/* <input className="login-input" placeholder="Last Name" /> */}
+						<input
+							className="login-input"
+							type="text"
+							placeholder="Last Name"
+							onChange={(e) => {
+								setLast(e.target.value);
+							}}
+							value={last}
+						/>
 						<input
 							className="login-input"
 							placeholder="Email Address"
@@ -67,7 +74,15 @@ function Register() {
 							}}
 							value={email}
 						/>
-						{/* <input className="login-input" placeholder="Confirm Email Address" /> */}
+						<input
+							className="login-input"
+							placeholder="Confirm Email Address"
+							type="email"
+							onChange={(e) => {
+								setEmail2(e.target.value);
+							}}
+							value={email2}
+						/>
 						<input
 							className="login-input"
 							placeholder="Password"
@@ -77,7 +92,15 @@ function Register() {
 							}}
 							value={password}
 						/>
-						{/* <input className="login-input" placeholder="Confirm Password" /> */}
+						<input
+							className="login-input"
+							placeholder="Confirm Password"
+							type="password"
+							onChange={(e) => {
+								setPassword2(e.target.value);
+							}}
+							value={password2}
+						/>
 
 						<button type="submit" onClick={doRegister}>
 							Register
