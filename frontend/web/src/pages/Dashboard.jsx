@@ -12,7 +12,9 @@ function Dashboard() {
 
 	return (
 		<>
-			<h1>hello {currentUser.name}</h1>
+			<h1>
+				hello {currentUser.first_name} {currentUser.last_name}
+			</h1>
 			<button onClick={handleClick}>log out</button>
 		</>
 	);
