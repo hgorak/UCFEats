@@ -30,7 +30,7 @@ const registerUser = async(req, res) => {
   const {email, password, name} = req.body;
 
   try {
-    const user = await User.signup(email, password, name);
+    const user = await User.signup(email, password, name, 'ucfEats');
 
     // Create token for user
     const token = createToken(user._id);

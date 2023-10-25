@@ -25,6 +25,6 @@ const grocerySchema = new Schema({
     type: String,
     required: true
   }
-}, { timestamps: true });
+}, {collection: 'Groceries'}, { timestamps: true });
 
 module.exports = mongoose.model("Grocery", grocerySchema);
