@@ -20,17 +20,11 @@ function Login() {
 						<input
 							required
 							type="email"
-							onChange={(e) => {
-								setEmail(e.target.value);
-							}}
-							value={email}
 							className="login-input"
 							placeholder="Email Address"
 						/>
-						<button onClick={handleSubmit} type="submit">
-							Log In
-						</button>
-						{error && <div className="error">{error}</div>}
+						<button type="submit">Log In</button>
+						{/* {error && <div className="error">{error}</div>} */}
 					</form>
 				</div>
 			</div>
