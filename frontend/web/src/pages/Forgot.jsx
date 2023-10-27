@@ -14,8 +14,12 @@ function Login() {
 				</div>
 			</div>
 			<div className="container">
-				<div className="login-box">
-					<h1>Member Login</h1>
+				<div className="forgot-box">
+					<h1>Forgot Your Password?</h1>
+					<span>
+						No worries! Enter your email address <br></br>below and we'll send you a
+						reset link pronto.
+					</span>
 					<form>
 						<input
 							required
@@ -23,7 +27,7 @@ function Login() {
 							className="login-input"
 							placeholder="Email Address"
 						/>
-						<button type="submit">Log In</button>
+						<button type="submit">Submit</button>
 						{/* {error && <div className="error">{error}</div>} */}
 					</form>
 				</div>
