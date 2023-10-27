@@ -57,7 +57,7 @@ function Login() {
 							placeholder="Password"
 						/>
 						<div>
-							<Link>
+							<Link to="/forgotpassword">
 								<span>Forgot password?</span>
 							</Link>
 						</div>
