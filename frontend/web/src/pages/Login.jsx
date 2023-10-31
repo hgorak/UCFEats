@@ -28,7 +28,9 @@ function Login() {
 			<div className="navbar-container navbar-container-bg">
 				<div className="navbar">
 					<div className="title">
-						<h1>UCFEats</h1>
+						<Link to="/">
+							<h1>UCFEats</h1>
+						</Link>
 					</div>
 				</div>
 			</div>
