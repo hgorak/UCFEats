@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
-import Forgot from "./pages/Forgot.jsx";
 import Landing from "./pages/Landing.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Home from "./pages/dash-pages/Home.jsx";
 import Error from "./pages/Error.jsx";
 import { AuthContext } from "./context/AuthContext.jsx";
 
@@ -42,14 +42,11 @@ function App() {
 						<Route path="/login" element={<Login />} errorElement={<Error />} />
 						<Route path="/register" element={<Register />} errorElement={<Error />} />
 						<Route
-							path="/forgotpassword"
-							element={<Forgot />}
-							errorElement={<Error />}
-						/>
-						<Route
 							path="/dashboard"
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
-						/>
+						>
+							<Route path="/dashboard/home" element={<Home />} />
+						</Route>
 					</Routes>
 				</BrowserRouter>
 			</div>
