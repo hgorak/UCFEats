@@ -590,13 +590,33 @@ body {
                 display: flex;
                 flex-direction: row;
                 
-                .navbar {
+                .sidebar {
                     display: flex;
                     flex-direction: column;
                     flex: 1;
                     background-color: $primary-color;
                     color: $secondary-color;
                     align-items: center;
+                    padding-top: 24px;
+
+                    button {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        border: none;
+                        background-color: $primary-color;
+                        transition-duration: 0.1s;
+                        border-radius: 12px;
+                        color: $secondary-color;
+                        width: 256px;
+                        font-size: 16px;
+                        gap: 10px;
+                    }
+
+                    button:hover {
+                        background-color: #e97179;
+                    }
                 }
 
                 .container {
