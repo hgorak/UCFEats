@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
 
+import "../styles.scss";
+
 function Dashboard() {
 	const { logout, currentUser } = useContext(AuthContext);
 	const navigate = useNavigate();
@@ -11,12 +13,13 @@ function Dashboard() {
 	};
 
 	return (
-		<>
-			<h1>
-				hello {currentUser.first_name} {currentUser.last_name}
-			</h1>
+		<div className="dashboard">
+			<div className="navbar">
+				<h2>{currentUser.first_name}'s Eats</h2>
+			</div>
+			<div className="container"></div>
 			<button onClick={handleClick}>log out</button>
-		</>
+		</div>
 	);
 }
 

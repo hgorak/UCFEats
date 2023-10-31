@@ -581,6 +581,29 @@ body {
                 
                 
             }
+
+            .dashboard {
+                color: black;
+                height: 100vh;
+                width: 100%;
+                background-color: $secondary-color;
+                display: flex;
+                flex-direction: row;
+                
+                .navbar {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    background-color: $primary-color;
+                    color: $secondary-color;
+                    align-items: center;
+                }
+
+                .container {
+                    flex: 6;
+                }
+
+            }
         }   
         
         
