@@ -14,6 +14,8 @@ const cors = require("cors");
 // Routes
 const groceryRoutes = require("./routes/groceries");
 const userRoutes = require("./routes/user");
+const storeRoutes = require('./routes/stores');
+const itemRoutes = require('./routes/items');
 
 // Creates an express app
 const app = express();
