@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ucfeats/values/app_routes.dart';
+import 'package:http/http.dart';
 
 import '../components/app_text_form_field.dart';
 import '../utils/extensions.dart';
@@ -19,6 +21,23 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
 
   bool isObscure = true;
+
+  void login(String email, password) async {
+    try {
+      Response response = await post(Uri.parse("https://api-weather.com"),
+          body: {'email': email, 'password': password});
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString());
+        debugPrint(data['token']);
+        debugPrint('Login successfully');
+      } else {
+        debugPrint('Login failed');
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,24 +149,10 @@ class _LoginPageState extends State<LoginPage> {
                       height: 15,
                     ),
                     FilledButton(
-                      onPressed: _formKey.currentState?.validate() ?? false
-                          ? () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Logged In!'),
-                                ),
-                              );
-                              emailController.clear();
-                              passwordController.clear();
-                            }
-                          : null,
-                      style: const ButtonStyle().copyWith(
-                        backgroundColor: MaterialStateProperty.all(
-                          _formKey.currentState?.validate() ?? false
-                              ? null
-                              : Colors.grey.shade300,
-                        ),
-                      ),
+                      onPressed: () {
+                        login(emailController.text.toString(),
+                            passwordController.text.toString());
+                      },
                       child: const Text('Login'),
                     ),
                     const SizedBox(
