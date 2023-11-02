@@ -24,6 +24,12 @@ const userSchema = new Schema({
   last_name: {
     type: String,
     required: true
+  },
+
+  stores: {
+    type: Array,
+    "default": [],
+    required: false
   }
 }, {collection: 'Users'});
 

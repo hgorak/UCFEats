@@ -10,6 +10,8 @@ const cors = require('cors');
 // Routes
 const groceryRoutes = require('./routes/groceries');
 const userRoutes = require('./routes/user');
+const storeRoutes = require('./routes/stores');
+const itemRoutes = require('./routes/items');
 
 // Creates an express app
 const app = express();
@@ -26,6 +28,8 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/groceries', groceryRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/stores', storeRoutes);
+app.use('/api/items', itemRoutes);
 
 
 // Connect to DB

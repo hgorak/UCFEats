@@ -30,6 +30,8 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/groceries", groceryRoutes);
 app.use("/api/user", userRoutes);
+app.use('/api/stores', storeRoutes);
+app.use('/api/items', itemRoutes);
 
 // HTTPS Setup
 const httpsOptions = {
