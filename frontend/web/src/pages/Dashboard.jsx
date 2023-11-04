@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate, Routes, Route, Outlet } from "react-router-dom";
+import { Link, useNavigate, Routes, Route, Outlet, useOutletContext } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { GiKnifeFork } from "react-icons/gi";
 import { AiFillHome } from "react-icons/ai";
@@ -11,6 +11,7 @@ import "../styles.scss";
 
 function Dashboard() {
 	const { logout, currentUser } = useContext(AuthContext);
+
 	const navigate = useNavigate();
 	const handleClick = () => {
 		logout();
@@ -46,7 +47,7 @@ function Dashboard() {
 				</div> */}
 			</div>
 			<div className="container">
-				<Outlet></Outlet>
+				<Outlet context={{ currentUser }} />
 			</div>
 		</div>
 	);

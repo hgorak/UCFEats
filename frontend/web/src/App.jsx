@@ -6,6 +6,7 @@ import Login from "./pages/Login.jsx";
 import Landing from "./pages/Landing.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/dash-pages/Home.jsx";
+import Food from "./pages/dash-pages/Food.jsx";
 import Error from "./pages/Error.jsx";
 import { AuthContext } from "./context/AuthContext.jsx";
 
@@ -35,7 +36,7 @@ function App() {
 	const { currentUser } = useContext(AuthContext);
 	return (
 		<div className="app">
-			<div className="container">
+			<div className="app-container">
 				<BrowserRouter>
 					<Routes>
 						<Route path="/" element={<Landing />} errorElement={<Error />} />
@@ -46,6 +47,7 @@ function App() {
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
 						>
 							<Route path="/dashboard/home" element={<Home />} />
+							<Route path="/dashboard/food" element={<Food />} />
 						</Route>
 					</Routes>
 				</BrowserRouter>

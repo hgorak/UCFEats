@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import '../node_modules/bootstrap/scss/bootstrap/';
 
 $primary-color: #e03440;
 $secondary-color: #F5ece4;
@@ -21,7 +22,7 @@ body {
         justify-content: center;
         color: $secondary-color;
 
-        .container {
+        .app-container {
             display: flex;
             width: 100%;
             justify-content: center;
@@ -588,7 +589,7 @@ body {
 
             .dashboard {
                 color: black;
-                height: 100vh;
+                height: 100%;
                 width: 100%;
                 background-color: $secondary-color;
                 display: flex;
@@ -639,6 +640,43 @@ body {
 
                 .container {
                     flex: 5;
+
+                    .home {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        padding: 20px;
+
+                        .container {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: row;
+                            flex: 5;
+                            align-items: center;
+                            gap: 30px;
+
+                            .trends {
+                                background-color: #e7e1dc;
+                                border-radius: 20px;
+                                height: 400px;
+                                width: 400px;
+
+                            }
+
+                            .goals {
+                                height: 400px;
+                                width: 400px;
+                                border-radius: 20px;
+                                background-color: #ddd4cd;
+                            }
+                        }
+
+                        .recent {
+                            background-color: #ddd4cd;
+                            border-radius: 20px;
+                            flex: 3;
+                        }
+                    }
                 }
 
             }
