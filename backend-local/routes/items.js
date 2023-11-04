@@ -11,9 +11,9 @@ const router = express.Router();
 router.use(requireAuth);
 
 // Get all locations
-router.get('/', getItems);
+router.post('/', getItems);
 
-// Gets specified grocery
-router.get('/name', getItem);
+// Gets specified item from location
+router.post('/name', getItem);
 
 module.exports = router;
