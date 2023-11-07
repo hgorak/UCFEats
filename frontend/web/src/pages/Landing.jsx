@@ -32,7 +32,7 @@ function Landing() {
 				</div>
 			</div>
 			<div className="reviews">
-				<div className="container">
+				<div className="review-container">
 					<div className="stars">
 						<IconContext.Provider value={{ size: "30px", className: "star" }}>
 							<AiFillStar />
@@ -51,7 +51,7 @@ function Landing() {
 				</div>
 			</div>
 			<div className="about">
-				<div className="container">
+				<div className="about-container">
 					<div className="header">
 						<h1>Meet the team</h1>
 						<span>
@@ -61,7 +61,7 @@ function Landing() {
 					</div>
 
 					<div className="team">
-						<div className="row">
+						<div className="member-row">
 							<div className="member">
 								<div className="head">
 									<img src={darrenHead} alt="darren headshot" />
@@ -99,7 +99,7 @@ function Landing() {
 								</div>
 							</div>
 						</div>
-						<div className="row">
+						<div className="member-row">
 							<div className="member">
 								<div className="head">
 									<img src={darrenHead} alt="darren headshot" />
