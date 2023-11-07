@@ -3,24 +3,24 @@
 
 $primary-color: #e03440;
 $secondary-color: #F5ece4;
+
 * {
     font-family: 'Roboto', sans-serif;
 
 }
+
 body {
     margin: 0px;
 }
 
 :root {
-    // background-image: linear-gradient(to bottom right,  red, #ACB2F9);
-    // background-color: #ff958e;
-    background-color: $primary-color;
-    min-height: 100vh;
-    
+
     .app {
         display: flex;
         justify-content: center;
         color: $secondary-color;
+        background-color: $primary-color;
+        min-height: 100vh;
 
         .app-container {
             display: flex;
@@ -54,7 +54,7 @@ body {
                         // border: solid 1px black;
                         width: 1024px;
                         height: 75px;
-                        
+
                         .title {
                             h1 {
                                 font-size: 40px;
@@ -67,7 +67,7 @@ body {
                                 color: $secondary-color;
                             }
                         }
-                        
+
                     }
                 }
 
@@ -157,7 +157,7 @@ body {
                             height: 600px;
                         }
 
-                        
+
                     }
                 }
 
@@ -171,7 +171,7 @@ body {
                     align-items: center;
                     justify-content: center;
 
-                    .container {
+                    .review-container {
                         width: 1024px;
                         color: black;
                         display: flex;
@@ -195,7 +195,7 @@ body {
                             font-size: 60px;
                             font-weight: bold;
                         }
-                        
+
                         .review {
                             font-size: 24px;
                             font-weight: 300;
@@ -219,7 +219,7 @@ body {
                     align-items: center;
                     justify-content: center;
 
-                    .container {
+                    .about-container {
                         width: 1024px;
                         height: 100%;
                         color: $secondary-color;
@@ -234,12 +234,13 @@ body {
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;
+
                             h1 {
                                 font-size: 60px;
                                 margin-top: 5px;
                                 margin-bottom: 5px;
                             }
-    
+
                             span {
                                 font-size: 24px;
                                 font-weight: 300;
@@ -249,14 +250,14 @@ body {
                         .team {
                             display: flex;
                             flex-direction: column;
-                            
-                            .row {
+
+                            .member-row {
                                 display: flex;
                                 flex-direction: row;
                                 align-items: center;
                                 justify-content: center;
                                 gap: 20px;
-    
+
                                 .member {
                                     display: flex;
                                     flex-direction: column;
@@ -264,31 +265,32 @@ body {
                                     align-items: center;
                                     justify-content: center;
                                     padding: 20px;
-        
+
                                     .head {
                                         overflow: hidden;
                                         width: 150px;
                                         height: 150px;
                                         border-radius: 75px;
-        
+
                                         img {
                                             zoom: 6.5%;
                                             margin: -400px 0px 0px 0px;
                                         }
                                     }
-        
+
                                     .desc {
                                         display: flex;
                                         flex-direction: column;
                                         align-items: center;
                                         gap: 5px;
+
                                         h2 {
                                             font-size: 22px;
                                             font-weight: 300;
                                             text-align: center;
                                             margin-bottom: 5px;
                                         }
-    
+
                                         span {
                                             font-size: 14px;
                                             font-weight: 800;
@@ -296,7 +298,7 @@ body {
                                     }
                                 }
                             }
-                        } 
+                        }
                     }
                 }
             }
@@ -309,7 +311,7 @@ body {
                 height: 100vh;
                 width: 100%;
                 background-color: $secondary-color;
-                
+
                 .navbar-container {
                     width: 100%;
                     display: flex;
@@ -323,12 +325,13 @@ body {
                         width: 1024px;
                         height: 75px;
                         color: black;
-                        
+
                         .title {
                             a {
                                 text-decoration: none;
                                 color: black;
                             }
+
                             h1 {
                                 font-size: 40px;
                                 font-weight: 200;
@@ -357,7 +360,7 @@ body {
                         h1 {
                             color: black;
                             font-size: 24px;
-                            margin-top: 40px; 
+                            margin-top: 40px;
                         }
 
                         form {
@@ -365,8 +368,8 @@ body {
                             align-items: center;
                             flex-direction: column;
                             margin-top: 10px;
-                            gap:10px;
-        
+                            gap: 10px;
+
                             input {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 border: solid 1px black;
@@ -378,16 +381,17 @@ body {
                                 padding-left: 10px;
                                 gap: 10px;
                                 background-color: $secondary-color;
-                                
+
                             }
 
                             input:focus {
                                 outline-color: $primary-color;
-                                border: solid 1px $primary-color; 
+                                border: solid 1px $primary-color;
                             }
 
                             div {
                                 align-self: first baseline;
+
                                 span {
                                     margin-bottom: 2px;
                                     font-size: 14px;
@@ -395,14 +399,14 @@ body {
                                     align-self: first baseline;
                                 }
                             }
-                            
+
 
                             button {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 margin-top: 20px;
                                 margin-bottom: 20px;
                                 border: none;
-                                border-radius: 5px; 
+                                border-radius: 5px;
                                 background-color: $primary-color;
                                 color: $secondary-color;
                                 height: 50px;
@@ -420,7 +424,7 @@ body {
                             .error {
                                 color: $primary-color;
                             }
-                            
+
                         }
                     }
 
@@ -437,7 +441,7 @@ body {
                         h1 {
                             color: black;
                             font-size: 24px;
-                            margin-top: 40px; 
+                            margin-top: 40px;
                         }
 
                         form {
@@ -445,8 +449,8 @@ body {
                             align-items: center;
                             flex-direction: column;
                             margin-top: 10px;
-                            gap:10px;
-        
+                            gap: 10px;
+
                             input {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 border: solid 1px black;
@@ -458,16 +462,17 @@ body {
                                 padding-left: 10px;
                                 gap: 10px;
                                 background-color: $secondary-color;
-                                
+
                             }
 
                             input:focus {
                                 outline-color: $primary-color;
-                                border: solid 1px $primary-color; 
+                                border: solid 1px $primary-color;
                             }
 
                             div {
                                 align-self: first baseline;
+
                                 span {
                                     margin-bottom: 2px;
                                     font-size: 14px;
@@ -475,14 +480,14 @@ body {
                                     align-self: first baseline;
                                 }
                             }
-                            
+
 
                             button {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 margin-top: 20px;
                                 margin-bottom: 20px;
                                 border: none;
-                                border-radius: 5px; 
+                                border-radius: 5px;
                                 background-color: $primary-color;
                                 color: $secondary-color;
                                 height: 50px;
@@ -494,7 +499,7 @@ body {
                             .error {
                                 color: $primary-color;
                             }
-                            
+
                         }
                     }
 
@@ -511,7 +516,7 @@ body {
                         h1 {
                             color: black;
                             font-size: 24px;
-                            margin-top: 40px; 
+                            margin-top: 40px;
                         }
 
                         span {
@@ -526,10 +531,10 @@ body {
                             align-items: center;
                             flex-direction: column;
                             margin-top: 10px;
-                            gap:10px;
+                            gap: 10px;
 
-                            
-        
+
+
                             input {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 border: solid 1px black;
@@ -541,16 +546,17 @@ body {
                                 padding-left: 10px;
                                 gap: 10px;
                                 background-color: $secondary-color;
-                                
+
                             }
 
                             input:focus {
                                 outline-color: $primary-color;
-                                border: solid 1px $primary-color; 
+                                border: solid 1px $primary-color;
                             }
 
                             div {
                                 align-self: first baseline;
+
                                 span {
                                     margin-bottom: 2px;
                                     font-size: 14px;
@@ -558,14 +564,14 @@ body {
                                     align-self: first baseline;
                                 }
                             }
-                            
+
 
                             button {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 margin-top: 20px;
                                 margin-bottom: 20px;
                                 border: none;
-                                border-radius: 5px; 
+                                border-radius: 5px;
                                 background-color: $primary-color;
                                 color: $secondary-color;
                                 height: 50px;
@@ -578,13 +584,13 @@ body {
                                 color: $primary-color;
                             }
 
-                            
-                            
+
+
                         }
                     }
                 }
-                
-                
+
+
             }
 
             .dashboard {
@@ -594,7 +600,7 @@ body {
                 background-color: $secondary-color;
                 display: flex;
                 flex-direction: row;
-                
+
                 .sidebar {
                     display: flex;
                     flex-direction: column;
@@ -604,10 +610,11 @@ body {
                     align-items: center;
                     padding-top: 24px;
                     gap: 10px;
-                    
+
                     .icon {
                         color: $secondary-color;
                     }
+
                     button {
                         display: flex;
                         flex-direction: row;
@@ -640,6 +647,7 @@ body {
 
                 .container {
                     flex: 5;
+                    padding: 20px;
 
                     .home {
                         display: flex;
@@ -677,12 +685,73 @@ body {
                             flex: 3;
                         }
                     }
+
+                    .food {
+
+                        h1 {
+                            font-weight: 300;
+                            font-size: 48px;
+                            margin: 10px;
+                            margin-left: 0px;
+                        }
+
+                        .accordion {
+                            background-color: $secondary-color;
+
+                            .accordion-header {
+                                font-weight: 300;
+                                background-color: $secondary-color;
+                            }
+
+                            .accordion-body {
+
+                                .food-table {
+                                    width: 100%;
+                                    justify-self: center;
+                                    align-self: center;
+                                    border-spacing: 50px 0px;
+
+                                    th,
+                                    td {
+                                        padding: 10px;
+                                    }
+
+                                    .name {
+                                        width: 40%;
+                                    }
+
+                                    .price {
+                                        width: 15%;
+                                    }
+
+                                    .calories {
+                                        width: 15%
+                                    }
+
+                                    .protein {
+                                        width: 15%
+                                    }
+
+                                    .carbs {
+                                        width: 15%
+                                    }
+
+                                    .fats {
+                                        width: 15%
+                                    }
+
+
+                                }
+                            }
+                        }
+                    }
                 }
 
             }
-        }   
-        
-        
-        
+        }
+
+
+
     }
 }
+
