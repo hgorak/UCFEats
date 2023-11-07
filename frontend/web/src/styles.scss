@@ -52,7 +52,7 @@ body {
                         align-items: center;
                         justify-content: space-between;
                         // border: solid 1px black;
-                        width: 1024px;
+                        width: 70%;
                         height: 75px;
 
                         .title {
@@ -97,7 +97,7 @@ body {
 
                 // main hero section
                 .hero {
-                    width: 1024px;
+                    width: 70%;
                     // border: solid 1px black;
                     height: 100vh;
                     display: flex;
@@ -172,7 +172,7 @@ body {
                     justify-content: center;
 
                     .review-container {
-                        width: 1024px;
+                        width: 70%;
                         color: black;
                         display: flex;
                         flex-direction: column;
@@ -220,7 +220,7 @@ body {
                     justify-content: center;
 
                     .about-container {
-                        width: 1024px;
+                        width: 70%;
                         height: 100%;
                         color: $secondary-color;
                         display: flex;
