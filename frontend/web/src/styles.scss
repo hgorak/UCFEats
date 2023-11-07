@@ -113,19 +113,20 @@ body {
 
                         .header {
                             h1 {
-                                font-size: 80px;
+                                //font-size: 80px;
+                                font-size: 6vw;
                                 font-weight: bold;
                                 margin-bottom: 5px;
                             }
 
                             span {
-                                font-size: 60px;
+                                font-size: 5vw;
                                 font-weight: 200;
                             }
                         }
 
                         span {
-                            font-size: 18px;
+                            font-size: 1.2vw;
                             font-weight: 300;
                         }
 
@@ -154,7 +155,8 @@ body {
                         filter: drop-shadow(35px 25px 15px #9d242d);
 
                         img {
-                            height: 600px;
+                            width: 75%;
+                            max-width: 100%;
                         }
 
 
