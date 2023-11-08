@@ -472,10 +472,32 @@ const Food = () => {
 	//     }
 	// ];
 	const [cfa, setCfa] = useState([]);
+	const [restaurants, setRestaurants] = useState([]);
+
+	const getRestaurantNames = async (event) => {
+		const response = await fetch(API_URL + "/api/stores/", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log("ERROR: failed to fetch restaurants");
+		}
+
+		if (response.ok) {
+			console.log(response);
+		}
+	};
+
 	const getFoodItems = async (event) => {
 		// console.log("running!");
 
-		const response = await fetch(API_URL + "/api/items/?name=Chick-fil-a", {
+		const response = await fetch(API_URL + "/api/items/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/JSON",
@@ -490,7 +512,7 @@ const Food = () => {
 
 		console.log(json);
 		if (!response.ok) {
-			console.log("FETCH ITEM ERROR");
+			console.log("ERROR: failed to fetch items");
 		}
 
 		if (response.ok) {
