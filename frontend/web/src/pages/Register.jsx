@@ -13,6 +13,7 @@ function Register() {
 	const [error, setError] = useState("");
 
 	const navigate = useNavigate();
+
 	const doRegister = async (event) => {
 		setError(null);
 		event.preventDefault();

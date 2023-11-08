@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useOutletContext } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
 
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
 
 const Food = () => {
+	const { currentUser } = useContext(AuthContext);
 	// const cfa = [
 	//     {
 	//         "_id": "652715a2fc9fddd7e9e59275",
@@ -470,15 +472,36 @@ const Food = () => {
 	//     }
 	// ];
 	const [cfa, setCfa] = useState([]);
+	const [restaurants, setRestaurants] = useState([]);
+
+	const getRestaurantNames = async (event) => {
+		const response = await fetch(API_URL + "/api/stores/", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log("ERROR: failed to fetch restaurants");
+		}
+
+		if (response.ok) {
+			console.log(response);
+		}
+	};
+
 	const getFoodItems = async (event) => {
 		// console.log("running!");
 
-		const response = await fetch(API_URL + "/api/items/?name=Chick-fil-a", {
+		const response = await fetch(API_URL + "/api/items/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/JSON",
-				Authorization:
-					"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM5ODgxN2RlYjdmZDJjODE4MTgxZjkiLCJpYXQiOjE2OTkxMTY1MDMsImV4cCI6MTY5OTM3NTcwM30.vMObIJSVEUb6JrZN4Z0lcy4TkembvrC0Yzf7VdODgbA",
+				Authorization: "Bearer " + currentUser.token,
 			},
 			body: JSON.stringify({
 				name: "Chick-fil-a",
@@ -489,7 +512,7 @@ const Food = () => {
 
 		console.log(json);
 		if (!response.ok) {
-			console.log("FETCH ITEM ERROR");
+			console.log("ERROR: failed to fetch items");
 		}
 
 		if (response.ok) {
