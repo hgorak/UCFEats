@@ -1,6 +1,7 @@
 const express = require('express');
 const {
-  getLocations,
+  getAllLocations,
+  getUserLocations,
   getLocation,
   addLocation,
   deleteLocation,
@@ -10,11 +11,14 @@ const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
+// Get all locations
+router.get('/all', getAllLocations);
+
 // Require authentication for all store routes
 router.use(requireAuth);
 
-// Get all locations
-router.get('/', getLocations);
+// Get all user locations
+router.get('/', getUserLocations);
 
 // Gets specified grocery
 router.get('/:id', getLocation);

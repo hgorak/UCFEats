@@ -30,6 +30,12 @@ const userSchema = new Schema({
     type: Array,
     "default": [],
     required: false
+  },
+
+  eats: {
+    type: Array,
+    "default": [],
+    required: false
   }
 }, {collection: 'Users'});
 

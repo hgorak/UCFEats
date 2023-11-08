@@ -2,8 +2,15 @@ const LocationList = require('../models/locationModel.js');
 const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
-// Get all locations
-const getLocations = async (req, res) => {
+// Get all of the locations
+const getAllLocations = async (req, res) => {
+  const locations = await LocationList.find({});
+
+  res.status(200).json(locations);
+}
+
+// Get all of the user's locations
+const getUserLocations = async (req, res) => {
   // Gets user
   const user = await User.findById(req.user._id);
   
@@ -142,7 +149,8 @@ const updateLocations = async (req, res) => {
 
 
 module.exports = {
-  getLocations,
+  getAllLocations,
+  getUserLocations,
   getLocation,
   addLocation,
   deleteLocation,

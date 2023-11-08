@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const sendEmail = require('../utils/emailSender');
 
 const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' });
@@ -36,6 +37,9 @@ const registerUser = async(req, res) => {
     // Create token for user
     const token = createToken(user._id);
 
+    // Send email for verification
+    sendEmail(email);
+
     res.status(200).json({email, first_name, last_name, token});
   }
 
@@ -44,4 +48,17 @@ const registerUser = async(req, res) => {
   }
 };
 
-module.exports = { loginUser, registerUser };
+const deleteUser = async(req, res) => {
+
+  try {
+    const id = req.user._id;
+    const result = await User.findOneAndDelete({_id: id});
+    res.status(200).json(result)
+  }
+
+  catch (error) {
+    res.status(404).json({message: 'User not found'});
+  }
+};
+
+module.exports = { loginUser, registerUser, deleteUser };
