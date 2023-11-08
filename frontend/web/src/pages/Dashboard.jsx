@@ -12,6 +12,11 @@ import "../styles.scss";
 
 function Dashboard() {
 	const { logout, currentUser } = useContext(AuthContext);
+	const [clickedButton, setClickedButton] = useState("overview");
+
+	const handleButtonClick = (buttonName) => {
+		setClickedButton(buttonName);
+	};
 
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -28,13 +33,28 @@ function Dashboard() {
 					</div>
 					<div className="buttons">
 						<NavLink to="/dashboard/">
-							<button>Overview</button>
+							<button
+								onClick={() => handleButtonClick("overview")}
+								className={clickedButton === "overview" ? "clicked" : ""}
+							>
+								Overview
+							</button>
 						</NavLink>
 						<NavLink to="/dashboard/food">
-							<button>What to Eat</button>
+							<button
+								onClick={() => handleButtonClick("food")}
+								className={clickedButton === "food" ? "clicked" : ""}
+							>
+								What to Eat
+							</button>
 						</NavLink>
 						<NavLink to="favorites">
-							<button>Favorite Eats</button>
+							<button
+								onClick={() => handleButtonClick("fav")}
+								className={clickedButton === "fav" ? "clicked" : ""}
+							>
+								Favorite Eats
+							</button>
 						</NavLink>
 					</div>
 					<div className="account">Welcome back, {currentUser.first_name}</div>
