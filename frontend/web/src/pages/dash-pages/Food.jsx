@@ -19,7 +19,7 @@ const Food = () => {
 				</div>
 			</div>
 
-			<Accordion as="div" className="accordion">
+			<Accordion>
 				{restaurantItems.map(([restaurant, items], index) => (
 					<Accordion.Item eventKey={index} key={index}>
 						<Accordion.Header>{restaurant}</Accordion.Header>
