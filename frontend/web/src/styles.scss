@@ -76,8 +76,9 @@ body {
 
                         a {
                             display: flex;
-                            width: 25%;
-                            height: 80%;
+                            flex-direction: row;
+                            width: 20%;
+                            height: 75%;
                             border-radius: 25px;
                             justify-content: center;
                             align-items: center;
@@ -89,22 +90,8 @@ body {
                                 width: 100%;
                                 height: 100%;
                                 border-radius: 25px;
-                                font-size: 1rem;
+                                font-size: .9rem;
                                 color: black;
-
-                                &:hover {
-                                    background-color: $primary-color;
-                                    color: white;
-                                  }
-                            
-                                  &:active {
-                                    background-color: $primary-color;
-                                    color: white;
-                                  }
-                            
-                                  &:focus {
-                                    outline: none; // Remove the focus outline
-                                  }
                             }
                         }
 
@@ -695,7 +682,8 @@ body {
             }
             .dashboard {
                 color: black;
-                height: 100vh;
+                height: fit-content;
+                min-height: 100vh;
                 width: 100%;
                 background-color: $secondary-color;
                 display: flex;
@@ -821,7 +809,7 @@ body {
 
                         .accordion {
                             background-color: $secondary-color;
-
+                            margin-bottom: 50px;
                             .accordion-header {
                                 font-weight: 300;
                                 background-color: $secondary-color;

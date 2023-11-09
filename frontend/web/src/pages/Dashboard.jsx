@@ -2,6 +2,10 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate, NavLink, Outlet } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { AuthContext } from "../context/AuthContext.jsx";
+
+import { IconContext } from "react-icons";
+import { AiFillHome } from "react-icons/ai";
+
 import "../styles.scss";
 
 function Dashboard() {
@@ -28,28 +32,19 @@ function Dashboard() {
 					</div>
 					<div className="buttons">
 						<NavLink to="/dashboard/">
-							<button
-								onClick={() => handleButtonClick("overview")}
-								className={clickedButton === "overview" ? "clicked" : ""}
-							>
-								Overview
-							</button>
+							{({ isActive }) => (
+								<button className={isActive ? "clicked" : ""}>Overview</button>
+							)}
 						</NavLink>
 						<NavLink to="/dashboard/food">
-							<button
-								onClick={() => handleButtonClick("food")}
-								className={clickedButton === "food" ? "clicked" : ""}
-							>
-								What to Eat
-							</button>
+							{({ isActive }) => (
+								<button className={isActive ? "clicked" : ""}>What to Eat</button>
+							)}
 						</NavLink>
 						<NavLink to="favorites">
-							<button
-								onClick={() => handleButtonClick("fav")}
-								className={clickedButton === "fav" ? "clicked" : ""}
-							>
-								Favorite Eats
-							</button>
+							{({ isActive }) => (
+								<button className={isActive ? "clicked" : ""}>Favorites</button>
+							)}
 						</NavLink>
 					</div>
 					<Dropdown className="dropdown" drop="down-centered">
