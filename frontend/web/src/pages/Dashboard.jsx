@@ -38,7 +38,7 @@ function Dashboard() {
 						</NavLink>
 						<NavLink to="/dashboard/food">
 							{({ isActive }) => (
-								<button className={isActive ? "clicked" : ""}>What to Eat</button>
+								<button className={isActive ? "clicked" : ""}>Eats</button>
 							)}
 						</NavLink>
 						<NavLink to="favorites">

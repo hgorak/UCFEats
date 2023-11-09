@@ -50,6 +50,7 @@ body {
                     height: 100%;
 
                     .title {
+                        width: 25%;
                         h1 {
                             font-size: 40px;
                             font-weight: 200;
@@ -67,9 +68,8 @@ body {
                         flex-direction: row;
                         justify-content: center;
                         align-items: center;
-                        width: 30%;
+                        width: 40%;
                         height: 75%;
-                        gap: 15px;
                         background-color: $nearly-white;
                         border-radius: 25px;
 
@@ -104,17 +104,17 @@ body {
                     .dropdown {
                         display: flex;
                         flex-direction: row;
-                        justify-content: center;
+                        justify-content: right;
                         align-items: center;
                         height: 100%;
-                        width: 18%;
+                        width: 25%;
                         
                         .account {
                             color: black;
                             background-color: $nearly-white;
                             border: none;
                             height: 80%;
-                            width: 100%;
+                            width: 80%;
                             border-radius: 25px;
                             font-size: .9rem;
                         }
@@ -782,14 +782,33 @@ body {
                     .food {
                         display: flex;
                         flex-direction: column;
+                        justify-content: center;
                         width: 100%;
+                        gap: 20px;
 
                         .food-header {
                             display: flex;
                             flex-direction: row;
                             align-items: center;
-                            justify-content: space-between;
+                            justify-content: center;
+                            height: 40vh;
 
+                            .food-hero {
+                                display: flex;
+                                flex-direction: column;
+                                background-image: linear-gradient(to top right, $primary-color, #E09E34);
+                                width: 60%;
+                                height: 90%;
+                                border-radius: 25px;
+                                justify-content: center;
+                                align-items: center;
+                                color: $nearly-white;
+
+                                h2 {
+                                    font-size: 3rem;
+                                }
+                            }
+                            
                             h1 {
                                 font-weight: 300;
                                 font-size: 48px;
@@ -810,6 +829,8 @@ body {
                         .accordion {
                             background-color: $secondary-color;
                             margin-bottom: 50px;
+                            border-radius: 25px;
+
                             .accordion-header {
                                 font-weight: 300;
                                 background-color: $secondary-color;

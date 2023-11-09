@@ -13,11 +13,13 @@ const Food = () => {
 	return (
 		<div className="food">
 			<div className="food-header">
-				<h1>Restaurants</h1>
-				<input placeholder="Search" />
+				<div class="food-hero">
+					<h2>Eats</h2>
+					<span>All of UCF's food options. All in one place.</span>
+				</div>
 			</div>
 
-			<Accordion>
+			<Accordion as="div" className="accordion">
 				{restaurantItems.map(([restaurant, items], index) => (
 					<Accordion.Item eventKey={index} key={index}>
 						<Accordion.Header>{restaurant}</Accordion.Header>
