@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { GiKnifeFork } from "react-icons/gi";
-import { AiFillHome } from "react-icons/ai";
-import { IconContext } from "react-icons";
+import Dropdown from "react-bootstrap/Dropdown";
 import "../styles.scss";
 
 function DashNav() {

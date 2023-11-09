@@ -1,14 +1,7 @@
-import React, { useState, useContext, createContext, useEffect } from "react";
-import { Link, useNavigate, NavLink, Outlet, useOutletContext } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate, NavLink, Outlet } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
 import { AuthContext } from "../context/AuthContext.jsx";
-import { GiKnifeFork } from "react-icons/gi";
-import { AiFillHome } from "react-icons/ai";
-import { IconContext } from "react-icons";
-
-import Home from "./dash-pages/Home.jsx";
-import DashNav from "../components/DashNav.jsx";
-import Loading from "../components/Loading.jsx";
-import { API_URL } from "../../api.js";
 import "../styles.scss";
 
 function Dashboard() {
@@ -59,10 +52,15 @@ function Dashboard() {
 							</button>
 						</NavLink>
 					</div>
-					<div className="account">
-						Welcome back, {currentUser.first_name}
-						<button onClick={logout}>Logout</button>
-					</div>
+					<Dropdown className="dropdown" drop="down-centered">
+						<Dropdown.Toggle className="account">
+							Welcome back, {currentUser.first_name}
+						</Dropdown.Toggle>
+
+						<Dropdown.Menu>
+							<Dropdown.Item onClick={handleClick}>Logout</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 				</div>
 			</div>
 			<div className="container">
