@@ -5,6 +5,7 @@ import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
 import Landing from "./pages/Landing.jsx";
+import Loading from "./components/Loading.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/dash-pages/Home.jsx";
 import Food from "./pages/dash-pages/Food.jsx";
@@ -48,6 +49,7 @@ function App() {
 							element={<Forgot />}
 							errorElement={<Error />}
 						/>
+						<Route path="/loading" element={<Loading />} />
 						<Route
 							path="/dashboard"
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}

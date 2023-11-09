@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 import { Link, useNavigate, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { GiKnifeFork } from "react-icons/gi";
@@ -7,7 +7,8 @@ import { IconContext } from "react-icons";
 
 import Home from "./dash-pages/Home.jsx";
 import DashNav from "../components/DashNav.jsx";
-
+import Loading from "../components/Loading.jsx";
+import { API_URL } from "../../api.js";
 import "../styles.scss";
 
 function Dashboard() {
@@ -19,6 +20,7 @@ function Dashboard() {
 	};
 
 	const navigate = useNavigate();
+
 	const handleClick = () => {
 		logout();
 		navigate("/");
