@@ -4,7 +4,7 @@ export const ItemsContext = createContext();
 
 export function ItemsContextProvider({ children }) {
 	const storedRestaurantItems = JSON.parse(localStorage.getItem("restaurantItems"));
-	const [restaurantItems, setRestaurantItems] = useState(storedRestaurantItems || new Map());
+	const [restaurantItems, setRestaurantItems] = useState(storedRestaurantItems || []);
 
 	useEffect(() => {
 		const fetchRestaurants = async (event) => {
@@ -47,12 +47,19 @@ export function ItemsContextProvider({ children }) {
 				);
 
 				// Map associating restaurants with their items
-				setRestaurantItems(restaurantItemsMap);
+				setRestaurantItems(Array.from(restaurantItemsMap.entries()));
+
+				console.log(
+					"Data before storing in localStorage:",
+					Array.from(restaurantItemsMap.entries())
+				);
 
 				localStorage.setItem(
 					"restaurantItems",
 					JSON.stringify(Array.from(restaurantItemsMap.entries()))
 				);
+
+				// localStorage.setItem("restaurantItems", restaurantItemsMap);
 				navigate("/dashboard");
 			}
 		};
@@ -60,9 +67,6 @@ export function ItemsContextProvider({ children }) {
 		if (!storedRestaurantItems) {
 			fetchRestaurants();
 		}
-
-		console.log("in context");
-		console.log(restaurantItems);
 	}, [setRestaurantItems, storedRestaurantItems]);
 
 	return (

@@ -59,7 +59,10 @@ function Dashboard() {
 							</button>
 						</NavLink>
 					</div>
-					<div className="account">Welcome back, {currentUser.first_name}</div>
+					<div className="account">
+						Welcome back, {currentUser.first_name}
+						<button onClick={logout}>Logout</button>
+					</div>
 				</div>
 			</div>
 			<div className="container">

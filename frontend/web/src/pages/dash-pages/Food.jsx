@@ -8,13 +8,6 @@ import { API_URL } from "../../../api.js";
 import "../../styles.scss";
 
 const Food = () => {
-	const { currentUser } = useContext(AuthContext);
-	const [fetched, setFetched] = useState(false);
-	const [itemsFetched, setItemsFetched] = useState(false);
-	const [data, setData] = useState(new Map());
-	const [restaurants, setRestaurants] = useState([]);
-	const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-
 	const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
 
 	return (
@@ -25,9 +18,9 @@ const Food = () => {
 			</div>
 
 			<Accordion>
-				{Array.from(restaurantItems.entries()).map(([restaurantName, items], index) => (
-					<Accordion.Item eventKey={index}>
-						<Accordion.Header>{restaurantName}</Accordion.Header>
+				{restaurantItems.map(([restaurant, items], index) => (
+					<Accordion.Item eventKey={index} key={index}>
+						<Accordion.Header>{restaurant}</Accordion.Header>
 						<Accordion.Body>
 							<table className="food-table">
 								<thead>

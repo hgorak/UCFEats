@@ -51,19 +51,24 @@ const Loading = () => {
 				);
 
 				// Map associating restaurants with their items
-				setRestaurantItems(restaurantItemsMap);
+				setRestaurantItems(Array.from(restaurantItemsMap.entries()));
+
+				console.log(
+					"Data before storing in localStorage:",
+					Array.from(restaurantItemsMap.entries())
+				);
 
 				localStorage.setItem(
 					"restaurantItems",
 					JSON.stringify(Array.from(restaurantItemsMap.entries()))
 				);
+
+				// localStorage.setItem("restaurantItems", restaurantItemsMap);
 				navigate("/dashboard");
 			}
 		};
 
 		fetchRestaurants();
-		console.log("in loading");
-		console.log(restaurantItems);
 	}, [setRestaurantItems]);
 
 	return <div>Loading...</div>;
