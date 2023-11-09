@@ -71,7 +71,7 @@ const Loading = () => {
 		fetchRestaurants();
 	}, [setRestaurantItems]);
 
-	return <div>Loading...</div>;
+	return <div className="loading">Whipping Up a Culinary Adventure...</div>;
 };
 
 export default Loading;
