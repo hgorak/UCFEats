@@ -36,6 +36,24 @@ const userSchema = new Schema({
     type: Array,
     "default": [],
     required: false
+  },
+
+  verified: {
+    type: Boolean,
+    "default": false,
+    required: false
+  },
+
+  verification_token: {
+    type: String,
+    "default": "",
+    required: false
+  },
+
+  reset_token: {
+    type: String,
+    "default": "",
+    required: false
   }
 }, {collection: 'Users'});
 
