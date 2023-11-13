@@ -887,23 +887,40 @@ body {
                                     }
 
                                     .price {
-                                        width: 15%;
+                                        width: 10%;
                                     }
 
                                     .calories {
-                                        width: 15%
+                                        width: 10%
                                     }
 
                                     .protein {
-                                        width: 15%
+                                        width: 10%
                                     }
 
                                     .carbs {
-                                        width: 15%
+                                        width: 10%
                                     }
 
                                     .fats {
-                                        width: 15%
+                                        width: 10%
+                                    }
+
+                                    .buttons {
+                                        width: 10%;
+                                        display: flex;
+                                        flex-direction: row;
+                                        gap: 5px;
+
+                                        button {
+                                            border: none;
+                                            background-color: white;
+                                        }
+                                        
+                                        .add:hover {
+                                            background-color: #e6e6e6;
+                                            border-radius: 5px;
+                                        }
                                     }
 
 

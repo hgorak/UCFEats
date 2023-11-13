@@ -3,6 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
+import { IconContext } from "react-icons";
+import { AiOutlinePlus, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
@@ -32,6 +34,7 @@ const Food = () => {
 									<th>Protein</th>
 									<th>Carbohydrates</th>
 									<th>Fats</th>
+									<th></th>
 								</thead>
 								<tbody>
 									{items.map((item, itemIndex) => (
@@ -42,6 +45,22 @@ const Food = () => {
 											<td className="protein">{item.Protein}g</td>
 											<td className="carbs">{item.Carbs}g</td>
 											<td className="fats">{item.Fat}g</td>
+											<td className="buttons">
+												<IconContext.Provider
+													value={{ color: "black", size: "25px" }}
+												>
+													<button className="add">
+														<AiOutlinePlus />
+													</button>
+												</IconContext.Provider>
+												<IconContext.Provider
+													value={{ color: "black", size: "25px" }}
+												>
+													<button>
+														<AiOutlineHeart />
+													</button>
+												</IconContext.Provider>
+											</td>
 										</tr>
 									))}
 								</tbody>
