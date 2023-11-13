@@ -28,7 +28,9 @@ function Dashboard() {
 			<div className="navbar-container navbar-container-dash">
 				<div className="navbar navbar-dash">
 					<div className="title">
-						<h1>UCFEats</h1>
+						<Link to="/landing">
+							<h1>UCFEats</h1>
+						</Link>
 					</div>
 					<div className="buttons">
 						<NavLink to="/dashboard/">
