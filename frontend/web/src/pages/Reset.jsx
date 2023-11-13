@@ -1,10 +1,16 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLoaderData } from "react-router-dom";
 import { API_URL } from "../../api.js";
 
 import "../styles.scss";
 
+export function loader({ params }) {
+	const resetToken = params.resetToken;
+	return { resetToken };
+}
 function Reset() {
+	const { resetToken } = useLoaderData();
+
 	return (
 		<div className="login">
 			<div className="navbar-container navbar-container-bg">
@@ -22,6 +28,7 @@ function Reset() {
 					<span>
 						Make this one memorable. <br></br>Or super complicated. Up to you.
 					</span>
+					<span>{resetToken}</span>
 					<form>
 						<input
 							required
