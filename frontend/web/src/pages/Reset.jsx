@@ -1,15 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate, useLoaderData } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../api.js";
 
 import "../styles.scss";
 
-export function loader({ params }) {
-	const resetToken = params.resetToken;
-	return { resetToken };
-}
 function Reset() {
-	const { resetToken } = useLoaderData();
+	let { resetToken } = useParams();
 
 	return (
 		<div className="login">

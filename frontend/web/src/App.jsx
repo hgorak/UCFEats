@@ -35,7 +35,6 @@ function App() {
 							path="/reset/:resetToken"
 							element={<Reset />}
 							errorElement={<Error />}
-							loader={resetTokenLoader}
 						/>
 						<Route
 							path="/loading"
