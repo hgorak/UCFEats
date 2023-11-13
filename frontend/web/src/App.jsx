@@ -10,30 +10,11 @@ import Loading from "./components/Loading.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/dash-pages/Home.jsx";
 import Food from "./pages/dash-pages/Food.jsx";
+import Favorites from "./pages/dash-pages/Favorites.jsx";
 import Error from "./pages/Error.jsx";
 import { AuthContext } from "./context/AuthContext.jsx";
 
 import "./styles.scss";
-
-// const router = createBrowserRouter([
-// 	{
-// 		path: "/",
-// 		element: <Landing />,
-// 		errorElement: <Error />,
-// 	},
-// 	{
-// 		path: "/login",
-// 		element: <Login />,
-// 	},
-// 	{
-// 		path: "/register",
-// 		element: <Register />,
-// 	},
-// 	{
-// 		path: "/dashboard",
-// 		element: {},
-// 	},
-// ]);
 
 function App() {
 	const { currentUser } = useContext(AuthContext);
@@ -59,8 +40,9 @@ function App() {
 							path="/dashboard"
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
 						>
-							<Route path="/dashboard/home" element={<Home />} />
+							<Route path="/dashboard/" element={<Home />} />
 							<Route path="/dashboard/food" element={<Food />} />
+							<Route path="/dashboard/favorites" element={<Favorites />} />
 						</Route>
 					</Routes>
 				</BrowserRouter>

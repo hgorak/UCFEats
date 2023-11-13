@@ -3,18 +3,39 @@ import { useOutletContext } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
+import { IconContext } from "react-icons";
+import { AiOutlinePlus, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
 
-const Food = () => {
+function Food() {
+	const { currentUser } = useContext(AuthContext);
 	const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
+	const [error, setError] = useState("");
+
+	const addEat = async (items, itemIndex) => {
+		const itemName = items[itemIndex].Name;
+
+		const response = await fetch(API_URL + "/api/items/add", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({ name: itemName }),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) console.log(json.error);
+	};
 
 	return (
 		<div className="food">
 			<div className="food-header">
 				<div class="food-hero">
-					<h2>Eats</h2>
+					<h2>Restaurants</h2>
 					<span>All of UCF's food options. All in one place.</span>
 				</div>
 			</div>
@@ -32,6 +53,7 @@ const Food = () => {
 									<th>Protein</th>
 									<th>Carbohydrates</th>
 									<th>Fats</th>
+									<th></th>
 								</thead>
 								<tbody>
 									{items.map((item, itemIndex) => (
@@ -42,6 +64,27 @@ const Food = () => {
 											<td className="protein">{item.Protein}g</td>
 											<td className="carbs">{item.Carbs}g</td>
 											<td className="fats">{item.Fat}g</td>
+											<td className="buttons">
+												<IconContext.Provider
+													value={{ color: "black", size: "25px" }}
+												>
+													<button
+														onClick={() => {
+															addEat(items, itemIndex);
+														}}
+														className="add"
+													>
+														<AiOutlinePlus />
+													</button>
+												</IconContext.Provider>
+												{/* <IconContext.Provider
+													value={{ color: "black", size: "25px" }}
+												>
+													<button>
+														<AiOutlineHeart />
+													</button>
+												</IconContext.Provider> */}
+											</td>
 										</tr>
 									))}
 								</tbody>
@@ -52,6 +95,6 @@ const Food = () => {
 			</Accordion>
 		</div>
 	);
-};
+}
 
 export default Food;
