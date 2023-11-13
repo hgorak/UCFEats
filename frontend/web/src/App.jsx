@@ -31,7 +31,11 @@ function App() {
 							element={<Forgot />}
 							errorElement={<Error />}
 						/>
-						<Route path="/resetpassword" element={<Reset />} errorElement={<Error />} />
+						<Route
+							path="/reset/:resetToken"
+							element={<Reset />}
+							errorElement={<Error />}
+						/>
 						<Route
 							path="/loading"
 							element={currentUser ? <Loading /> : <Navigate to="/" />}
