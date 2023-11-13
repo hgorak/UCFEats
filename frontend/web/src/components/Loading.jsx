@@ -64,7 +64,7 @@ const Loading = () => {
 				);
 
 				// localStorage.setItem("restaurantItems", restaurantItemsMap);
-				navigate("/dashboard");
+				navigate("/dashboard/");
 			}
 		};
 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "../styles.scss";
 
-function Forgot() {
+function Reset() {
 	return (
 		<div className="login">
 			<div className="navbar-container navbar-container-bg">
@@ -15,19 +15,24 @@ function Forgot() {
 			</div>
 			<div className="container">
 				<div className="forgot-box">
-					<h1>Forgot Your Password?</h1>
+					<h1>Change your Password</h1>
 					<span>
-						No worries! Enter your email address <br></br>below and we'll send you a
-						reset link pronto.
+						Make this one memorable. <br></br>Or super complicated. Up to you.
 					</span>
 					<form>
 						<input
 							required
+							type="password"
+							className="login-input"
+							placeholder="New Password"
+						/>
+						<input
+							required
 							type="email"
 							className="login-input"
-							placeholder="Email Address"
+							placeholder="Confirm New Password"
 						/>
-						<button type="submit">Submit</button>
+						<button type="submit">Change Password</button>
 						{/* {error && <div className="error">{error}</div>} */}
 					</form>
 				</div>
@@ -36,4 +41,4 @@ function Forgot() {
 	);
 }
 
-export default Forgot;
+export default Reset;

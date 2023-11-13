@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
+import Reset from "./pages/Reset.jsx";
 import Landing from "./pages/Landing.jsx";
 import Loading from "./components/Loading.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -49,7 +50,11 @@ function App() {
 							element={<Forgot />}
 							errorElement={<Error />}
 						/>
-						<Route path="/loading" element={<Loading />} />
+						<Route path="/resetpassword" element={<Reset />} errorElement={<Error />} />
+						<Route
+							path="/loading"
+							element={currentUser ? <Loading /> : <Navigate to="/" />}
+						/>
 						<Route
 							path="/dashboard"
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
