@@ -42,7 +42,7 @@ function Reset() {
 				</div>
 			</div>
 			<div className="container">
-				{sent ? (
+				{reset ? (
 					<div className="forgot-box forgot-box-sent">
 						<h1>Password Successfully Reset</h1>
 						<span>
