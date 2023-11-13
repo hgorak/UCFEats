@@ -9,8 +9,27 @@ import { AiOutlinePlus, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
 
-const Food = () => {
+function Food() {
+	const { currentUser } = useContext(AuthContext);
 	const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
+	const [error, setError] = useState("");
+
+	const addEat = async (items, itemIndex) => {
+		const itemName = items[itemIndex].Name;
+
+		const response = await fetch(API_URL + "/api/items/add", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({ name: itemName }),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) console.log(json.error);
+	};
 
 	return (
 		<div className="food">
@@ -49,7 +68,12 @@ const Food = () => {
 												<IconContext.Provider
 													value={{ color: "black", size: "25px" }}
 												>
-													<button className="add">
+													<button
+														onClick={() => {
+															addEat(items, itemIndex);
+														}}
+														className="add"
+													>
 														<AiOutlinePlus />
 													</button>
 												</IconContext.Provider>
@@ -71,6 +95,6 @@ const Food = () => {
 			</Accordion>
 		</div>
 	);
-};
+}
 
 export default Food;
