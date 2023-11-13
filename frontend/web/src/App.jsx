@@ -16,26 +16,6 @@ import { AuthContext } from "./context/AuthContext.jsx";
 
 import "./styles.scss";
 
-// const router = createBrowserRouter([
-// 	{
-// 		path: "/",
-// 		element: <Landing />,
-// 		errorElement: <Error />,
-// 	},
-// 	{
-// 		path: "/login",
-// 		element: <Login />,
-// 	},
-// 	{
-// 		path: "/register",
-// 		element: <Register />,
-// 	},
-// 	{
-// 		path: "/dashboard",
-// 		element: {},
-// 	},
-// ]);
-
 function App() {
 	const { currentUser } = useContext(AuthContext);
 	return (
@@ -60,7 +40,7 @@ function App() {
 							path="/dashboard"
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
 						>
-							<Route path="/dashboard/home" element={<Home />} />
+							<Route path="/dashboard/" element={<Home />} />
 							<Route path="/dashboard/food" element={<Food />} />
 							<Route path="/dashboard/favorites" element={<Favorites />} />
 						</Route>

@@ -35,7 +35,7 @@ function Food() {
 		<div className="food">
 			<div className="food-header">
 				<div class="food-hero">
-					<h2>Eats</h2>
+					<h2>Restaurants</h2>
 					<span>All of UCF's food options. All in one place.</span>
 				</div>
 			</div>
@@ -77,13 +77,13 @@ function Food() {
 														<AiOutlinePlus />
 													</button>
 												</IconContext.Provider>
-												<IconContext.Provider
+												{/* <IconContext.Provider
 													value={{ color: "black", size: "25px" }}
 												>
 													<button>
 														<AiOutlineHeart />
 													</button>
-												</IconContext.Provider>
+												</IconContext.Provider> */}
 											</td>
 										</tr>
 									))}
