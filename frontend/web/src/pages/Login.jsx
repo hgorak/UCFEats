@@ -37,6 +37,7 @@ function Login() {
 			<div className="container">
 				<div className="login-box">
 					<h1>Member Login</h1>
+					<span>Welcome back! It's great to see you again.</span>
 					<form>
 						<input
 							required
@@ -67,12 +68,12 @@ function Login() {
 						<button onClick={handleSubmit} type="submit">
 							Log In
 						</button>
+						{error && <div className="error">{error}</div>}
 						<div style={{ alignSelf: "center" }}>
 							<Link to="/register">
 								<span>Need an account?</span>
 							</Link>
 						</div>
-						{error && <div className="error">{error}</div>}
 					</form>
 				</div>
 			</div>

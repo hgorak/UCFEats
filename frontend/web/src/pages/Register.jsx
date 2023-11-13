@@ -37,7 +37,7 @@ function Register() {
 
 	return (
 		<div className="login">
-			<div className="navbar-container navbar-container-bg">
+			<div className="navbar-container navbar-container-bg navbar-container-dash">
 				<div className="navbar">
 					<div className="title">
 						<Link to="/">
@@ -48,7 +48,8 @@ function Register() {
 			</div>
 			<div className="container">
 				<div className="reg-box">
-					<h1>New Member</h1>
+					<h1>Create an Account</h1>
+					<span>We're excited to have you!</span>
 					<form>
 						<input
 							className="login-input"
@@ -108,12 +109,12 @@ function Register() {
 						<button type="submit" onClick={doRegister}>
 							Register
 						</button>
+						{error && <div className="error">{error}</div>}
 						<div style={{ alignSelf: "center" }}>
 							<Link to="/login">
 								<span>Have an account?</span>
 							</Link>
 						</div>
-						{error && <div className="error">{error}</div>}
 					</form>
 				</div>
 			</div>
