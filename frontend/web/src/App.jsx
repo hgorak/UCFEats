@@ -51,7 +51,10 @@ function App() {
 							errorElement={<Error />}
 						/>
 						<Route path="/resetpassword" element={<Reset />} errorElement={<Error />} />
-						<Route path="/loading" element={<Loading />} />
+						<Route
+							path="/loading"
+							element={currentUser ? <Loading /> : <Navigate to="/" />}
+						/>
 						<Route
 							path="/dashboard"
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
