@@ -691,12 +691,19 @@ body {
                             }
 
                             .error {
+                                align-self: center;
+                                justify-self: center;
+                                font-weight: bold;
                                 color: $primary-color;
                             }
 
 
 
                         }
+                    }
+
+                    .forgot-box-sent {
+                        height: 150px;
                     }
                 }
 
