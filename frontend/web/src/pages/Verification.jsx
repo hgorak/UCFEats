@@ -8,7 +8,7 @@ function Verification() {
 	let { verificationToken } = useParams();
 	const [verified, setVerified] = useState(false);
 
-	useEffect = () => {
+	useEffect(() => {
 		verifyEmail = async () => {
 			setError(null);
 
@@ -29,7 +29,7 @@ function Verification() {
 		};
 
 		if (!verified) verifyEmail();
-	};
+	}, [verificationToken, verified, setVerified]);
 
 	return (
 		<div className="login">
