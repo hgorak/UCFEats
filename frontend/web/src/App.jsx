@@ -2,9 +2,10 @@ import React, { useState, useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Register from "./pages/Register.jsx";
+import Verification from "./pages/Verification.jsx";
 import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
-import Reset, { loader as resetTokenLoader } from "./pages/Reset.jsx";
+import Reset from "./pages/Reset.jsx";
 import Landing from "./pages/Landing.jsx";
 import Loading from "./components/Loading.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -26,6 +27,11 @@ function App() {
 						<Route path="/" element={<Landing />} errorElement={<Error />} />
 						<Route path="/login" element={<Login />} errorElement={<Error />} />
 						<Route path="/register" element={<Register />} errorElement={<Error />} />
+						<Route
+							path="/verification/:verificationToken"
+							element={<Verification />}
+							errorElement={<Error />}
+						/>
 						<Route
 							path="/forgotpassword"
 							element={<Forgot />}
