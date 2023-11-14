@@ -23,7 +23,7 @@ function Reset() {
 		const json = await response.json();
 
 		if (!response.ok) {
-			setError(json.message);
+			setError(json.error);
 		}
 
 		if (response.ok) {
