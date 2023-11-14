@@ -704,6 +704,16 @@ body {
 
                     .forgot-box-sent {
                         height: 150px;
+
+                        span { 
+                            a {
+                                color: black;
+                            }
+
+                            a:hover {
+                                color: black;
+                            }
+                        }
                     }
                 }
 

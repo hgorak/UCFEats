@@ -68,7 +68,8 @@ function Verification() {
 					<div className="forgot-box forgot-box-sent">
 						<h1>Email Verified</h1>
 						<span>
-							Let's use your new account! <Link to="/login">Log in</Link>
+							Let's use your new account! <br></br>
+							<Link to="/login">Log in</Link>
 						</span>
 					</div>
 				) : (
