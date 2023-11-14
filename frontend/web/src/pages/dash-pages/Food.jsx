@@ -34,17 +34,17 @@ function Food() {
 
 		if (!response.ok) {
 			setAlertVariant("danger");
-			setAlertMessage(itemName + "could not be added!");
+			setAlertMessage(json.error);
 			setShowAlert(true);
 
 			window.setTimeout(() => {
-				showAlert(false);
+				setShowAlert(false);
 			}, 3000);
 		}
 
-		if (response) {
+		if (response.ok) {
 			setAlertVariant("success");
-			setAlertMessage(itemName + "added!");
+			setAlertMessage(itemName + " added!");
 			setShowAlert(true);
 
 			window.setTimeout(() => {
