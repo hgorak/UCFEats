@@ -7,6 +7,7 @@ import "../styles.scss";
 function Verification() {
 	let { verificationToken } = useParams();
 	const [verified, setVerified] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
 
 	useEffect(() => {
@@ -27,10 +28,29 @@ function Verification() {
 			if (response.ok) {
 				setVerified(true);
 			}
+
+			setLoading(false);
 		};
 
 		if (!verified) verifyEmail();
 	}, [verificationToken, verified, setVerified]);
+
+	if (loading) {
+		return (
+			<div className="login">
+				<div className="navbar-container navbar-container-bg">
+					<div className="navbar">
+						<div className="title">
+							<Link to="/">
+								<h1>UCFEats</h1>
+							</Link>
+						</div>
+					</div>
+				</div>
+				<div className="container">Loading...</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="login">
