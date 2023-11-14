@@ -7,6 +7,7 @@ import "../styles.scss";
 function Verification() {
 	let { verificationToken } = useParams();
 	const [verified, setVerified] = useState(false);
+	const [error, setError] = useState("");
 
 	useEffect(() => {
 		const verifyEmail = async () => {
