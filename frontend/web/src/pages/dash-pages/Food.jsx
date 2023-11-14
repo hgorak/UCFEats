@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
+import Alert from "react-bootstrap/Alert";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
@@ -12,6 +13,9 @@ import "../../styles.scss";
 function Food() {
 	const { currentUser } = useContext(AuthContext);
 	const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
+	const [showAlert, setShowAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
+	const [alertVariant, setAlertVariant] = useState("");
 	const [error, setError] = useState("");
 
 	const addEat = async (items, itemIndex) => {
@@ -28,7 +32,25 @@ function Food() {
 
 		const json = await response.json();
 
-		if (!response.ok) console.log(json.error);
+		if (!response.ok) {
+			setAlertVariant("danger");
+			setAlertMessage(itemName + "could not be added!");
+			setShowAlert(true);
+
+			window.setTimeout(() => {
+				showAlert(false);
+			}, 3000);
+		}
+
+		if (response) {
+			setAlertVariant("success");
+			setAlertMessage(itemName + "added!");
+			setShowAlert(true);
+
+			window.setTimeout(() => {
+				setShowAlert(false);
+			}, 3000);
+		}
 	};
 
 	return (
@@ -39,7 +61,9 @@ function Food() {
 					<span>All of UCF's food options. All in one place.</span>
 				</div>
 			</div>
-
+			<Alert show={showAlert} variant={alertVariant}>
+				{alertMessage}
+			</Alert>
 			<Accordion>
 				{restaurantItems.map(([restaurant, items], index) => (
 					<Accordion.Item eventKey={index} key={index}>
