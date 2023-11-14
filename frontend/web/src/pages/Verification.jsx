@@ -9,7 +9,7 @@ function Verification() {
 	const [verified, setVerified] = useState(false);
 
 	useEffect(() => {
-		verifyEmail = async () => {
+		const verifyEmail = async () => {
 			setError(null);
 
 			const response = await fetch(API_URL + "/api/user/verification/" + verificationToken, {
