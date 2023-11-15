@@ -29,7 +29,7 @@ const sendVerificationEmail = async (recipient) => {
 
     // Create html and link for email verification
     const htmlVerification = "Please Click Here To Verify Your Email";
-    const link = 'https://ucf-eats.vercel.app/verification/' + token; 
+    const link = 'https://ucf-eats.vercel.app/auth/verification/' + token; 
 
     // Send verification email
     const info = await transporter.sendMail({
