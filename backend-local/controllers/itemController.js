@@ -2,6 +2,16 @@ const ItemList = require('../models/itemModel');
 const LocationList = require('../models/locationModel');
 const User = require('../models/userModel');
 
+// Get all items
+const getAllItems = async (req, res) => {
+  const items = await ItemList.find({});
+
+  if (items === null)
+    return res.status(401).json({error: 'There are no items in the database'});
+
+  res.status(200).json(items);
+};
+
 // Get all items from location
 const getItems = async (req, res) => {
   const { name } = req.body;
@@ -45,6 +55,18 @@ const getEats = async (req, res) => {
   // Returns their stores
   res.status(200).json(user.eats);
 };
+
+// Get most recent eats
+const getRecentEats = async (req, res) => {
+   // Gets user
+  const user = await User.findById(req.user._id);
+
+  const numEats = 10;
+  
+  const firstTenEats = user.eats.slice(0, numEats);
+
+  res.status(200).json(firstTenEats);
+}
 
 // Adds an Eat to the user
 const addEat = async (req, res) => {
@@ -96,7 +118,7 @@ const addEat = async (req, res) => {
 };
 
 // Deletes an Eat 
-const deleteEat = async(req, res) => {
+const deleteEat = async (req, res) => {
   const { name } = req.body;
 
   /* Ensure item exists */
@@ -129,9 +151,11 @@ const deleteEat = async(req, res) => {
 };
 
 module.exports = {
+  getAllItems,
   getItems,
   getItem,
   getEats,
+  getRecentEats,
   addEat,
   deleteEat
 }
