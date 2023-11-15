@@ -37,7 +37,7 @@ function Verification() {
 
 	if (loading) {
 		return (
-			<div className="login">
+			<div className="auth">
 				<div className="navbar-container navbar-container-bg">
 					<div className="navbar">
 						<div className="title">

@@ -36,9 +36,11 @@ function Register() {
 		}
 	};
 
+	const comparePassword = () => {};
+
 	return (
-		<div className="login">
-			<div className="navbar-container navbar-container-bg navbar-container-dash">
+		<div className="auth">
+			<div className="navbar-container navbar-container-bg navbar-container-auth">
 				<div className="navbar">
 					<div className="title">
 						<Link to="/">
@@ -116,7 +118,7 @@ function Register() {
 							<button type="submit" onClick={doRegister}>
 								Register
 							</button>
-							{error && <div className="error">{error}</div>}
+							<div className="error">Error goes here</div>
 							<div style={{ alignSelf: "center" }}>
 								<Link to="/login">
 									<span>Have an account?</span>
