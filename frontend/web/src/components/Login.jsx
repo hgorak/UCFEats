@@ -18,6 +18,9 @@ function Login() {
 	const { login } = useContext(AuthContext);
 
 	const handleSubmit = async (event) => {
+		setError(null);
+		setAlert(false);
+
 		const form = event.currentTarget;
 		if (form.checkValidity() === false) {
 			event.preventDefault();
@@ -28,6 +31,7 @@ function Login() {
 
 		setValidated(true);
 		event.preventDefault();
+
 		try {
 			await login(email, password);
 			navigate("/loading");

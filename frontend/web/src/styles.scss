@@ -544,118 +544,28 @@ body {
                         }
                     }
 
-                    .reg-box {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        background-color: $dashboard-color;
-                        width: 500px;
-                        margin: 10px;
-                        padding-top: 50px;
-                        padding-bottom: 50px;
-                        border-radius: 12px;
-                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-                        span {
-                            color: black;
-                            text-align: center;
-                            font-weight: 300;
-                            margin-bottom: 20px;
-                        }
-
-                        h1 {
-                            color: black;
-                            font-size: 24px;
-                            margin: 0px;
-                        }
-
-                        form {
-                            display: flex;
-                            align-items: center;
-                            flex-direction: column;
-                            margin-top: 10px;
-                            gap: 10px;
-
-                            a {
-                                text-decoration-color: black;
-                            }
-
-                            input {
-                                // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                                border: solid 1px black;
-                                border-radius: 5px;
-                                height: 50px;
-                                width: 350px;
-                                font-size: 16px;
-                                box-sizing: border-box;
-                                padding-left: 10px;
-                                gap: 10px;
-                                background-color: $dashboard-color;
-
-                            }
-
-                            input:focus {
-                                outline-color: $primary-color;
-                                border: solid 1px $primary-color;
-                            }
-
-                            div {
-                                align-self: first baseline;
-
-                                span {
-                                    margin-bottom: 2px;
-                                    font-size: 14px;
-                                    color: black;
-                                    align-self: first baseline;
-                                }
-                            }
-
-
-                            button {
-                                // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                                margin-top: 20px;
-                                margin-bottom: 20px;
-                                border: none;
-                                border-radius: 5px;
-                                background-color: $primary-color;
-                                color: $nearly-white;
-                                height: 50px;
-                                width: 350px;
-                                font-weight: 600;
-                                font-size: 18px;
-                            }
-
-                            .error {
-                                align-self: center;
-                                justify-self: center;
-                                font-weight: bold;
-                                color: $primary-color;
-                            }
-
-                        }
-                    }
-
                     .forgot-box {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                         background-color: $dashboard-color;
                         width: 500px;
-                        height: 400px;
+                        padding: 40px;
                         border-radius: 12px;
+                        gap: 20px;
                         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-                        h1 {
-                            color: black;
-                            font-size: 24px;
-                            margin-top: 40px;
-                        }
-
-                        span {
-                            color: black;
+                        .auth-header {
                             text-align: center;
-                            font-weight: 300;
-                            margin-bottom: 20px;
+                            h1 {
+                                color: black;
+                                font-size: 24px;
+                            }
+                            span {
+                                color: black;
+                                text-align: center;
+                                font-weight: 300;
+                            }
                         }
 
                         form {
@@ -665,7 +575,14 @@ body {
                             margin-top: 10px;
                             gap: 10px;
 
+                            label {
+                                color: #828282;
+                            }
 
+                            label::after {
+                                background-color: $dashboard-color;
+                                opacity: 50%;
+                            }
 
                             input {
                                 // font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

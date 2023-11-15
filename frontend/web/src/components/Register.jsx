@@ -20,6 +20,8 @@ function Register() {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
+		setError(null);
+		setAlert(false);
 		const form = event.currentTarget;
 		if (form.checkValidity() === false) {
 			event.preventDefault();
@@ -28,7 +30,6 @@ function Register() {
 			return;
 		}
 
-		setError(null);
 		event.preventDefault();
 		setValidated(true);
 
