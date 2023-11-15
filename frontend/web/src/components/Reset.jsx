@@ -54,7 +54,7 @@ function Reset() {
 				<div className="auth-header">
 					<h1>Password Successfully Reset</h1>
 					<span>
-						Enjoy your new password! <Link to="/login">Log in</Link>
+						Enjoy your new password! <Link to="/auth/login">Log in</Link>
 					</span>
 				</div>
 			</div>

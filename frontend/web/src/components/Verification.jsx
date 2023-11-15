@@ -58,7 +58,7 @@ function Verification() {
 				<div className="auth-header">
 					<h1>Email Verified</h1>
 					<span>
-						Let's use your new account! <Link to="/login">Log in</Link>
+						Let's use your new account! <Link to="/auth/login">Log in</Link>
 					</span>
 				</div>
 			</div>
