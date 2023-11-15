@@ -34,7 +34,7 @@ function Navbar() {
 								: { size: "35px", color: "#F5ece4" }
 						}
 					>
-						<Link to={currentUser ? "/loading" : "/login"}>
+						<Link to={currentUser ? "/loading" : "/auth/login"}>
 							<VscAccount />
 						</Link>
 					</IconContext.Provider>
