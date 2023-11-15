@@ -1,9 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useOutletContext } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext.jsx";
+import React, { useContext } from "react";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
-import Accordion from "react-bootstrap/Accordion";
-
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
 

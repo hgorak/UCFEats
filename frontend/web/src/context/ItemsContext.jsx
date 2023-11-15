@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ItemsContext = createContext();
 
@@ -8,6 +8,7 @@ export function ItemsContextProvider({ children }) {
 
 	useEffect(() => {
 		const fetchRestaurants = async (event) => {
+			// get all restaurant names
 			const restaurantResponse = await fetch(API_URL + "/api/stores/all", {
 				method: "GET",
 				headers: {

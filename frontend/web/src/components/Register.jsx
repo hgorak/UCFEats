@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Alert from "react-bootstrap/Alert";
 import Form from "react-bootstrap/Form";
@@ -11,13 +11,10 @@ function Register() {
 	const [last, setLast] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [password2, setPassword2] = useState("");
 	const [registered, setRegistered] = useState(false);
 	const [validated, setValidated] = useState(false);
 	const [alert, setAlert] = useState(false);
 	const [error, setError] = useState("");
-
-	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
 		setError(null);

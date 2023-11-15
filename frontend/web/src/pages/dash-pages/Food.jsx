@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useOutletContext } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
 import Alert from "react-bootstrap/Alert";
 import { IconContext } from "react-icons";
-import { AiOutlinePlus, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
@@ -16,8 +15,8 @@ function Food() {
 	const [showAlert, setShowAlert] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertVariant, setAlertVariant] = useState("");
-	const [error, setError] = useState("");
 
+	// record an eat and show success or error alert
 	const addEat = async (items, itemIndex) => {
 		const itemName = items[itemIndex].Name;
 
@@ -101,13 +100,6 @@ function Food() {
 														<AiOutlinePlus />
 													</button>
 												</IconContext.Provider>
-												{/* <IconContext.Provider
-													value={{ color: "black", size: "25px" }}
-												>
-													<button>
-														<AiOutlineHeart />
-													</button>
-												</IconContext.Provider> */}
 											</td>
 										</tr>
 									))}

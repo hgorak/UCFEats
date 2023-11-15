@@ -10,6 +10,7 @@ import Phone from "../images/phone.png";
 import darrenHead from "../images/darren.jpg";
 import "../styles.scss";
 
+// root page of the application
 function Landing() {
 	return (
 		<div className="landing">
