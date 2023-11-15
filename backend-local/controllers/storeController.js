@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 // Get all of the locations
 const getAllLocations = async (req, res) => {
-  const locations = await LocationList.find({});
+  const locations = await LocationList.find({}).sort({Name: 1}).collation({ locale: "en", caseLevel: true });
 
   res.status(200).json(locations);
 }

@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 
 // Get all items
 const getAllItems = async (req, res) => {
-  const items = await ItemList.find({});
+  const items = await ItemList.find().sort({Name: 1}).collation({ locale: "en", caseLevel: true });
 
   if (items === null)
     return res.status(401).json({error: 'There are no items in the database'});
@@ -24,7 +24,7 @@ const getItems = async (req, res) => {
     return res.status(404).json({error: 'Store Does Not Exist'});
 
   // Gets items from store
-  const items = await ItemList.find({loc_id: store._id});
+  const items = await ItemList.find({loc_id: store._id}).sort({Name: 1}).collation({ locale: "en", caseLevel: true });
 
   // Returns the stores' items
   res.status(200).json(items);
@@ -61,11 +61,12 @@ const getRecentEats = async (req, res) => {
    // Gets user
   const user = await User.findById(req.user._id);
 
+  const arrLength = user.eats.length
   const numEats = 10;
   
-  const firstTenEats = user.eats.slice(0, numEats);
+  const recentEats = user.eats.slice(arrLength - numEats, arrLength);
 
-  res.status(200).json(firstTenEats);
+  res.status(200).json(recentEats);
 }
 
 // Adds an Eat to the user
