@@ -51,8 +51,10 @@ function Register() {
 	if (registered) {
 		return (
 			<div className="forgot-box forgot-box-sent">
-				<h1>Email Verification Link Sent</h1>
-				<span>We just sent you an email with a link to verify your email.</span>
+				<div className="auth-header">
+					<h1>Email Verification Link Sent</h1>
+					<span>We just sent you an email with a link to verify your email.</span>
+				</div>
 			</div>
 		);
 	} else {
