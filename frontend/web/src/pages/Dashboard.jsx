@@ -3,21 +3,16 @@ import { Link, useNavigate, NavLink, Outlet } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { AuthContext } from "../context/AuthContext.jsx";
 
-import { IconContext } from "react-icons";
-import { AiFillHome } from "react-icons/ai";
-
 import "../styles.scss";
 
+// main dashboard page
 function Dashboard() {
 	const { logout, currentUser } = useContext(AuthContext);
 	const [clickedButton, setClickedButton] = useState("overview");
 
-	const handleButtonClick = (buttonName) => {
-		setClickedButton(buttonName);
-	};
-
 	const navigate = useNavigate();
 
+	// logout button and redirect to landing page
 	const handleClick = () => {
 		logout();
 		navigate("/");

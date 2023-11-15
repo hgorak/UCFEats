@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 
 import "../styles.scss";
 
+// main authentication page
 function Auth() {
 	return (
 		<div className="auth">

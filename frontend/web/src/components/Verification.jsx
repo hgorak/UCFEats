@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../api.js";
 
 import "../styles.scss";
@@ -8,22 +8,13 @@ function Verification() {
 	let { verificationToken } = useParams();
 	const [verified, setVerified] = useState(false);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState("");
 
 	useEffect(() => {
 		const verifyEmail = async () => {
-			setError(null);
-
 			const response = await fetch(API_URL + "/api/user/verification/" + verificationToken, {
 				method: "GET",
 				headers: { "Content-Type": "application/JSON" },
 			});
-
-			const json = await response.json();
-
-			if (!response.ok) {
-				setError(json.error);
-			}
 
 			if (response.ok) {
 				setVerified(true);
