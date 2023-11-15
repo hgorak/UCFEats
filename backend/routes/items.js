@@ -1,5 +1,6 @@
 const express = require('express');
 const {
+  getAllItems,
   getItems,
   getItem,
   getEats,
@@ -9,6 +10,9 @@ const {
 const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
+
+// Get all items
+router.get('/all', getAllItems);
 
 // Get all locations
 router.post('/', getItems);

@@ -2,6 +2,16 @@ const ItemList = require('../models/itemModel');
 const LocationList = require('../models/locationModel');
 const User = require('../models/userModel');
 
+// Get all items
+const getAllItems = async(req, res) => {
+  const items = await ItemList.find({});
+
+  if (items === null)
+    return res.status(401).json({error: 'There are no items in the database'});
+
+  res.status(200).json(items);
+};
+
 // Get all items from location
 const getItems = async (req, res) => {
   const { name } = req.body;
@@ -129,6 +139,7 @@ const deleteEat = async(req, res) => {
 };
 
 module.exports = {
+  getAllItems,
   getItems,
   getItem,
   getEats,
