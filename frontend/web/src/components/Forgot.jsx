@@ -48,8 +48,10 @@ function Forgot() {
 	if (sent) {
 		return (
 			<div className="forgot-box forgot-box-sent">
-				<h1>Password Reset Link Sent</h1>
-				<span>We just sent you an email with a link to reset your password.</span>
+				<div className="auth-header">
+					<h1>Password Reset Link Sent</h1>
+					<span>We just sent you an email with a link to reset your password.</span>
+				</div>
 			</div>
 		);
 	} else {
