@@ -4,8 +4,9 @@ const {
   getItems,
   getItem,
   getEats,
+  getRecentEats,
   addEat,
-  deleteEat
+  deleteEat,
 } = require('../controllers/itemController');
 const requireAuth = require('../middleware/requireAuth');
 
@@ -28,6 +29,9 @@ router.post('/add', addEat);
 
 // Get all of the user's Eats
 router.get('/', getEats);
+
+// Get user's most recent Eats
+router.get('/recent', getRecentEats);
 
 // Delete an Eat from the User
 router.delete('/', deleteEat);
