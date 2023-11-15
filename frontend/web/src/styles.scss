@@ -11,8 +11,12 @@ $nearly-white: #fbfbfb;
 
 }
 
+html {
+    min-height: 100%;
+}
 body {
     margin: 0px;
+    height: 100%;
 }
 
 :root {
@@ -22,11 +26,12 @@ body {
         justify-content: center;
         color: $nearly-white;
         background-color: $primary-color;
-        // min-height: 100vh;
+        height: 100%;
 
         .app-container {
             display: flex;
             width: 100%;
+            height: 100%;
             justify-content: center;
 
             .navbar-container {
@@ -665,9 +670,9 @@ body {
                 background-color: $dashboard-color;
 
             }
+
             .dashboard {
                 color: black;
-                height: fit-content;
                 min-height: 100vh;
                 width: 100%;
                 background-color: $dashboard-color;
@@ -675,52 +680,7 @@ body {
                 flex-direction: column;
                 align-items: center;
 
-                .sidebar {
-                    display: flex;
-                    flex-direction: column;
-                    flex: 1;
-                    background-color: $primary-color;
-                    color: $secondary-color;
-                    align-items: center;
-                    padding-top: 24px;
-                    gap: 10px;
-
-                    .icon {
-                        color: $secondary-color;
-                    }
-
-                    button {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        justify-content: left baseline;
-                        padding-left: 20px;
-                        border: none;
-                        background-color: $primary-color;
-                        transition-duration: 0.1s;
-                        border-radius: 12px;
-                        color: $secondary-color;
-                        width: 256px;
-                        font-size: 16px;
-                        gap: 10px;
-                    }
-
-                    button:hover {
-                        background-color: #e97179;
-                    }
-
-                    .restaurants {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: left baseline;
-                        list-style-type: none;
-                        margin: 0;
-                        padding: 0;
-                    }
-                }
-
                 .container {
-                    flex: 5;
                     padding: 0;
                     display: flex;
                     flex-direction: column;
@@ -733,18 +693,39 @@ body {
                         flex-direction: row;
                         width: 100%;
                         height: 100%;
-                        padding: 20px;
+                        padding: 20px 0px 50px 0px;
+                        gap: 20px;
 
                         .charts {
-                            flex: 1;
+                            flex: 2;
                             background-color: #d9d7d6;
                             height: 100%
                         }
 
                         .records {
                             flex: 1;
-                            background-color: #d9d7d6;
+                            display: flex;
+                            flex-direction: column;
+                            background-color: $nearly-white;
+                            border-radius: 20px;
                             height: 100%;
+                            
+                            .record-hero {
+                                background-image: linear-gradient(to top right, $primary-color, #E09E34);
+                                width: 100%;
+                                height: 60px;
+                                border-radius: 20px;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                color: $nearly-white;
+
+                                h2 {
+                                    font-size: 2rem;
+                                    margin: 0px;
+                                }
+                            }
                         }
                     }
 
@@ -754,7 +735,7 @@ body {
                         justify-content: center;
                         width: 100%;
                         gap: 20px;
-
+                                      
                         .food-header {
                             display: flex;
                             flex-direction: row;
