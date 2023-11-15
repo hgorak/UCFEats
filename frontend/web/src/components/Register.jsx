@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
 import { API_URL } from "../../api.js";
 import "../styles.scss";
 
@@ -7,17 +10,27 @@ function Register() {
 	const [first, setFirst] = useState("");
 	const [last, setLast] = useState("");
 	const [email, setEmail] = useState("");
-	const [email2, setEmail2] = useState("");
 	const [password, setPassword] = useState("");
 	const [password2, setPassword2] = useState("");
 	const [registered, setRegistered] = useState(false);
+	const [validated, setValidated] = useState(false);
+	const [alert, setAlert] = useState(false);
 	const [error, setError] = useState("");
 
 	const navigate = useNavigate();
 
-	const doRegister = async (event) => {
+	const handleSubmit = async (event) => {
+		const form = event.currentTarget;
+		if (form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+			setValidated(true);
+			return;
+		}
+
 		setError(null);
 		event.preventDefault();
+		setValidated(true);
 
 		const response = await fetch(API_URL + "/api/user/register", {
 			method: "POST",
@@ -29,6 +42,7 @@ function Register() {
 
 		if (!response.ok) {
 			setError(json.error);
+			setAlert(true);
 		}
 
 		if (response.ok) {
@@ -36,32 +50,26 @@ function Register() {
 		}
 	};
 
-	const comparePassword = () => {};
-
-	return (
-		<div className="auth">
-			<div className="navbar-container navbar-container-bg navbar-container-auth">
-				<div className="navbar">
-					<div className="title">
-						<Link to="/">
-							<h1>UCFEats</h1>
-						</Link>
-					</div>
-				</div>
+	if (registered) {
+		return (
+			<div className="forgot-box forgot-box-sent">
+				<h1>Email Verification Link Sent</h1>
+				<span>We just sent you an email with a link to verify your email.</span>
 			</div>
-			<div className="container">
-				{registered ? (
-					<div className="forgot-box forgot-box-sent">
-						<h1>Email Verification Link Sent</h1>
-						<span>We just sent you an email with a link to verify your email.</span>
-					</div>
-				) : (
-					<div className="reg-box">
-						<h1>Create an Account</h1>
-						<span>We're excited to have you!</span>
-						<form>
-							<input
-								className="login-input"
+		);
+	} else {
+		return (
+			<div className="auth-box">
+				<div className="auth-header">
+					<h1>Create an Account</h1>
+					<span>We're excited to have you!</span>
+				</div>
+				{alert && <Alert variant="danger">{error}</Alert>}
+				<Form noValidate onSubmit={handleSubmit} validated={validated}>
+					<Form.Group>
+						<FloatingLabel label="First Name">
+							<Form.Control
+								required
 								type="text"
 								placeholder="First Name"
 								onChange={(e) => {
@@ -69,8 +77,15 @@ function Register() {
 								}}
 								value={first}
 							/>
-							<input
-								className="login-input"
+							<Form.Control.Feedback type="invalid">
+								Please provide your first name.
+							</Form.Control.Feedback>
+						</FloatingLabel>
+					</Form.Group>
+					<Form.Group>
+						<FloatingLabel label="Last Name">
+							<Form.Control
+								required
 								type="text"
 								placeholder="Last Name"
 								onChange={(e) => {
@@ -78,58 +93,57 @@ function Register() {
 								}}
 								value={last}
 							/>
-							<input
-								className="login-input"
-								placeholder="Email Address"
+							<Form.Control.Feedback type="invalid">
+								Please provide your last name.
+							</Form.Control.Feedback>
+						</FloatingLabel>
+					</Form.Group>
+					<Form.Group>
+						<FloatingLabel label="Email address">
+							<Form.Control
+								required
 								type="email"
+								placeholder="name@example.com"
 								onChange={(e) => {
 									setEmail(e.target.value);
 								}}
 								value={email}
 							/>
-							<input
-								className="login-input"
-								placeholder="Confirm Email Address"
-								type="email"
-								onChange={(e) => {
-									setEmail2(e.target.value);
-								}}
-								value={email2}
-							/>
-							<input
-								className="login-input"
-								placeholder="Password"
+							<Form.Control.Feedback type="invalid">
+								Please provide your email address.
+							</Form.Control.Feedback>
+						</FloatingLabel>
+					</Form.Group>
+					<Form.Group>
+						<FloatingLabel label="Password">
+							<Form.Control
+								required
 								type="password"
+								placeholder="password"
 								onChange={(e) => {
 									setPassword(e.target.value);
 								}}
 								value={password}
 							/>
-							<input
-								className="login-input"
-								placeholder="Confirm Password"
-								type="password"
-								onChange={(e) => {
-									setPassword2(e.target.value);
-								}}
-								value={password2}
-							/>
-
-							<button type="submit" onClick={doRegister}>
-								Register
-							</button>
-							<div className="error">Error goes here</div>
-							<div style={{ alignSelf: "center" }}>
-								<Link to="/login">
-									<span>Have an account?</span>
-								</Link>
-							</div>
-						</form>
-					</div>
-				)}
+							<Form.Text>
+								Must be at least 8 digits long and contain an uppercase<br></br>{" "}
+								letter, a number, and a special character.
+							</Form.Text>
+							<Form.Control.Feedback type="invalid">
+								Password is required.
+							</Form.Control.Feedback>
+						</FloatingLabel>
+					</Form.Group>
+					<button type="submit">Log In</button>
+					<Form.Text>
+						<Link to="/auth/login">
+							<span>Have an account?</span>
+						</Link>
+					</Form.Text>
+				</Form>
 			</div>
-		</div>
-	);
+		);
+	}
 }
 
 export default Register;
