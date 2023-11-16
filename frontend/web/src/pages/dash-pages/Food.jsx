@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
 import Alert from "react-bootstrap/Alert";
+import ListGroup from "react-bootstrap/ListGroup";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -1355,11 +1356,17 @@ function Food() {
 				</Accordion>
 			) : (
 				<div>
-					<ul>
+					<ListGroup>
 						{searchResults.map((result) => (
-							<li key={result._id}>{result.Name}</li>
+							<ListGroup.Item>
+								<div className="item">
+									<div className="subheading">
+										<strong>{result.Name}</strong>
+									</div>
+								</div>
+							</ListGroup.Item>
 						))}
-					</ul>
+					</ListGroup>
 				</div>
 			)}
 		</div>
