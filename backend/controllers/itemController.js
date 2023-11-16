@@ -46,8 +46,6 @@ const getItem = async (req, res) => {
   res.status(200).json(item);
 };
 
-<<<<<<< HEAD
-=======
 // Gets the user's Eats
 const getEats = async (req, res) => {
   // Gets user
@@ -152,7 +150,6 @@ const deleteEat = async (req, res) => {
   res.status(200).json(finalEats);
 };
 
->>>>>>> a73352974ca6065a14bdb85da1cf86a49f3f9eae
 module.exports = {
   getAllItems,
   getItems,
