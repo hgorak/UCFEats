@@ -1244,8 +1244,8 @@ function Food() {
 	// record an eat and show success or error alert
 	const addEat = async (items, itemIndex) => {
 		const itemName = items[itemIndex].Name;
-
-		const response = await fetch(API_URL + "/api/items/add", {
+		console.log(itemName);
+		const response = await fetch(API_URL + "/api/eats/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/JSON",
@@ -1256,6 +1256,7 @@ function Food() {
 
 		const json = await response.json();
 
+		console.log(json);
 		if (!response.ok) {
 			setAlertVariant("danger");
 			setAlertMessage(json.error);

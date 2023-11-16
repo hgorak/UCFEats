@@ -34,6 +34,7 @@ function Home() {
 				const json = await response.json();
 				setRecentEats(json);
 				setLoading(false);
+				console.log(json);
 			}
 		} catch (error) {
 			setError("An error occurred while fetching data.");
@@ -42,21 +43,17 @@ function Home() {
 		}
 	};
 
-	const delay = () => {
-		window.setTimeout(3000);
-	};
-
 	return (
 		<div className="home">
 			<div className="charts"></div>
 			<div className="records">
-				<div class="record-hero">
+				<div className="record-hero">
 					<h2>Recent Eats</h2>
 				</div>
 				<div>
 					<ol>
 						{recentEats.map((item) => (
-							<li>{item}</li>
+							<li>{item.itemName}</li>
 						))}
 					</ol>
 				</div>
