@@ -11,6 +11,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/user');
 const storeRoutes = require('./routes/stores');
 const itemRoutes = require('./routes/items');
+const eatRoutes = require('./routes/eats');
 
 // Creates an express app
 const app = express();
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes);
 app.use('/api/stores', storeRoutes);
 app.use('/api/items', itemRoutes);
+app.use('/api/eats', eatRoutes);
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)

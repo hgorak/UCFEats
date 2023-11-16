@@ -1,6 +1,5 @@
 const ItemList = require('../models/itemModel');
 const LocationList = require('../models/locationModel');
-const User = require('../models/userModel');
 
 // Get all items
 const getAllItems = async (req, res) => {
@@ -155,8 +154,4 @@ module.exports = {
   getAllItems,
   getItems,
   getItem,
-  getEats,
-  getRecentEats,
-  addEat,
-  deleteEat
 }
