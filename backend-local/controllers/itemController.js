@@ -8,7 +8,26 @@ const getAllItems = async (req, res) => {
   if (items === null)
     return res.status(401).json({error: 'There are no items in the database'});
 
-  res.status(200).json(items);
+  // Extract location IDs from items and get locations
+  const locationIDs = items.map(item => item.loc_id);
+  const locations = await LocationList.find({_id: {$in: locationIDs}});
+
+  // Create an array of location names for each item
+  const locationNames = items.map(item => {
+    const location = locations.find(loc => loc._id.equals(item.loc_id));
+    return location.Name;
+  });
+
+  // Turn into javascript array
+  const itemsArray = items.map(item => item.toObject());
+
+  // Create an array of location names for each item
+  const updatedItems = itemsArray.map((item, i) => {
+    item.locationName = locationNames[i];
+    return item;
+  });
+
+  res.status(200).json(updatedItems);
 };
 
 // Get all items from location
@@ -44,110 +63,6 @@ const getItem = async (req, res) => {
   const item = await ItemList.find({Name: itemName, loc_id: store._id});
 
   res.status(200).json(item);
-};
-
-// Gets the user's Eats
-const getEats = async (req, res) => {
-  // Gets user
-  const user = await User.findById(req.user._id);
-  
-  // Returns their stores
-  res.status(200).json(user.eats);
-};
-
-// Get most recent eats
-const getRecentEats = async (req, res) => {
-   // Gets user
-  const user = await User.findById(req.user._id);
-
-  const arrLength = user.eats.length
-  const numEats = 10;
-  
-  const recentEats = user.eats.slice(arrLength - numEats, arrLength);
-
-  res.status(200).json(recentEats);
-}
-
-// Adds an Eat to the user
-const addEat = async (req, res) => {
-  const { name } = req.body;
-  let emptyFields = [];
-
-  /* Ensure fields aren't empty */
-  if (!name)
-    emptyFields.push('name');
-
-  if (emptyFields.length > 0)
-    return res.status(400).json({ error: 'Please fill in the required fields', emptyFields });
-
-  try
-  {
-    /* Ensure item exists */
-    // Find desired item
-    const item = await ItemList.findOne({Name: name});
-
-    // Return if the store doesn't exist
-    if (item === null)
-      return res.status(404).json({error: 'Item Does Not Exist'});
-
-    /* Check if user already has item */
-    // Add locations id to stores
-    const itemID = item._id;
-
-    // Gets user
-    const user = await User.findById(req.user._id);
-
-    // If the user already has the item: Don't add
-    if (user.eats.includes(itemID))
-      return res.status(401).json({error: 'User Already Has This Item'});
-
-    // Adds store to user
-    await User.findByIdAndUpdate(req.user._id, {$push: {eats: itemID}});
-
-    /* Get an updated list of the stores to return */
-    const updatedUser = await User.findById(req.user._id);
-    const finalEats = updatedUser.eats;
-  
-    res.status(200).json(finalEats);
-  }
-
-  catch (error)
-  {
-    res.status(400).json({error: error.message})
-  }
-};
-
-// Deletes an Eat 
-const deleteEat = async (req, res) => {
-  const { name } = req.body;
-
-  /* Ensure item exists */
-  // Find desired item
-  const item = await ItemList.findOne({Name: name});
-
-  // Return if the item doesn't exit
-  if (item === null)
-    return res.status(404).json({error: 'Item Does Not Exist'});
-
-  /* Check if user already has item */
-  // Add locations id to eats
-  const itemID = item._id;
-
-  // Gets user
-  const user = await User.findById(req.user._id);
-
-  // If the user doesn't have the Eat: Throw error
-  if (!user.eats.includes(itemID))
-    return res.status(401).json({error: 'User Does Not Have This Eat'});
-
-  // Delete the Eat
-  await User.findByIdAndUpdate(req.user._id, {$pull: {eats: itemID}});
-
-  /* Get an updated list of the Eats to return */
-  const updatedUser = await User.findById(req.user._id);
-  const finalEats = updatedUser.eats;
-  
-  res.status(200).json(finalEats);
 };
 
 module.exports = {

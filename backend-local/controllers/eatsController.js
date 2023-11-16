@@ -16,30 +16,35 @@ const getEats = async (req, res) => {
 const getRecentEats = async (req, res) => {
   const userID = req.user._id;
 
-  const eats = await EatsList.find({user_id: userID}).sort({timestamp: 1});
+  const eats = await EatsList.find({user_id: userID}).sort({updatedAt: -1});
 
   // Only get most recent eats
-  const arrLength = eats.length
   const numEats = 10;
-  const newEats = eats.slice(arrLength - numEats, arrLength);
+  const newEats = eats.slice(0, numEats);
 
   // Extract item IDs from newEats arr and get items
   const itemIDs = newEats.map(eat => eat.item_id);
   const items = await ItemList.find({_id: {$in: itemIDs}});
 
+  // Map items to their timestamps
+  const itemsSorted = itemIDs.map(itemID => {
+    const sortedItem = items.find(item => item._id.equals(itemID));
+    return sortedItem;
+  });
+
   // Extract location IDs from items and get locations
-  const locationIDs = items.map(item => item.loc_id);
+  const locationIDs = itemsSorted.map(item => item.loc_id);
   const locations = await LocationList.find({_id: {$in: locationIDs}});
 
   // Create an array of location names for each item
-  const locationNames = items.map(item => {
+  const locationNames = itemsSorted.map(item => {
     const location = locations.find(loc => loc._id.equals(item.loc_id));
     return location.Name;
   });
 
   const recentEats = newEats.map((eat, index) => ({
-    timestamp: eat.createdAt,
-    itemName: items[index].Name,
+    timestamp: eat.updatedAt,
+    itemName: itemsSorted[index].Name,
     locationName: locationNames[index]
   }));
 
