@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useOutletContext } from "react-router-dom";
+import ListGroup from "react-bootstrap/ListGroup";
 import { AuthContext } from "../../context/AuthContext.jsx";
 
 import { API_URL } from "../../../api.js";
@@ -50,12 +51,20 @@ function Home() {
 				<div className="record-hero">
 					<h2>Recent Eats</h2>
 				</div>
-				<div>
-					<ol>
+				<div className="record-data">
+					<ListGroup variant="flush">
 						{recentEats.map((item) => (
-							<li>{item.itemName}</li>
+							<ListGroup.Item>
+								<div className="item">
+									<div className="subheading">
+										<strong>{item.itemName}</strong>
+										{item.locationName}
+									</div>
+									<div></div>
+								</div>
+							</ListGroup.Item>
 						))}
-					</ol>
+					</ListGroup>
 				</div>
 			</div>
 		</div>

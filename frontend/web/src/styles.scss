@@ -697,7 +697,7 @@ body {
                         gap: 20px;
 
                         .charts {
-                            flex: 2;
+                            flex: 1;
                             background-color: #d9d7d6;
                             height: 100%
                         }
@@ -725,6 +725,29 @@ body {
                                     font-size: 2rem;
                                     margin: 0px;
                                 }
+                            }
+
+                            .record-data {
+                                .list-group {
+                                    background-color: $nearly-white;
+                                    
+                                    .list-group-item {
+                                        background-color: $nearly-white;
+
+                                        .item {
+                                            display: flex;
+                                            flex-direction: row;
+                                            justify-content: space-between;
+        
+                                            .subheading {
+                                                display: flex;
+                                                flex-direction: column;
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                                
                             }
                         }
                     }
