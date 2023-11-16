@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import TimeSince from "../../components/TimeSince.jsx";
+import Placeholder from "react-bootstrap/Placeholder";
 
 import { API_URL } from "../../../api.js";
 
@@ -15,6 +16,7 @@ function Home() {
 	useEffect(() => {
 		// getRecentEats();
 		getRecentEats();
+		setLoading(false);
 	}, []);
 
 	const getRecentEats = async () => {
@@ -35,13 +37,11 @@ function Home() {
 			} else {
 				const json = await response.json();
 				setRecentEats(json);
-				setLoading(false);
 				console.log(json);
 			}
 		} catch (error) {
 			setError("An error occurred while fetching data.");
 			console.error(error);
-			setLoading(false);
 		}
 	};
 
@@ -54,19 +54,60 @@ function Home() {
 				</div>
 				<div className="record-data">
 					<ListGroup variant="flush">
-						{recentEats.map((item) => (
-							<ListGroup.Item>
-								<div className="item">
-									<div className="subheading">
-										<strong>{item.itemName}</strong>
-										{item.locationName}
+						{loading ? (
+							<div>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+								<Placeholder as={ListGroup.Item} animation="glow">
+									<Placeholder xs={12} />
+									<Placeholder xs={4} />
+								</Placeholder>
+							</div>
+						) : (
+							recentEats.map((item) => (
+								<ListGroup.Item>
+									<div className="item">
+										<div className="subheading">
+											<strong>{item.itemName}</strong>
+											{item.locationName}
+										</div>
+										<div>
+											<TimeSince timestamp={item.timestamp} />
+										</div>
 									</div>
-									<div>
-										<TimeSince timestamp={item.timestamp} />
-									</div>
-								</div>
-							</ListGroup.Item>
-						))}
+								</ListGroup.Item>
+							))
+						)}
 					</ListGroup>
 				</div>
 			</div>
