@@ -14,7 +14,6 @@ function Home() {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		// getRecentEats();
 		getRecentEats();
 		setLoading(false);
 	}, []);

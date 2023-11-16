@@ -164,6 +164,7 @@ function Food() {
 								<div className="item">
 									<div className="subheading">
 										<strong>{result.Name}</strong>
+										{result.locationName}
 									</div>
 								</div>
 							</ListGroup.Item>
