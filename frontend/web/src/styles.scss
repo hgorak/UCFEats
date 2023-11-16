@@ -875,6 +875,21 @@ body {
                                 }
                             }
                         }
+
+                        .list-group-item {
+                            background-color: $nearly-white;
+
+                            .item {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+
+                                .subheading {
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                            }
+                        }
                     }
                 }
 
