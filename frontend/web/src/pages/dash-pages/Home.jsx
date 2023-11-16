@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useOutletContext } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import TimeSince from "../../components/TimeSince.jsx";
 
 import { API_URL } from "../../../api.js";
 
@@ -60,7 +61,9 @@ function Home() {
 										<strong>{item.itemName}</strong>
 										{item.locationName}
 									</div>
-									<div></div>
+									<div>
+										<TimeSince timestamp={item.timestamp} />
+									</div>
 								</div>
 							</ListGroup.Item>
 						))}
