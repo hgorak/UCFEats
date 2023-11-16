@@ -108,7 +108,7 @@ function Food() {
 			<Alert show={showAlert} variant={alertVariant}>
 				{alertMessage}
 			</Alert>
-			<input onChange={handleChange}></input>
+			<input class="search-bar" onChange={handleChange}></input>
 			{!searchQuery ? (
 				<Accordion>
 					{restaurantItems.map(([restaurant, items], index) => (

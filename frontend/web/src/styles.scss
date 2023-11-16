@@ -697,16 +697,16 @@ body {
                         gap: 20px;
 
                         .charts {
-                            flex: 1;
+                            flex: 3;
                             background-color: #d9d7d6;
                             height: 100%
                         }
 
                         .records {
-                            flex: 1;
+                            flex: 2;
                             display: flex;
                             flex-direction: column;
-                            background-color: $nearly-white;
+                            background-color: $dashboard-color;
                             border-radius: 20px;
                             height: 100%;
                             
@@ -729,10 +729,10 @@ body {
 
                             .record-data {
                                 .list-group {
-                                    background-color: $nearly-white;
+                                    background-color: $dashboard-color;
                                     
                                     .list-group-item {
-                                        background-color: $nearly-white;
+                                        background-color: $dashboard-color;
 
                                         .item {
                                             display: flex;
@@ -798,6 +798,15 @@ body {
                             }
                         }
                         
+                        .search-bar {
+                            background-color: $nearly-white;
+                            border: none;
+                            align-self: first baseline;
+                            width: 30%;
+                            height: 40px;
+                            border-radius: 25px;
+                            padding-left: 20px;
+                        }
 
                         .accordion {
                             margin-bottom: 50px;
