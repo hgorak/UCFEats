@@ -10,18 +10,6 @@ const itemSchema = new Schema({
     required: true
   },
 
-  Quantity:
-  {
-    type: Number,
-    required: true
-  },
-
-  Brand:
-  {
-    type: String,
-    required: true
-  },
-
   Fat:
   {
     type: Number,

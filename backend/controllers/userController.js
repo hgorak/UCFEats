@@ -1,4 +1,5 @@
-// Model
+// Models
+const EatsList = require('../models/eatsModel');
 const User = require('../models/userModel');
 
 // Libraries
@@ -94,6 +95,7 @@ const deleteUser = async(req, res) => {
 
   try {
     const id = req.user._id;
+    await EatsList.deleteMany({user_id: id});
     const result = await User.findOneAndDelete({_id: id});
     res.status(200).json(result)
   }

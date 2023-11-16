@@ -1,53 +1,8 @@
+const EatsList = require('../models/eatsModel');
 const ItemList = require('../models/itemModel');
-const LocationList = require('../models/locationModel');
+const LocationList = require('../models/locationModel.js');
+const User = require('../models/userModel');
 
-// Get all items
-const getAllItems = async (req, res) => {
-  const items = await ItemList.find().sort({Name: 1}).collation({ locale: "en", caseLevel: true });
-
-  if (items === null)
-    return res.status(401).json({error: 'There are no items in the database'});
-
-  res.status(200).json(items);
-};
-
-// Get all items from location
-const getItems = async (req, res) => {
-  const { name } = req.body;
-
-  /* Get Store ID */
-  const store = await LocationList.findOne({Name: name});
-
-  // Return if the store doesn't exist
-  if (store === null)
-    return res.status(404).json({error: 'Store Does Not Exist'});
-
-  // Gets items from store
-  const items = await ItemList.find({loc_id: store._id}).sort({Name: 1}).collation({ locale: "en", caseLevel: true });
-
-  // Returns the stores' items
-  res.status(200).json(items);
-};
-
-// Gets one item
-const getItem = async (req, res) => {
-  const { storeName, itemName } = req.body;
-
-  /* Get Store ID */
-  const store = await LocationList.findOne({Name: storeName});
-
-  // Return if the store doesn't exist
-  if (store === null)
-    return res.status(404).json({error: 'Store Does Not Exist'});
-
-  // Get item
-  const item = await ItemList.find({Name: itemName, loc_id: store._id});
-
-  res.status(200).json(item);
-};
-
-<<<<<<< HEAD
-=======
 // Gets the user's Eats
 const getEats = async (req, res) => {
   // Gets user
@@ -57,20 +12,41 @@ const getEats = async (req, res) => {
   res.status(200).json(user.eats);
 };
 
-// Get most recent eats
+// Get the user's recent eats
 const getRecentEats = async (req, res) => {
-   // Gets user
-  const user = await User.findById(req.user._id);
+  const userID = req.user._id;
 
-  const arrLength = user.eats.length
+  const eats = await EatsList.find({user_id: userID}).sort({timestamp: 1});
+
+  // Only get most recent eats
+  const arrLength = eats.length
   const numEats = 10;
-  
-  const recentEats = user.eats.slice(arrLength - numEats, arrLength);
+  const newEats = eats.slice(arrLength - numEats, arrLength);
+
+  // Extract item IDs from newEats arr and get items
+  const itemIDs = newEats.map(eat => eat.item_id);
+  const items = await ItemList.find({_id: {$in: itemIDs}});
+
+  // Extract location IDs from items and get locations
+  const locationIDs = items.map(item => item.loc_id);
+  const locations = await LocationList.find({_id: {$in: locationIDs}});
+
+  // Create an array of location names for each item
+  const locationNames = items.map(item => {
+    const location = locations.find(loc => loc._id.equals(item.loc_id));
+    return location.Name;
+  });
+
+  const recentEats = newEats.map((eat, index) => ({
+    timestamp: eat.createdAt,
+    itemName: items[index].Name,
+    locationName: locationNames[index]
+  }));
 
   res.status(200).json(recentEats);
 }
 
-// Adds an Eat to the user
+// Adds an eat
 const addEat = async (req, res) => {
   const { name } = req.body;
   let emptyFields = [];
@@ -93,18 +69,27 @@ const addEat = async (req, res) => {
       return res.status(404).json({error: 'Item Does Not Exist'});
 
     /* Check if user already has item */
-    // Add locations id to stores
+    // Get item's ID
     const itemID = item._id;
 
     // Gets user
     const user = await User.findById(req.user._id);
+    
+    // Get user's ID
+    const userID = user._id;
 
     // If the user already has the item: Don't add
     if (user.eats.includes(itemID))
-      return res.status(401).json({error: 'User Already Has This Item'});
+    {
+      await EatsList.findOneAndUpdate({user_id: userID, item_id: itemID}, {$inc: {Quantity: 1}});
+      return res.status(200).json({message: 'Quantity has been updated'});
+    }
 
     // Adds store to user
-    await User.findByIdAndUpdate(req.user._id, {$push: {eats: itemID}});
+    await User.findByIdAndUpdate(userID, {$push: {eats: itemID}});
+    
+    // Add to the records
+    await EatsList.create({user_id: userID, item_id: itemID});
 
     /* Get an updated list of the stores to return */
     const updatedUser = await User.findById(req.user._id);
@@ -145,6 +130,9 @@ const deleteEat = async (req, res) => {
   // Delete the Eat
   await User.findByIdAndUpdate(req.user._id, {$pull: {eats: itemID}});
 
+  // Delete the Eat from the records
+  await EatsList.findOneAndDelete({user_id: req.user._id, item_id: itemID});
+
   /* Get an updated list of the Eats to return */
   const updatedUser = await User.findById(req.user._id);
   const finalEats = updatedUser.eats;
@@ -152,9 +140,9 @@ const deleteEat = async (req, res) => {
   res.status(200).json(finalEats);
 };
 
->>>>>>> a73352974ca6065a14bdb85da1cf86a49f3f9eae
 module.exports = {
-  getAllItems,
-  getItems,
-  getItem,
+  getEats,
+  getRecentEats,
+  addEat,
+  deleteEat
 }
