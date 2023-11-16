@@ -16,12 +16,12 @@ const TimeSince = ({ timestamp }) => {
 			let timeSinceString = "";
 
 			if (hours > 0) {
-				timeSinceString += `${hours} ${hours === 1 ? "hour" : "hours"}`;
+				timeSinceString += `${hours} ${hours === 1 ? "hr" : "hrs"}`;
 			}
 
 			if (minutes > 0) {
 				timeSinceString += `${hours > 0 ? " and " : ""}${minutes} ${
-					minutes === 1 ? "minute" : "minutes"
+					minutes === 1 ? "min" : "mins"
 				}`;
 			}
 
