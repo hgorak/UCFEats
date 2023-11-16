@@ -19,7 +19,7 @@ const TimeSince = ({ timestamp }) => {
 				timeSinceString += `${hours} ${hours === 1 ? "hr" : "hrs"}`;
 			}
 
-			if (minutes > 0) {
+			if (minutes > 0 && hours < 1) {
 				timeSinceString += `${hours > 0 ? " and " : ""}${minutes} ${
 					minutes === 1 ? "min" : "mins"
 				}`;
