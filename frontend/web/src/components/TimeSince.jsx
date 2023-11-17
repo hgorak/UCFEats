@@ -10,19 +10,18 @@ const TimeSince = ({ timestamp }) => {
 			const estMoment = utcMoment.tz("America/New_York"); // Eastern Standard Time (EST)
 
 			const duration = moment.duration(estMoment.diff(moment()));
+			const days = Math.abs(duration.days());
 			const hours = Math.abs(duration.hours());
 			const minutes = Math.abs(duration.minutes());
 
 			let timeSinceString = "";
 
-			if (hours > 0) {
+			if (days > 0) {
+				timeSinceString += `${days}  ${days === 1 ? "day" : "days"}`;
+			} else if (hours > 0) {
 				timeSinceString += `${hours} ${hours === 1 ? "hr" : "hrs"}`;
-			}
-
-			if (minutes > 0 && hours < 1) {
-				timeSinceString += `${hours > 0 ? " and " : ""}${minutes} ${
-					minutes === 1 ? "min" : "mins"
-				}`;
+			} else if (minutes > 0) {
+				timeSinceString += `${minutes} ${minutes === 1 ? "min" : "mins"}`;
 			}
 
 			setTimeSince(timeSinceString.length > 0 ? timeSinceString + " ago" : "Just now");
