@@ -48,11 +48,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (response.statusCode == 200) {
       debugPrint("Register successful");
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Register Successful')));
       return RegisterModel.fromJson(
           jsonDecode(response.body) as Map<String, dynamic>);
     } else {
       debugPrint(response.body.toString());
-      throw Exception('Register unsuccessful :(');
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Register Failed')));
+      throw Exception('Register failed :(');
     }
   }
 
@@ -75,16 +81,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
+                  const Padding(
+                    padding: EdgeInsets.only(
                       top: 15,
-                    ),
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
                     ),
                   ),
                   Column(

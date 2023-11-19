@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ucfeats/pages/dashboard_page.dart';
 
 import 'values/app_theme.dart';
 import 'pages/login_page.dart';
@@ -36,8 +37,9 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.loginScreen,
       navigatorKey: AppConstants.navigationKey,
       routes: {
-        AppRoutes.loginScreen: (context) => const LoginPage(),
-        AppRoutes.registerScreen: (context) => const RegisterPage(),
+        AppRoutes.loginScreen: (_) => const LoginPage(),
+        AppRoutes.registerScreen: (_) => const RegisterPage(),
+        AppRoutes.dashboardScreen: (_) => const DashboardPage()
       },
     );
   }

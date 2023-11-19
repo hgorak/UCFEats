@@ -37,10 +37,17 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 200) {
       debugPrint("Login successful");
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Login Successful')));
+      AppRoutes.dashboardScreen.pushName();
       return LoginModel.fromJson(
           jsonDecode(response.body) as Map<String, dynamic>);
     } else {
-      throw Exception('Login unsuccessful :(');
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Login Failed')));
+      throw Exception('Login failed :(');
     }
   }
 
