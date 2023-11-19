@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import TimeSince from "../../components/TimeSince.jsx";
@@ -46,11 +46,20 @@ function Home() {
 
 	return (
 		<div className="home">
-			<div className="charts"></div>
-			<div className="records">
-				<div className="record-hero">
-					<h2>Recent Eats</h2>
+			<div className="charts">
+				<div className="charts-hero">
+					<div>
+						<h2>All of UCF's best flavors and menus in one place</h2>
+						<span>Find and enjoy your favorite eats here and track your nutrition</span>
+
+						<Link to="/dashboard/food">
+							<button>Explore</button>
+						</Link>
+					</div>
 				</div>
+			</div>
+			<div className="records">
+				<h2>Recent Eats</h2>
 				<div className="record-data">
 					<ListGroup variant="flush">
 						{loading ? (

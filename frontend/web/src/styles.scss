@@ -140,6 +140,7 @@ body {
 
             .navbar-container-dash {
                 position: static;
+                border-bottom: solid 1px #dee2e6;
             }
 
             // change navbar color on scroll
@@ -698,18 +699,65 @@ body {
 
                         .charts {
                             flex: 3;
-                            background-color: #d9d7d6;
-                            height: 100%
+                            height: 100%;
+
+                            .charts-hero {
+                                background-image: linear-gradient(to top right, $primary-color, #E09E34);
+                                width: 100%;
+                                height: 240px;
+                                padding: 0px 40px;
+                                border-radius: 20px;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: first baseline;
+                                justify-content: center;
+                                color: $nearly-white;
+
+                                div { 
+                                    width: 70%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 10px;
+
+                                    a {
+                                        width: 150px;
+                                        height: 50px;
+
+                                        button {
+                                            border: none;
+                                            border-radius: 15px;
+                                            background-color: white;
+                                            color: $primary-color;
+                                            height: 50px;
+                                            width: 150px;
+                                            font-weight: 600;
+                                            font-size: 18px;
+                                            padding: 0px;
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                h2 {
+                                    font-size: 1.6rem;
+                                    margin: 0px;
+                                }
+                            }
                         }
 
                         .records {
                             flex: 2;
                             display: flex;
                             flex-direction: column;
-                            background-color: $dashboard-color;
+                            background-color: $nearly-white;
                             border-radius: 20px;
+                            padding: 16px;
+                            gap: 10px;
                             height: 100%;
-                            
+
+                            h2 {
+                                padding: 0px 16px;
+                            }
                             .record-hero {
                                 background-image: linear-gradient(to top right, $primary-color, #E09E34);
                                 width: 100%;
@@ -729,10 +777,11 @@ body {
 
                             .record-data {
                                 .list-group {
-                                    background-color: $dashboard-color;
+                                    
+                                    background-color: $nearly-white;
                                     
                                     .list-group-item {
-                                        background-color: $dashboard-color;
+                                        background-color: $nearly-white;
 
                                         .item {
                                             display: flex;
