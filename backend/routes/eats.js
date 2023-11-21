@@ -5,6 +5,9 @@ const {
   addEat,
   deleteEat,
   dayEats,
+  getDailyMacros,
+  setGoalMacros,
+  getGoals,
   addFavorite,
   deleteFavorite,
   getFavorites
@@ -25,11 +28,20 @@ router.get('/', getEats);
 // Get user's most recent Eats
 router.get('/recent', getRecentEats);
 
+// Delete an Eat from the User
+router.delete('/', deleteEat);
+
 // Gets the user's eats from today
 router.get('/day', dayEats)
 
-// Delete an Eat from the User
-router.delete('/', deleteEat);
+// Get the user's macros so far in the day
+router.get('/dailyMacros', getDailyMacros);
+
+// Get the user's macro goals
+router.get('/macroGoals', getGoals);
+
+// Set macro goals
+router.post('/setMacroGoal', setGoalMacros);
 
 // Add a favorite eat
 router.post('/favorite', addFavorite);

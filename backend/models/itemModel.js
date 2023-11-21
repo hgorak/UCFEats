@@ -10,6 +10,12 @@ const itemSchema = new Schema({
     required: true
   },
 
+  Calories:
+  {
+    type: Number,
+    required: true
+  },
+
   Fat:
   {
     type: Number,

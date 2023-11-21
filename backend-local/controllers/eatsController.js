@@ -84,6 +84,16 @@ const addEat = async (req, res) => {
     // Get user's ID
     const userID = user._id;
 
+    // Adds info to user
+    let progress = user.dayProgress;
+    progress[0] += item.Calories;
+    progress[1] += item.Fat;
+    progress[2] += item.Carbs;
+    progress[3] += item.Protein;
+
+    // Update progress for the day
+    await User.findByIdAndUpdate(userID, {$set: {dayProgress: progress}});
+
     // If the user already has the item: Don't add
     if (user.eats.includes(itemID))
     {
@@ -93,14 +103,14 @@ const addEat = async (req, res) => {
 
     // Adds store to user
     await User.findByIdAndUpdate(userID, {$push: {eats: itemID}});
-    
+
     // Add to the records
     await EatsList.create({user_id: userID, item_id: itemID});
 
     /* Get an updated list of the stores to return */
     const updatedUser = await User.findById(req.user._id);
     const finalEats = updatedUser.eats;
-  
+
     res.status(200).json(finalEats);
   }
 
@@ -184,6 +194,29 @@ const dayEats = async (req, res) => {
 
   res.status(200).json(dayEats);
 };
+
+/* Macros */
+const getDailyMacros = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  res.status(200).json(user.dayProgress);
+}
+
+const setGoalMacros = async (req, res) => {
+  const {calories, fat, carbs, protein} = req.body;
+
+  const newGoals = [calories, fat, carbs, protein];
+
+  const result = await User.findByIdAndUpdate(req.user._id, {$set: {goals: newGoals}});
+
+  res.status(200).json(newGoals);
+}
+
+const getGoals = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  res.status(200).json(user.goals);
+}
 
 /* Favorite Operations */
 // Add Favorite
@@ -271,6 +304,9 @@ module.exports = {
   addEat,
   deleteEat,
   dayEats,
+  getDailyMacros,
+  setGoalMacros,
+  getGoals,
   addFavorite,
   deleteFavorite,
   getFavorites
