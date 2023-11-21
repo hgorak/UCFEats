@@ -38,6 +38,12 @@ const userSchema = new Schema({
     required: false
   },
 
+  favorites: {
+    type: Array,
+    "default": [],
+    required: false
+  },
+
   verified: {
     type: Boolean,
     "default": false,
