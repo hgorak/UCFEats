@@ -50,5 +50,3 @@ class _ProfilePageState extends State<ProfilePage> {
                 ))));
   }
 }
-
-hi camilo
