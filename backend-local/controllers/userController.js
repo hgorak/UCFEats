@@ -25,6 +25,17 @@ const loginUser = async(req, res) => {
     const first_name = user.first_name;
     const last_name = user.last_name;
 
+    let start = new Date();
+    start.setHours(0,0,0,0);
+
+    let end = new Date();
+    end.setHours(23,59,59,999);
+    
+    const dayEats = await EatsList.find({user_id: user._id, updatedAt: {$gte: start, $lt: end}});
+
+    if (dayEats.length === 0)
+      user.dayProgress = [0, 0, 0, 0];
+
     // Create token for user
     const token = createToken(user._id);
 

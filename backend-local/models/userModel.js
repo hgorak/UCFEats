@@ -38,6 +38,24 @@ const userSchema = new Schema({
     required: false
   },
 
+  favorites: {
+    type: Array,
+    "default": [],
+    required: false
+  },
+
+  goals: {
+    type: Array,
+    "default": [0, 0, 0, 0],
+    required: false
+  },
+
+  dayProgress: {
+    type: Array,
+    "default": [0, 0, 0, 0],
+    required: false
+  },
+
   verified: {
     type: Boolean,
     "default": false,
