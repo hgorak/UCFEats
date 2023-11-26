@@ -4,6 +4,13 @@ const {
   getRecentEats,
   addEat,
   deleteEat,
+  dayEats,
+  getDailyMacros,
+  setGoalMacros,
+  getGoals,
+  addFavorite,
+  deleteFavorite,
+  getFavorites
 } = require('../controllers/eatsController');
 const requireAuth = require('../middleware/requireAuth');
 
@@ -23,5 +30,26 @@ router.get('/recent', getRecentEats);
 
 // Delete an Eat from the User
 router.delete('/', deleteEat);
+
+// Gets the user's eats from today
+router.get('/day', dayEats)
+
+// Get the user's macros so far in the day
+router.get('/dailyMacros', getDailyMacros);
+
+// Get the user's macro goals
+router.get('/macroGoals', getGoals);
+
+// Set macro goals
+router.post('/setMacroGoal', setGoalMacros);
+
+// Add a favorite eat
+router.post('/favorite', addFavorite);
+
+// Delete a favorite eat
+router.delete('/favorite', deleteFavorite);
+
+// Gets the user's favorite eats
+router.get('/favorite', getFavorites);
 
 module.exports = router;
