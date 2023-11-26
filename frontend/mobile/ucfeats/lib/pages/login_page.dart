@@ -147,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          AppRoutes.forgotPasswordScreen.pushName(),
                       style: Theme.of(context).textButtonTheme.style,
                       child: Text(
                         'Forgot Password?',

@@ -5,6 +5,7 @@ import 'package:ucfeats/pages/dashboard_page.dart';
 import 'values/app_theme.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
+import 'pages/forgot_page.dart';
 import 'values/app_constants.dart';
 import 'values/app_routes.dart';
 
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.loginScreen: (_) => const LoginPage(),
         AppRoutes.registerScreen: (_) => const RegisterPage(),
         AppRoutes.dashboardScreen: (_) => const DashboardPage(),
-        AppRoutes.forgotPasswordScreen: (_) => const DashboardPage()
+        AppRoutes.forgotPasswordScreen: (_) => const ForgotPasswordPage()
       },
     );
   }
