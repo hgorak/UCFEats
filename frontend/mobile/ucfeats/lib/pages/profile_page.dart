@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../components/app_text_form_field.dart';
 import '../utils/extensions.dart';
@@ -30,22 +31,34 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     Container(
-                        height: size.height * 0.2,
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(20),
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(224, 52, 64, 1),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      height: size.height * 0.2,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        color: Color.fromRGBO(224, 52, 64, 1),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'User Profile',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 30),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              'User Profile',
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                          ],
-                        ))
+                            Text('Test  :3',
+                                style: Theme.of(context).textTheme.bodySmall),
+                          ]),
+                    )
                   ],
                 ))));
   }
