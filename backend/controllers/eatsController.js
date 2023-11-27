@@ -8,6 +8,9 @@ const User = require('../models/userModel');
 const getEats = async (req, res) => {
   // Gets user
   const user = await User.findById(req.user._id);
+
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or has invalid token'});
   
   // Returns their stores
   res.status(200).json(user.eats);
@@ -123,6 +126,14 @@ const addEat = async (req, res) => {
 // Deletes an Eat 
 const deleteEat = async (req, res) => {
   const { name } = req.body;
+  let emptyFields = [];
+
+  /* Ensure fields aren't empty */
+  if (!name)
+    emptyFields.push('name');
+
+  if (emptyFields.length > 0)
+    return res.status(400).json({ error: 'Please fill in the required fields', emptyFields });
 
   /* Ensure item exists */
   // Find desired item
@@ -146,13 +157,22 @@ const deleteEat = async (req, res) => {
   // Delete the Eat
   await User.findByIdAndUpdate(req.user._id, {$pull: {eats: itemID}});
 
+  // Remove the macros
+  let progress = user.dayProgress;
+  progress[0] -= item.Calories;
+  progress[1] -= item.Fat;
+  progress[2] -= item.Carbs;
+  progress[3] -= item.Protein;
+
+  await User.findByIdAndUpdate(req.user._id, {$set: {dayProgress: progress}});
+
   // Delete the Eat from the records
   await EatsList.findOneAndDelete({user_id: req.user._id, item_id: itemID});
 
   /* Get an updated list of the Eats to return */
   const updatedUser = await User.findById(req.user._id);
   const finalEats = updatedUser.eats;
-  
+
   res.status(200).json(finalEats);
 };
 
@@ -199,6 +219,9 @@ const dayEats = async (req, res) => {
 const getDailyMacros = async (req, res) => {
   const user = await User.findById(req.user._id);
 
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or has invalid token'});
+
   res.status(200).json(user.dayProgress);
 }
 
@@ -207,13 +230,16 @@ const setGoalMacros = async (req, res) => {
 
   const newGoals = [calories, fat, carbs, protein];
 
-  const result = await User.findByIdAndUpdate(req.user._id, {$set: {goals: newGoals}});
+  await User.findByIdAndUpdate(req.user._id, {$set: {goals: newGoals}});
 
   res.status(200).json(newGoals);
 }
 
 const getGoals = async (req, res) => {
   const user = await User.findById(req.user._id);
+
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or has invalid token'});
 
   res.status(200).json(user.goals);
 }
@@ -242,6 +268,9 @@ const addFavorite = async (req, res) => {
       return res.status(404).json({error: 'Item Does Not Exist'});
 
     const user = await User.findById(req.user._id);
+
+    if (user === null)
+      return res.status(404).json({error: 'User does not exist or has invalid token'});
 
     // If the user doesn't have this favorites: Throw error
     if (user.favorites.includes(item._id))
@@ -277,6 +306,9 @@ const deleteFavorite = async (req, res) => {
 
   const user = await User.findById(req.user._id);
 
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or has invalid token'});
+
   // If the user doesn't have this favorites: Throw error
   if (!user.favorites.includes(item._id))
     return res.status(401).json({error: 'User Does Not Have This Favorite'});
@@ -294,6 +326,9 @@ const deleteFavorite = async (req, res) => {
 // Get Favorites
 const getFavorites = async (req, res) => {
   const user = await User.findById(req.user._id);
+
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or has invalid token'});
 
   res.status(200).json(user.favorites);
 };

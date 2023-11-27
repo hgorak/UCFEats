@@ -13,6 +13,10 @@ const getAllLocations = async (req, res) => {
 const getUserLocations = async (req, res) => {
   // Gets user
   const user = await User.findById(req.user._id);
+
+  // If user doesn't exist: throw error
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or token is invalid'});
   
   // Returns their stores
   res.status(200).json(user.stores);
@@ -43,7 +47,7 @@ const addLocation = async (req, res) => {
     emptyFields.push('name');
 
   if (emptyFields.length > 0)
-    return res.status(400).json({ error: 'Please fill in the required fields', emptyFields });
+    return res.status(400).json({error: 'Please fill in the required fields', emptyFields});
 
   try
   {
@@ -61,6 +65,10 @@ const addLocation = async (req, res) => {
 
     // Gets user
     const user = await User.findById(req.user._id);
+
+    // If user doesn't exist: return
+    if (user === null)
+      return res.status(404).json({error: 'User does not exist or token is invalid'});
 
     // If the user already has the store: Don't add
     if (user.stores.includes(storeID))
@@ -100,6 +108,10 @@ const deleteLocation = async(req, res) => {
 
   // Gets user
   const user = await User.findById(req.user._id);
+    
+  // If user doesn't exist: return
+  if (user === null)
+    return res.status(404).json({error: 'User does not exist or token is invalid'});
 
   // If the user doesn't have the store: Throw error
   if (!user.stores.includes(storeID))
@@ -128,10 +140,7 @@ const updateLocations = async (req, res) => {
     const store = await LocationList.findOne({Name: locationName})
 
     if (store === null)
-    {
-      res.status(404).json({error: locationName + ' not found'});
-      continue;
-    }
+      return res.status(404).json({error: locationName + ' not found'});
 
     const storeID = store._id
     newStores.push(storeID)

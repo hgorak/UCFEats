@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd tests | jest --detectOpenHandles",
     "start": "nodemon server.js",
     "build": "node server.js"
   },
@@ -22,5 +22,8 @@
     "nodemailer": "^6.9.7",
     "pm2": "^5.3.0",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

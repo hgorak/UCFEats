@@ -32,14 +32,12 @@ const sendVerificationEmail = async (recipient) => {
     const link = 'https://ucf-eats.vercel.app/auth/verification/' + token; 
 
     // Send verification email
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: '"UCFEats"' + process.env.EMAIL,
       to: recipient.email,
       subject: "Email Verification",
       html: '<a href=\"' + link + '\">' + htmlVerification + '</a>'
     });
-
-    console.log("Message sent: %s", info.messageId);
   }
 
   catch (error) {console.error(error)}
