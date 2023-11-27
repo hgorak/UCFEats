@@ -52,7 +52,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: 'School',
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
