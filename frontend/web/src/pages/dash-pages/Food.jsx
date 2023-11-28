@@ -6,6 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import ListGroup from "react-bootstrap/ListGroup";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
+import { FaRegHeart } from "react-icons/fa";
 
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
@@ -145,6 +146,14 @@ function Food() {
 															className="add"
 														>
 															<AiOutlinePlus />
+														</button>
+														<button
+															onClick={() => {
+																addEat(items, itemIndex);
+															}}
+															className="add"
+														>
+															<FaRegHeart />
 														</button>
 													</IconContext.Provider>
 												</td>
