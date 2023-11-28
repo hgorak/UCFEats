@@ -9,9 +9,14 @@ import {
 	CircularProgressbarWithChildren,
 	buildStyles,
 } from "react-circular-progressbar";
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 import "react-circular-progressbar/dist/styles.css";
 
 import { API_URL } from "../../../api.js";
+
+Chart.register(CategoryScale);
 
 function Home() {
 	const { currentUser } = useContext(AuthContext);
@@ -21,6 +26,15 @@ function Home() {
 	const [progress, setProgress] = useState([0, 0, 0, 0]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [chartData, setChartData] = useState({
+		labels: ["Fats", "Carbs", "Protein"],
+		datasets: [
+			{
+				label: "Breakdown of Macronutrients",
+				data: [120, 150, 90],
+			},
+		],
+	});
 
 	useEffect(() => {
 		getRecentEats();
@@ -169,6 +183,21 @@ function Home() {
 							</div>
 						</div>
 					)}
+				</div>
+				<div className="chart">
+					<div className="chart-container">
+						<Doughnut
+							data={chartData}
+							options={{
+								plugins: {
+									title: {
+										display: true,
+										text: "Breakdown of Macronutrients",
+									},
+								},
+							}}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className="records">
