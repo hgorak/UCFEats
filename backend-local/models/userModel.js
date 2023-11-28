@@ -24,16 +24,60 @@ const userSchema = new Schema({
   last_name: {
     type: String,
     required: true
+  },
+
+  stores: {
+    type: Array,
+    "default": [],
+    required: false
+  },
+
+  eats: {
+    type: Array,
+    "default": [],
+    required: false
+  },
+
+  favorites: {
+    type: Array,
+    "default": [],
+    required: false
+  },
+
+  goals: {
+    type: Array,
+    "default": [0, 0, 0, 0],
+    required: false
+  },
+
+  dayProgress: {
+    type: Array,
+    "default": [0, 0, 0, 0],
+    required: false
+  },
+
+  verified: {
+    type: Boolean,
+    "default": false,
+    required: false
+  },
+
+  verification_token: {
+    type: String,
+    "default": "",
+    required: false
+  },
+
+  reset_token: {
+    type: String,
+    "default": "",
+    required: false
   }
 }, {collection: 'Users'});
 
 // Static signup method
 userSchema.statics.signup = async function(email, password, first_name, last_name) {
   // Ensure all fields are filled in
-  console.log(email);
-  console.log(password);
-  console.log(first_name);
-  console.log(last_name);
   if (!email || !password || !first_name || !last_name)
     throw Error('All fields must be filled');
 

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { VscAccount } from "react-icons/vsc";
 import { IconContext } from "react-icons";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 import "../styles.scss";
 
 function Navbar() {
+	const { currentUser } = useContext(AuthContext);
 	const [color, setColor] = useState(false);
 
 	const changeColor = () => {
@@ -32,7 +34,7 @@ function Navbar() {
 								: { size: "35px", color: "#F5ece4" }
 						}
 					>
-						<Link to="/login">
+						<Link to={currentUser ? "/loading" : "/auth/login"}>
 							<VscAccount />
 						</Link>
 					</IconContext.Provider>
