@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ucfeats/pages/home_page.dart';
+import 'package:ucfeats/pages/search_page.dart';
 import 'package:ucfeats/values/app_routes.dart';
 
 import '../components/app_text_form_field.dart';
@@ -23,6 +24,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final screens = [
     HomePage(),
+    SearchPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,8 +48,8 @@ class _DashboardPageState extends State<DashboardPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -40,7 +41,9 @@ class _LoginPageState extends State<LoginPage> {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Login Successful')));
-      AppRoutes.dashboardScreen.pushName();
+      Timer(const Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.dashboardScreen);
+      });
       return LoginModel.fromJson(
           jsonDecode(response.body) as Map<String, dynamic>);
     } else {
