@@ -22,6 +22,12 @@ class AppTheme {
         fontSize: 34,
         letterSpacing: 0.5,
       ),
+      titleMedium: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: AppColors.red,
+        fontSize: 24,
+        letterSpacing: 0.5,
+      ),
       bodySmall: TextStyle(
         color: Colors.grey,
         fontSize: 14,

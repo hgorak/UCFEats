@@ -16,10 +16,15 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController calorieController = TextEditingController();
   TextEditingController proteinController = TextEditingController();
   TextEditingController carbController = TextEditingController();
   TextEditingController fatsController = TextEditingController();
+
+  bool isObscure = true;
+  bool isConfirmPasswordObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
                       decoration: const BoxDecoration(
-                        color: Color.fromRGBO(224, 52, 64, 1),
+                        color: AppColors.red,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -49,13 +54,162 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 30),
+                      padding: const EdgeInsets.all(30),
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          //mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Test  :3',
+                            Text('User Information',
+                                style: Theme.of(context).textTheme.titleMedium),
+                            const Divider(
+                              height: 12,
+                              thickness: 0.5,
+                            ),
+                            Text('Email: [Insert the user email in here]',
+                                style: Theme.of(context).textTheme.bodySmall),
+                            const SizedBox(
+                              height: 18,
+                            ),
+
+// Beginning of Password thingy
+                            AppTextFormField(
+                              labelText: 'Change Password',
+                              keyboardType: TextInputType.visiblePassword,
+                              textInputAction: TextInputAction.next,
+                              onChanged: (_) =>
+                                  _formKey.currentState?.validate(),
+                              validator: (value) {
+                                return value!.isEmpty
+                                    ? 'Please, Enter Password'
+                                    : AppConstants.passwordRegex.hasMatch(value)
+                                        ? null
+                                        : 'Invalid Password';
+                              },
+                              controller: passwordController,
+                              obscureText: isObscure,
+                              // onEditingComplete: () {
+                              //   FocusScope.of(context).unfocus();
+                              //   FocusScope.of(context).requestFocus(confirmFocusNode);
+                              // },
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.only(right: 15),
+                                child: Focus(
+                                  /// If false,
+                                  ///
+                                  /// disable focus for all of this node's descendants
+                                  descendantsAreFocusable: false,
+
+                                  /// If false,
+                                  ///
+                                  /// make this widget's descendants un-traversable.
+                                  // descendantsAreTraversable: false,
+                                  child: IconButton(
+                                    onPressed: () => setState(() {
+                                      isObscure = !isObscure;
+                                    }),
+                                    style: ButtonStyle(
+                                      minimumSize: MaterialStateProperty.all(
+                                        const Size(48, 48),
+                                      ),
+                                    ),
+                                    icon: Icon(
+                                      isObscure
+                                          ? Icons.visibility_off_outlined
+                                          : Icons.visibility_outlined,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            AppTextFormField(
+                              labelText: 'Confirm Password',
+                              keyboardType: TextInputType.visiblePassword,
+                              textInputAction: TextInputAction.done,
+                              // focusNode: confirmFocusNode,
+                              onChanged: (value) {
+                                _formKey.currentState?.validate();
+                              },
+                              validator: (value) {
+                                return value!.isEmpty
+                                    ? 'Please, Re-Enter Password'
+                                    : AppConstants.passwordRegex.hasMatch(value)
+                                        ? passwordController.text ==
+                                                confirmPasswordController.text
+                                            ? null
+                                            : 'Password not matched!'
+                                        : 'Invalid Password!';
+                              },
+                              controller: confirmPasswordController,
+                              obscureText: isConfirmPasswordObscure,
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.only(right: 15),
+                                child: Focus(
+                                  /// If false,
+                                  ///
+                                  /// disable focus for all of this node's descendants.
+                                  descendantsAreFocusable: false,
+
+                                  /// If false,
+                                  ///
+                                  /// make this widget's descendants un-traversable.
+                                  // descendantsAreTraversable: false,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        isConfirmPasswordObscure =
+                                            !isConfirmPasswordObscure;
+                                      });
+                                    },
+                                    style: ButtonStyle(
+                                      minimumSize: MaterialStateProperty.all(
+                                        const Size(48, 48),
+                                      ),
+                                    ),
+                                    icon: Icon(
+                                      isConfirmPasswordObscure
+                                          ? Icons.visibility_off_outlined
+                                          : Icons.visibility_outlined,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // Password reset button
+                            FilledButton(
+                                onPressed: () {
+                                  setState(() {});
+                                },
+                                child: const Text('Reset Password')),
+
+                            const SizedBox(
+                              height: 26,
+                            ),
+                            Text('Macro Goals',
+                                style: Theme.of(context).textTheme.titleMedium),
+                            const Divider(
+                              height: 12,
+                              thickness: 0.5,
+                            ),
+                            Text('Calories [Form that has Cal Goal]',
+                                style: Theme.of(context).textTheme.bodySmall),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Text('Protein [Form that has Protein Goal]',
+                                style: Theme.of(context).textTheme.bodySmall),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Text('Carbohydrates [Form that has Carb Goal]',
+                                style: Theme.of(context).textTheme.bodySmall),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Text('Total Fats [Form that has Fat Goal]',
                                 style: Theme.of(context).textTheme.bodySmall),
                           ]),
                     )
