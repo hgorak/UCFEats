@@ -181,9 +181,9 @@ function Food() {
 															<AiOutlinePlus />
 														</button>
 														<button
-															onClick={() => {
-																addEat(items, itemIndex);
-															}}
+															// onClick={() => {
+															// 	addEat(items, itemIndex);
+															// }}
 															className="add"
 														>
 															<FaRegHeart />

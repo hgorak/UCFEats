@@ -13,9 +13,13 @@ function Dashboard() {
 	const navigate = useNavigate();
 
 	// logout button and redirect to landing page
-	const handleClick = () => {
+	const handleLogout = () => {
 		logout();
 		navigate("/");
+	};
+
+	const handleProfile = () => {
+		navigate("/dashboard/goals");
 	};
 
 	return (
@@ -50,7 +54,8 @@ function Dashboard() {
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu>
-							<Dropdown.Item onClick={handleClick}>Logout</Dropdown.Item>
+							<Dropdown.Item onClick={handleProfile}>Goals</Dropdown.Item>
+							<Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>
 				</div>
