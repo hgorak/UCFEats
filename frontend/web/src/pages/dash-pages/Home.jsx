@@ -4,7 +4,11 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import TimeSince from "../../components/TimeSince.jsx";
 import Placeholder from "react-bootstrap/Placeholder";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import {
+	CircularProgressbar,
+	CircularProgressbarWithChildren,
+	buildStyles,
+} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import { API_URL } from "../../../api.js";
@@ -12,28 +16,20 @@ import { API_URL } from "../../../api.js";
 function Home() {
 	const { currentUser } = useContext(AuthContext);
 	const [recentEats, setRecentEats] = useState([]);
-	// const [currentCalories, setCurrentCalories] = useState();
-	// const [calorieGoal, setCalorieGoal] = useState();
-	// const [currentFats, setCurrentFats] = useState();
-	// const [fatsGoals, setFatsGoal] = useState();
-	// const [currentCarbs, setCurrentCarbs] = useState();
-	// const [carbsGoal, setCarbsGoal] = useState();
-	// const [currentProtein, setCurrentProtein] = useState();
-	// const [proteinGoal, setProteinGoal] = useState();
-	const [goals, setGoals] = useState([]);
-	const [currentMacros, setCurrentMacros] = useState([]);
+	const [goals, setGoals] = useState([0, 0, 0, 0]);
+	const [currentMacros, setCurrentMacros] = useState([0, 0, 0, 0]);
+	const [progress, setProgress] = useState([0, 0, 0, 0]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		getRecentEats();
-		getCurrentMacros();
-		getGoals();
+		getMacroData();
 		setLoading(false);
 	}, []);
 
-	const getGoals = async () => {
-		const response = await fetch(API_URL + "/api/eats/macroGoals", {
+	const getMacroData = async () => {
+		const macroResponse = await fetch(API_URL + "/api/eats/dailyMacros", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/JSON",
@@ -41,23 +37,12 @@ function Home() {
 			},
 		});
 
-		if (!response.ok) {
-			const json = await response.json();
-			console.log(json.error);
-		} else {
-			const json = await response.json();
-			// setCalorieGoal(json[0]);
-			// setFatsGoal(json[1]);
-			// setCarbsGoal(json[2]);
-			// setProteinGoal(json[3]);
-			setGoals(json);
-			console.log("goals: " + json);
-			console.log("calorie goal: " + json[0]);
-		}
-	};
+		const macroJson = await macroResponse.json();
 
-	const getCurrentMacros = async () => {
-		const response = await fetch(API_URL + "/api/eats/dailyMacros", {
+		if (!macroResponse.ok) console.log(macroJson.error);
+		else setCurrentMacros(macroJson);
+
+		const goalResponse = await fetch(API_URL + "/api/eats/macroGoals", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/JSON",
@@ -65,20 +50,22 @@ function Home() {
 			},
 		});
 
-		if (!response.ok) {
-			const json = await response.json();
-			console.log(json.error);
+		const goalJson = await goalResponse.json();
+
+		if (!goalResponse.ok) {
+			console.log(goalJson.error);
 		} else {
-			const json = await response.json();
-			// setCurrentCalories(json[0]);
-			// setCurrentFats(json[1]);
-			// setCurrentCarbs(json[2]);
-			// setCurrentCalories(json[3]);
-			setCurrentMacros(json);
-			console.log("currents: " + json);
-			console.log("calorie current: " + json[0]);
+			setGoals(goalJson);
 		}
+
+		let diff = [];
+
+		for (var i = 0; i < macroJson.length; i++)
+			diff.push(Math.round(goalJson[i] - macroJson[i]));
+
+		setProgress(diff);
 	};
+
 	const getRecentEats = async () => {
 		setError(null);
 
@@ -104,58 +91,80 @@ function Home() {
 		<div className="home">
 			<div className="charts">
 				<div className="charts-hero">
-					{/* <div>
-						<h2>All of UCF's best flavors and menus in one place</h2>
-						<span>Find and enjoy your favorite eats here and track your nutrition</span>
-
-						<Link to="/dashboard/food">
-							<button>Explore</button>
-						</Link>
-					</div> */}
-					{!loading && (
+					{loading ? (
+						<div>loading</div>
+					) : (
 						<div className="goals">
 							<div className="progress-bar">
-								<CircularProgressbar
+								<CircularProgressbarWithChildren
 									value={currentMacros[0]}
 									maxValue={goals[0]}
-									text={`${goals[0] - currentMacros[0]} remaining`}
 									styles={buildStyles({
-										textSize: "10px",
+										// textSize: "10px",
+										// textColor: progress[0] <= 0 ? "#28a745" : "",
+										pathColor: progress[0] <= 0 ? "#28a745" : "",
 									})}
-								/>
+								>
+									<div className="dial-content">
+										<strong>{Math.abs(progress[0])}</strong>
+										<br></br>
+										{progress[0] > 0 ? "Remaining" : "Over"}
+									</div>
+								</CircularProgressbarWithChildren>
 								<span>Calories</span>
 							</div>
 							<div className="progress-bar">
-								<CircularProgressbar
+								<CircularProgressbarWithChildren
 									value={currentMacros[2]}
 									maxValue={goals[2]}
-									text={`${goals[2] - currentMacros[2]}g remaining`}
 									styles={buildStyles({
 										textSize: "10px",
+										textColor: progress[2] <= 0 ? "#28a745" : "",
+										pathColor: progress[2] <= 0 ? "#28a745" : "",
 									})}
-								/>
+								>
+									<div className="dial-content">
+										<strong>{Math.abs(progress[2])}g</strong>
+										<br></br>
+										{progress[2] > 0 ? "Remaining" : "Over"}
+									</div>
+								</CircularProgressbarWithChildren>
 								<span>Carbs</span>
 							</div>
 							<div className="progress-bar">
-								<CircularProgressbar
+								<CircularProgressbarWithChildren
 									value={currentMacros[3]}
 									maxValue={goals[3]}
-									text={`${goals[3] - currentMacros[3]}g remaining`}
 									styles={buildStyles({
 										textSize: "10px",
+										textColor: progress[3] <= 0 ? "#28a745" : "",
+										pathColor: progress[3] <= 0 ? "#28a745" : "",
 									})}
-								/>
+								>
+									<div className="dial-content">
+										<strong>{Math.abs(progress[3])}g</strong>
+										<br></br>
+										{progress[3] > 0 ? "Remaining" : "Over"}
+									</div>
+								</CircularProgressbarWithChildren>
 								<span>Protein</span>
 							</div>
 							<div className="progress-bar">
-								<CircularProgressbar
+								<CircularProgressbarWithChildren
 									value={currentMacros[1]}
 									maxValue={goals[1]}
-									text={`${goals[1] - currentMacros[1]}g remaining`}
 									styles={buildStyles({
 										textSize: "10px",
+										textColor: progress[1] <= 0 ? "#28a745" : "",
+										pathColor: progress[1] <= 0 ? "#28a745" : "",
 									})}
-								/>
+								>
+									<div className="dial-content">
+										<strong>{Math.abs(progress[1])}g</strong>
+										<br></br>
+										{progress[1] > 0 ? "Remaining" : "Over"}
+									</div>
+								</CircularProgressbarWithChildren>
 								<span>Fats</span>
 							</div>
 						</div>
