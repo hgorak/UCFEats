@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:ucfeats/pages/home_page.dart';
 import 'package:ucfeats/values/app_routes.dart';
 
 import '../components/app_text_form_field.dart';
@@ -20,6 +21,10 @@ class _DashboardPageState extends State<DashboardPage> {
   final _formKey = GlobalKey<FormState>();
   int _selectedIndex = 0;
 
+  final screens = [
+    HomePage(),
+  ];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -30,17 +35,11 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     final size = context.mediaQuerySize;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('I\'m an appbar'),
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: const Text("Testing"),
-        ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -56,6 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
         currentIndex: _selectedIndex,
+        showUnselectedLabels: false,
         selectedItemColor: const Color.fromRGBO(224, 52, 64, 1),
         onTap: _onItemTapped,
       ),
