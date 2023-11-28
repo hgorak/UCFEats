@@ -12,6 +12,7 @@ import Loading from "./components/Loading.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/dash-pages/Home.jsx";
 import Food from "./pages/dash-pages/Food.jsx";
+import Goals from "./pages/dash-pages/Goals.jsx";
 import Favorites from "./pages/dash-pages/Favorites.jsx";
 import Error from "./components/Error.jsx";
 import { AuthContext } from "./context/AuthContext.jsx";
@@ -64,6 +65,7 @@ function App() {
 							<Route path="/dashboard/" element={<Home />} />
 							<Route path="/dashboard/food" element={<Food />} />
 							<Route path="/dashboard/favorites" element={<Favorites />} />
+							<Route path="/dashboard/goals" element={<Goals />} />
 						</Route>
 					</Routes>
 				</BrowserRouter>

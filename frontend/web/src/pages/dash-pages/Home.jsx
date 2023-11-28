@@ -21,26 +21,21 @@ function Home() {
 	const getRecentEats = async () => {
 		setError(null);
 
-		try {
-			const response = await fetch(API_URL + "/api/eats/recent", {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/JSON",
-					Authorization: "Bearer " + currentUser.token,
-				},
-			});
+		const response = await fetch(API_URL + "/api/eats/recent", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+		});
 
-			if (!response.ok) {
-				const json = await response.json();
-				setError(json.error);
-			} else {
-				const json = await response.json();
-				setRecentEats(json);
-				console.log(json);
-			}
-		} catch (error) {
-			setError("An error occurred while fetching data.");
-			console.error(error);
+		if (!response.ok) {
+			const json = await response.json();
+			console.log(json.error);
+		} else {
+			const json = await response.json();
+			setRecentEats(json);
+			console.log("eats:" + json);
 		}
 	};
 

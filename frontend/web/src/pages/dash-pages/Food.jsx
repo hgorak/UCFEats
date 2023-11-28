@@ -6,6 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import ListGroup from "react-bootstrap/ListGroup";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
+import { FaRegHeart } from "react-icons/fa";
 
 import { API_URL } from "../../../api.js";
 import "../../styles.scss";
@@ -81,6 +82,39 @@ function Food() {
 		}
 	};
 
+	// favorite or unfavorite an item
+	// const toggleFavorite = (foodItemId, isCurrentlyFavorite) => {
+	// 	const updatedFoodItems = restaurantItems.map(([restaurant, items]) =>
+	// 		item.id === foodItemId ? { ...item, isFavorite: !isCurrentlyFavorite } : item
+	// 	);
+
+	// 	// Update the local state
+	// 	setRestaurantItems(updatedFoodItems);
+
+	// 	// Update the server or API with the new favorite status
+	// 	if (!isCurrentlyFavorite) {
+	// 		// If not currently favorite, add to favorites
+	// 		fetch(API_URL + "/api/eats/favorite", {
+	// 			method: "POST",
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 			},
+	// 			body: JSON.stringify({ foodItemId }),
+	// 		})
+	// 			.then((response) => response.json())
+	// 			.then((data) => console.log("Added to favorites:", data))
+	// 			.catch((error) => console.error("Error adding to favorites:", error));
+	// 	} else {
+	// 		// If currently favorite, remove from favorites
+	// 		fetch(API_URL + "/api/eats/favorite", {
+	// 			method: "DELETE",
+	// 		})
+	// 			.then((response) => response.json())
+	// 			.then((data) => console.log("Removed from favorites:", data))
+	// 			.catch((error) => console.error("Error removing from favorites:", error));
+	// 	}
+	// };
+
 	const handleSearch = (query) => {
 		const filteredResults = allItems.filter((item) =>
 			Object.values(item).some((value) =>
@@ -145,6 +179,14 @@ function Food() {
 															className="add"
 														>
 															<AiOutlinePlus />
+														</button>
+														<button
+															// onClick={() => {
+															// 	addEat(items, itemIndex);
+															// }}
+															className="add"
+														>
+															<FaRegHeart />
 														</button>
 													</IconContext.Provider>
 												</td>
