@@ -16,7 +16,7 @@ const createToken = (_id) => {
 }
 
 // User login
-const loginUser = async(req, res) => {
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -52,20 +52,21 @@ const registerUser = async(req, res) => {
   const {email, password, first_name, last_name} = req.body;
 
   try {
-    const user = await User.signup(email, password, first_name, last_name);
-
-    // Create token for user
-    const token = createToken(user._id);
-
-    // Send verification email
-    sendVerificationEmail(user);
-
-    res.status(200).json({email, first_name, last_name, token});
+    var user = await User.signup(email, password, first_name, last_name);
   }
 
   catch (error) {
-    res.status(400).json({error: error.message});
+    return res.status(400).json({error: error.message});
   }
+
+
+  // Create token for user
+  const token = createToken(user._id);
+
+  // Send verification email
+  sendVerificationEmail(user);
+
+  res.status(200).json({email, first_name, last_name, token});
 };
 
 // Email verification processing
@@ -78,7 +79,7 @@ const verifyEmail = async (req, res) => {
   // Check if any user has the token
   if (user === null)
   {
-    res.status(404).json({message: 'Token does not exist. Uh oh'});
+    res.status(404).json({error: 'Token does not exist. Uh oh'});
     return;
   }
 
@@ -103,11 +104,17 @@ const verifyEmail = async (req, res) => {
 
 // Delete user
 const deleteUser = async(req, res) => {
-
   try {
+    // Get user's id
     const id = req.user._id;
+
+    // Delete all the user's eats
     await EatsList.deleteMany({user_id: id});
+
+    // Get the results of deleting the user
     const result = await User.findOneAndDelete({_id: id});
+
+    // Return the result
     res.status(200).json(result)
   }
 
@@ -125,11 +132,11 @@ const resetUserPasswordSetup = async(req, res) => {
   const validEmail = await User.findOne({email: email}, 'email');
 
   if (validEmail === null)
-    res.status(404).json({message: 'No Account Found With That Email'});
+    return res.status(404).json({error: 'No Account Found With That Email'});
 
   sendResetEmail(validEmail);
 
-  res.status(200).json();
+  res.status(200).json({message: 'Reset User Password Email Successful'});
 }
 
 // Reset user's password
@@ -143,7 +150,7 @@ const resetUserPassword = async(req, res) => {
   // Check if any user has the token
   if (user === null)
   {
-    res.status(404).json({message: 'Token does not exist. Please try the reset process again'});
+    res.status(404).json({error: 'Token does not exist. Please try the reset process again'});
     return;
   }
 
@@ -166,7 +173,6 @@ const resetUserPassword = async(req, res) => {
     res.status(410).json({error: 'New password cannot be old password'});
     return;
   }
-
 
   // Make sure new password is valid
   if (!validator.isStrongPassword(password))

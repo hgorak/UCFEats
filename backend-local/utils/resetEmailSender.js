@@ -34,14 +34,12 @@ const sendResetEmail = async (recipient) => {
     const link = 'https://ucf-eats.vercel.app/auth/reset/' + token; 
 
     // Send reset password email
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: '"UCFEats"' + process.env.EMAIL,
       to: recipient,
       subject: "Password Reset",
       html: '<a href=\"' + link + '\">' + htmlReset + '</a><br><br><span>Ignore This Email If You Did Not Request A New Password</span>'
     });
-
-    console.log("Message sent: %s", info.messageId);
   }
 
   catch (error) {console.error(error)}

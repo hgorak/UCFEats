@@ -60,7 +60,10 @@ const getItem = async (req, res) => {
     return res.status(404).json({error: 'Store Does Not Exist'});
 
   // Get item
-  const item = await ItemList.find({Name: itemName, loc_id: store._id});
+  const item = await ItemList.findOne({Name: itemName, loc_id: store._id});
+
+  if (item === null)
+    return res.status(404).json({error: 'Item Does Not Exist'});
 
   res.status(200).json(item);
 };
