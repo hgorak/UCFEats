@@ -750,6 +750,14 @@ body {
                                     padding: 20px 0px;
                                     color: black;
                                     gap: 5px;
+
+                                    .dial-content {
+                                        font-size: 14px;
+                                        strong {
+                                            font-size: 24px;
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }
