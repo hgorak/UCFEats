@@ -701,46 +701,55 @@ body {
                             flex: 3;
                             height: 100%;
 
-                            .charts-hero {
-                                background-image: linear-gradient(to top right, $primary-color, #E09E34);
+                            .charts-hero .goals {
+                                background-color: $nearly-white;
                                 width: 100%;
                                 height: 240px;
-                                padding: 0px 40px;
+                                padding: 0px 20px;
                                 border-radius: 20px;
                                 display: flex;
-                                flex-direction: column;
+                                flex-direction: row;
                                 align-items: first baseline;
                                 justify-content: center;
                                 color: $nearly-white;
+                                gap: 10px;
 
-                                div { 
-                                    width: 70%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 10px;
+                                
+                                // div { 
+                                //     width: 70%;
+                                //     display: flex;
+                                //     flex-direction: column;
+                                //     gap: 10px;
 
-                                    a {
-                                        width: 150px;
-                                        height: 50px;
+                                //     a {
+                                //         width: 150px;
+                                //         height: 50px;
 
-                                        button {
-                                            border: none;
-                                            border-radius: 15px;
-                                            background-color: white;
-                                            color: $primary-color;
-                                            height: 50px;
-                                            width: 150px;
-                                            font-weight: 600;
-                                            font-size: 18px;
-                                            padding: 0px;
+                                //         button {
+                                //             border: none;
+                                //             border-radius: 15px;
+                                //             background-color: white;
+                                //             color: $primary-color;
+                                //             height: 50px;
+                                //             width: 150px;
+                                //             font-weight: 600;
+                                //             font-size: 18px;
+                                //             padding: 0px;
                                             
-                                        }
-                                    }
+                                //         }
+                                //     }
                                     
-                                }
-                                h2 {
-                                    font-size: 1.6rem;
-                                    margin: 0px;
+                                // }
+                                // h2 {
+                                //     font-size: 1.6rem;
+                                //     margin: 0px;
+                                // }
+                                .progress-bar {
+                                    // border: solid 1px black;
+                                    height: 100%;
+                                    padding: 20px 0px;
+                                    color: black;
+                                    gap: 5px;
                                 }
                             }
                         }
