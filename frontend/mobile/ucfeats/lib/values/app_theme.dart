@@ -23,6 +23,7 @@ class AppTheme {
         letterSpacing: 0.5,
       ),
       titleMedium: TextStyle(
+        // Used for Subheaders
         fontWeight: FontWeight.bold,
         color: AppColors.red,
         fontSize: 24,

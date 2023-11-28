@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               height: 18,
                             ),
 
-// Beginning of Password thingy
+                            // Beginning of Password thingy
                             AppTextFormField(
                               labelText: 'Change Password',
                               keyboardType: TextInputType.visiblePassword,
@@ -184,7 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   setState(() {});
                                 },
                                 child: const Text('Reset Password')),
-
                             const SizedBox(
                               height: 26,
                             ),
