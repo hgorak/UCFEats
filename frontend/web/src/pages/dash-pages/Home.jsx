@@ -27,15 +27,7 @@ function Home() {
 	const [progress, setProgress] = useState([0, 0, 0, 0]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
-	const [chartData, setChartData] = useState({
-		labels: ["Fats", "Carbs", "Protein"],
-		datasets: [
-			{
-				label: "Breakdown of Macronutrients",
-				data: [120, 150, 90],
-			},
-		],
-	});
+	const [chartData, setChartData] = useState([]);
 
 	useEffect(() => {
 		getRecentEats();
@@ -56,8 +48,11 @@ function Home() {
 
 		const macroJson = await macroResponse.json();
 
-		if (!macroResponse.ok) console.log(macroJson.error);
-		else setCurrentMacros(macroJson);
+		if (!macroResponse.ok) {
+			console.log(macroJson.error);
+		} else {
+			setCurrentMacros(macroJson);
+		}
 
 		const goalResponse = await fetch(API_URL + "/api/eats/macroGoals", {
 			method: "GET",
@@ -82,6 +77,8 @@ function Home() {
 		for (var i = 0; i < macroJson.length; i++)
 			diff.push(Math.round(goalJson[i] - macroJson[i]));
 
+		macroJson.shift();
+		setChartData(macroJson);
 		setProgress(diff);
 	};
 
@@ -201,19 +198,29 @@ function Home() {
 					)}
 				</div>
 				<div className="chart">
-					<div className="chart-container">
-						<Doughnut
-							data={chartData}
-							options={{
-								plugins: {
-									title: {
-										display: true,
-										text: "Breakdown of Macronutrients",
+					{!loading && (
+						<div className="chart-container">
+							<Doughnut
+								data={{
+									labels: ["Fats", "Carbs", "Protein"],
+									datasets: [
+										{
+											label: "Breakdown of Macronutrients",
+											data: chartData,
+										},
+									],
+								}}
+								options={{
+									plugins: {
+										title: {
+											display: true,
+											text: "Breakdown of Macronutrients",
+										},
 									},
-								},
-							}}
-						/>
-					</div>
+								}}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 			<div className="records">
