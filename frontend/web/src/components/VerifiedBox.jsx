@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../api.js";
+import { Navigate } from "react-router-dom";
 
 import "../styles.scss";
+
+const navigate = Navigate();
 
 function VerifiedBox({ children }) {
 	const [show, setShow] = useState(true);
@@ -11,7 +14,7 @@ function VerifiedBox({ children }) {
 	useEffect(() => {
 		const timeId = setTimeout(() => {
 			// After 3 seconds set the show value to false
-			setShow(false);
+			navigate("/loading");
 		}, 3000);
 
 		return () => {
