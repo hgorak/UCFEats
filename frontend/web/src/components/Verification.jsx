@@ -21,7 +21,7 @@ function Verification() {
 			if (response.ok) {
 				setVerified(true);
 
-				setTimeout(() => navigate("/login"), 3000);
+				setTimeout(() => navigate("/loading"), 3000);
 			}
 
 			setLoading(false);
