@@ -27,27 +27,28 @@ const Loading = () => {
 			}
 
 			if (restaurantResponse.ok) {
-				// get items per restaurant
-				const restaurantItemsMap = new Map();
+				const promises = restaurants.map(async (restaurant) => {
+					const itemResponse = await fetch(API_URL + "/api/items/", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/JSON",
+							Authorization: "Bearer " + currentUser.token,
+						},
+						body: JSON.stringify({
+							name: restaurant.Name,
+						}),
+					});
 
-				await Promise.all(
-					restaurants.map(async (restaurant) => {
-						const itemResponse = await fetch(API_URL + "/api/items/", {
-							method: "POST",
-							headers: {
-								"Content-Type": "application/JSON",
-								Authorization: "Bearer " + currentUser.token,
-							},
-							body: JSON.stringify({
-								name: restaurant.Name,
-							}),
-						});
+					const items = await itemResponse.json();
 
-						const items = await itemResponse.json();
+					return { restaurant: restaurant, items: items };
+				});
 
-						// Store items in the Map with restaurant as the key
-						restaurantItemsMap.set(restaurant.Name, items);
-					})
+				const results = await Promise.all(promises);
+
+				// Now 'results' array will have the items in the original order
+				const restaurantItemsMap = new Map(
+					results.map((result) => [result.restaurant.Name, result.items])
 				);
 
 				// Map associating restaurants with their items
