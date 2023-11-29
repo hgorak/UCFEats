@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ucfeats/pages/home_page.dart';
+import 'package:ucfeats/pages/profile_page.dart';
 import 'package:ucfeats/pages/search_page.dart';
 import 'package:ucfeats/values/app_routes.dart';
 
@@ -22,10 +23,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final _formKey = GlobalKey<FormState>();
   int _selectedIndex = 0;
 
-  final screens = [
-    HomePage(),
-    SearchPage(),
-  ];
+  final screens = [HomePage(), SearchPage(), ProfilePage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,7 +50,7 @@ class _DashboardPageState extends State<DashboardPage> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],

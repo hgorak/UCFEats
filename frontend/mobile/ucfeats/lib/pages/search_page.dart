@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(224, 52, 64, 1),
-          title: const Text("Add Food"),
+          title: const Text("Add Food", style: TextStyle(color: Colors.white)),
           actions: [
             SearchAnchor(
                 viewBackgroundColor: Colors.white,

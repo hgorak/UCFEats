@@ -30,29 +30,15 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final size = context.mediaQuerySize;
     return Scaffold(
+        appBar: AppBar(
+            backgroundColor: const Color.fromRGBO(224, 52, 64, 1),
+            title: const Text("User profile",
+                style: TextStyle(color: Colors.white))),
         body: SingleChildScrollView(
             child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    Container(
-                      height: size.height * 0.2,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                        color: AppColors.red,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'User Profile',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ],
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(30),
                       child: Column(

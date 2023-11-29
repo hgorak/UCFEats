@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: const Color.fromRGBO(224, 52, 64, 1),
-          title: const Text("Testing")),
+          title: const Text("Home", style: TextStyle(color: Colors.white))),
       body: Column(
         children: [
           Container(

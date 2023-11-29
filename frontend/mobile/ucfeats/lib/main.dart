@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'UCFEats app',
       theme: AppTheme.themeData,
-      initialRoute: AppRoutes.dashboardScreen,
+      initialRoute: AppRoutes.loginScreen,
       navigatorKey: AppConstants.navigationKey,
       routes: {
         AppRoutes.loginScreen: (_) => const LoginPage(),
