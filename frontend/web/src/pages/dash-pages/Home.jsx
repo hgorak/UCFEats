@@ -22,6 +22,7 @@ function Home() {
 	const { currentUser } = useContext(AuthContext);
 	const [recentEats, setRecentEats] = useState([]);
 	const [goals, setGoals] = useState([0, 0, 0, 0]);
+	const [hasGoals, setHasGoals] = useState(false);
 	const [currentMacros, setCurrentMacros] = useState([0, 0, 0, 0]);
 	const [progress, setProgress] = useState([0, 0, 0, 0]);
 	const [error, setError] = useState("");
@@ -39,7 +40,9 @@ function Home() {
 	useEffect(() => {
 		getRecentEats();
 		getMacroData();
-		setLoading(false);
+
+		setTimeout(() => setLoading(false), 1000);
+		// setLoading(false);
 	}, []);
 
 	const getMacroData = async () => {
@@ -70,6 +73,8 @@ function Home() {
 			console.log(goalJson.error);
 		} else {
 			setGoals(goalJson);
+
+			if (goalJson.some((item) => item !== 0)) setHasGoals(true);
 		}
 
 		let diff = [];
@@ -105,83 +110,94 @@ function Home() {
 		<div className="home">
 			<div className="charts">
 				<div className="charts-hero">
-					{loading ? (
-						<div>loading</div>
-					) : (
-						<div className="goals">
-							<div className="progress-bar">
-								<CircularProgressbarWithChildren
-									value={currentMacros[0]}
-									maxValue={goals[0]}
-									styles={buildStyles({
-										// textSize: "10px",
-										// textColor: progress[0] <= 0 ? "#28a745" : "",
-										pathColor: progress[0] <= 0 ? "#28a745" : "",
-									})}
-								>
-									<div className="dial-content">
-										<strong>{Math.abs(progress[0])}</strong>
-										<br></br>
-										{progress[0] > 0 ? "Remaining" : "Over"}
+					{!loading ? (
+						<div>
+							{!hasGoals ? (
+								<div className="no-goals">
+									<h2>Time to set some goals!</h2>
+									<Link to="/dashboard/goals">
+										<button>SET GOALS</button>
+									</Link>
+								</div>
+							) : (
+								<div className="goals">
+									<div className="progress-bar">
+										<CircularProgressbarWithChildren
+											value={currentMacros[0]}
+											maxValue={goals[0]}
+											styles={buildStyles({
+												// textSize: "10px",
+												// textColor: progress[0] <= 0 ? "#28a745" : "",
+												pathColor: progress[0] <= 0 ? "#28a745" : "",
+											})}
+										>
+											<div className="dial-content">
+												<strong>{Math.abs(progress[0])}</strong>
+												<br></br>
+												{progress[0] > 0 ? "Remaining" : "Over"}
+											</div>
+										</CircularProgressbarWithChildren>
+										<span>Calories</span>
 									</div>
-								</CircularProgressbarWithChildren>
-								<span>Calories</span>
-							</div>
-							<div className="progress-bar">
-								<CircularProgressbarWithChildren
-									value={currentMacros[2]}
-									maxValue={goals[2]}
-									styles={buildStyles({
-										textSize: "10px",
-										textColor: progress[2] <= 0 ? "#28a745" : "",
-										pathColor: progress[2] <= 0 ? "#28a745" : "",
-									})}
-								>
-									<div className="dial-content">
-										<strong>{Math.abs(progress[2])}g</strong>
-										<br></br>
-										{progress[2] > 0 ? "Remaining" : "Over"}
+									<div className="progress-bar">
+										<CircularProgressbarWithChildren
+											value={currentMacros[2]}
+											maxValue={goals[2]}
+											styles={buildStyles({
+												textSize: "10px",
+												textColor: progress[2] <= 0 ? "#28a745" : "",
+												pathColor: progress[2] <= 0 ? "#28a745" : "",
+											})}
+										>
+											<div className="dial-content">
+												<strong>{Math.abs(progress[2])}g</strong>
+												<br></br>
+												{progress[2] > 0 ? "Remaining" : "Over"}
+											</div>
+										</CircularProgressbarWithChildren>
+										<span>Carbs</span>
 									</div>
-								</CircularProgressbarWithChildren>
-								<span>Carbs</span>
-							</div>
-							<div className="progress-bar">
-								<CircularProgressbarWithChildren
-									value={currentMacros[3]}
-									maxValue={goals[3]}
-									styles={buildStyles({
-										textSize: "10px",
-										textColor: progress[3] <= 0 ? "#28a745" : "",
-										pathColor: progress[3] <= 0 ? "#28a745" : "",
-									})}
-								>
-									<div className="dial-content">
-										<strong>{Math.abs(progress[3])}g</strong>
-										<br></br>
-										{progress[3] > 0 ? "Remaining" : "Over"}
+									<div className="progress-bar">
+										<CircularProgressbarWithChildren
+											value={currentMacros[3]}
+											maxValue={goals[3]}
+											styles={buildStyles({
+												textSize: "10px",
+												textColor: progress[3] <= 0 ? "#28a745" : "",
+												pathColor: progress[3] <= 0 ? "#28a745" : "",
+											})}
+										>
+											<div className="dial-content">
+												<strong>{Math.abs(progress[3])}g</strong>
+												<br></br>
+												{progress[3] > 0 ? "Remaining" : "Over"}
+											</div>
+										</CircularProgressbarWithChildren>
+										<span>Protein</span>
 									</div>
-								</CircularProgressbarWithChildren>
-								<span>Protein</span>
-							</div>
-							<div className="progress-bar">
-								<CircularProgressbarWithChildren
-									value={currentMacros[1]}
-									maxValue={goals[1]}
-									styles={buildStyles({
-										textSize: "10px",
-										textColor: progress[1] <= 0 ? "#28a745" : "",
-										pathColor: progress[1] <= 0 ? "#28a745" : "",
-									})}
-								>
-									<div className="dial-content">
-										<strong>{Math.abs(progress[1])}g</strong>
-										<br></br>
-										{progress[1] > 0 ? "Remaining" : "Over"}
+									<div className="progress-bar">
+										<CircularProgressbarWithChildren
+											value={currentMacros[1]}
+											maxValue={goals[1]}
+											styles={buildStyles({
+												textSize: "10px",
+												textColor: progress[1] <= 0 ? "#28a745" : "",
+												pathColor: progress[1] <= 0 ? "#28a745" : "",
+											})}
+										>
+											<div className="dial-content">
+												<strong>{Math.abs(progress[1])}g</strong>
+												<br></br>
+												{progress[1] > 0 ? "Remaining" : "Over"}
+											</div>
+										</CircularProgressbarWithChildren>
+										<span>Fats</span>
 									</div>
-								</CircularProgressbarWithChildren>
-								<span>Fats</span>
-							</div>
+								</div>
+							)}
 						</div>
+					) : (
+						<div></div>
 					)}
 				</div>
 				<div className="chart">
