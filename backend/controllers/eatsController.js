@@ -179,10 +179,12 @@ const deleteEat = async (req, res) => {
 /* Eats by Time Period */
 const dayEats = async (req, res) => {
   let start = new Date();
-  start.setHours(0,0,0,0);
+  start.setHours(5, 0, 0, 0);
+  start.setMinutes(start.getMinutes()); // Adjust for UTC-5
 
   let end = new Date();
-  end.setHours(23,59,59,999);
+  end.setHours(23, 59, 59, 999);
+  end.setMinutes(end.getMinutes()); // Adjust for UTC-5
   
   const eats = await EatsList.find({user_id: req.user._id, updatedAt: {$gte: start, $lt: end}}).sort({updatedAt: 1});
 
