@@ -21,7 +21,7 @@ function Verification() {
 			if (response.ok) {
 				setVerified(true);
 
-				setTimeout(() => navigate("/loading"), 3000);
+				setTimeout(() => navigate("/auth/login"), 3000);
 			}
 
 			setLoading(false);
@@ -40,8 +40,8 @@ function Verification() {
 				<div className="auth-header">
 					<h1>Email Verified</h1>
 					<span>
-						Redirecting you to your dashboard now. Click <Link to="/loading">here</Link>{" "}
-						if you are not redirected automatically.
+						Redirecting you to log in now. Click <Link to="/login">here</Link> if you
+						are not redirected automatically.
 					</span>
 				</div>
 			</VerifiedBox>
