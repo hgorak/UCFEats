@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../api.js";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "../styles.scss";
 
-const navigate = Navigate();
+const navigate = useNavigate();
 
 function VerifiedBox({ children }) {
 	const [show, setShow] = useState(true);
