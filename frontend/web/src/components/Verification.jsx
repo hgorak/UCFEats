@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../api.js";
+import VerifiedBox from "./VerifiedBox.jsx";
 
 import "../styles.scss";
 
@@ -32,14 +33,15 @@ function Verification() {
 
 	if (verified) {
 		return (
-			<div className="forgot-box forgot-box-sent">
+			<VerifiedBox>
 				<div className="auth-header">
 					<h1>Email Verified</h1>
 					<span>
-						Let's use your new account! <Link to="/auth/login">Log in</Link>
+						Redirecting you to your dashboard now. Click <Link to="/loading">here</Link>{" "}
+						if you are not redirected automatically.
 					</span>
 				</div>
-			</div>
+			</VerifiedBox>
 		);
 	} else {
 		return (
