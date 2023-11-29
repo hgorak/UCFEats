@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../../api.js";
 import VerifiedBox from "./VerifiedBox.jsx";
 
@@ -10,6 +10,7 @@ function Verification() {
 	const [verified, setVerified] = useState(false);
 	const [loading, setLoading] = useState(true);
 
+	const navigate = useNavigate();
 	useEffect(() => {
 		const verifyEmail = async () => {
 			const response = await fetch(API_URL + "/api/user/verification/" + verificationToken, {
@@ -19,6 +20,8 @@ function Verification() {
 
 			if (response.ok) {
 				setVerified(true);
+
+				setTimeout(() => navigate("/auth/login"), 3000);
 			}
 
 			setLoading(false);
@@ -37,8 +40,8 @@ function Verification() {
 				<div className="auth-header">
 					<h1>Email Verified</h1>
 					<span>
-						Redirecting you to your dashboard now. Click <Link to="/loading">here</Link>{" "}
-						if you are not redirected automatically.
+						Redirecting you to log in now. Click <Link to="/login">here</Link> if you
+						are not redirected automatically.
 					</span>
 				</div>
 			</VerifiedBox>
