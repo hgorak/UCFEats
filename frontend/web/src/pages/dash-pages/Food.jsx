@@ -7,23 +7,35 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaRegHeart } from "react-icons/fa";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 
 import { API_URL } from "../../../api.js";
-import "../../styles.scss";
 
 function Food() {
 	const { currentUser } = useContext(AuthContext);
 	const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
 	const [showAlert, setShowAlert] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
-	const [alertVariant, setAlertVariant] = useState("");
+	const [alerts, setAlerts] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 	const [allItems, setAllItems] = useState([]);
 
 	useEffect(() => {
 		fetchRawItems();
-	}, []);
+
+		// Automatically hide toasts after a delay
+		const hideAlerts = () => {
+			setTimeout(() => {
+				setAlerts((prevAlerts) => prevAlerts.slice(1));
+			}, 3000); // Adjust the delay (in milliseconds) as needed
+		};
+
+		if (alerts.length > 0) {
+			hideAlerts();
+		}
+	}, [alerts]);
 
 	const fetchRawItems = async () => {
 		const response = await fetch(API_URL + "/api/items/all", {
@@ -65,55 +77,25 @@ function Food() {
 			setAlertVariant("danger");
 			setAlertMessage(json.error);
 			setShowAlert(true);
-
-			window.setTimeout(() => {
-				setShowAlert(false);
-			}, 3000);
 		}
 
 		if (response.ok) {
-			setAlertVariant("success");
-			setAlertMessage(itemName + " added!");
-			setShowAlert(true);
+			// setAlertVariant("success");
+			// setAlertMessage(itemName + " added!");
 
-			window.setTimeout(() => {
-				setShowAlert(false);
-			}, 3000);
+			const newAlert = {
+				id: Date.now(),
+				title: "Eat Recorded!",
+				body: itemName + " has been added!",
+			};
+
+			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
 		}
 	};
 
-	// favorite or unfavorite an item
-	// const toggleFavorite = (foodItemId, isCurrentlyFavorite) => {
-	// 	const updatedFoodItems = restaurantItems.map(([restaurant, items]) =>
-	// 		item.id === foodItemId ? { ...item, isFavorite: !isCurrentlyFavorite } : item
-	// 	);
-
-	// 	// Update the local state
-	// 	setRestaurantItems(updatedFoodItems);
-
-	// 	// Update the server or API with the new favorite status
-	// 	if (!isCurrentlyFavorite) {
-	// 		// If not currently favorite, add to favorites
-	// 		fetch(API_URL + "/api/eats/favorite", {
-	// 			method: "POST",
-	// 			headers: {
-	// 				"Content-Type": "application/json",
-	// 			},
-	// 			body: JSON.stringify({ foodItemId }),
-	// 		})
-	// 			.then((response) => response.json())
-	// 			.then((data) => console.log("Added to favorites:", data))
-	// 			.catch((error) => console.error("Error adding to favorites:", error));
-	// 	} else {
-	// 		// If currently favorite, remove from favorites
-	// 		fetch(API_URL + "/api/eats/favorite", {
-	// 			method: "DELETE",
-	// 		})
-	// 			.then((response) => response.json())
-	// 			.then((data) => console.log("Removed from favorites:", data))
-	// 			.catch((error) => console.error("Error removing from favorites:", error));
-	// 	}
-	// };
+	const handleCloseAlert = (id) => {
+		setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
+	};
 
 	const handleSearch = (query) => {
 		const filteredResults = allItems.filter((item) =>
@@ -139,9 +121,35 @@ function Food() {
 					<span>All of UCF's food options. All in one place.</span>
 				</div>
 			</div>
-			<Alert show={showAlert} variant={alertVariant}>
+			{/* <Alert show={showAlert} variant={alertVariant}>
 				{alertMessage}
-			</Alert>
+			</Alert> */}
+			<ToastContainer
+				position="top-end"
+				className="p-3"
+				style={{
+					position: "fixed",
+					top: "10px",
+					right: "10px",
+					// marginTop: `${alerts.length * 60}px`, // Adjust the margin to stack toasts
+				}}
+			>
+				{alerts.map((alert) => (
+					<Toast
+						key={alert.id}
+						show
+						onClose={() => handleCloseAlert(alert.id)}
+						delay={3000}
+						autohide
+						className="toast-slide"
+					>
+						<Toast.Header>
+							<strong className="me-auto">{alert.title}</strong>
+						</Toast.Header>
+						<Toast.Body>{alert.body}</Toast.Body>
+					</Toast>
+				))}
+			</ToastContainer>
 			<input class="search-bar" onChange={handleChange}></input>
 			{!searchQuery ? (
 				<Accordion>
