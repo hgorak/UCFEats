@@ -852,7 +852,21 @@ body {
                         justify-content: center;
                         width: 100%;
                         gap: 20px;
-                                      
+                        
+                        .toast-slide {
+                            transform: translateY(0);
+                            transition: transform 0.5s ease-in-out;
+                            
+                            .toast-enter {
+                                transform: translateY(100%);
+                            }
+                              
+                            .toast-exit {
+                                transform: translateY(0);
+                            }
+                          }
+                          
+                          
                         .food-header {
                             display: flex;
                             flex-direction: row;
@@ -984,6 +998,7 @@ body {
                                 }
                             }
                         }
+                              
                     }
 
                     .goals {

@@ -11,7 +11,6 @@ import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 
 import { API_URL } from "../../../api.js";
-import "../../styles.scss";
 
 function Food() {
 	const { currentUser } = useContext(AuthContext);
@@ -86,8 +85,8 @@ function Food() {
 
 			const newAlert = {
 				id: Date.now(),
-				title: "New Toast",
-				body: "This is a new toast notification.",
+				title: "Eat Recorded!",
+				body: itemName + " has been added!",
 			};
 
 			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
@@ -95,7 +94,7 @@ function Food() {
 	};
 
 	const handleCloseAlert = (id) => {
-		setToasts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
+		setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
 	};
 
 	const handleSearch = (query) => {
@@ -142,6 +141,7 @@ function Food() {
 						onClose={() => handleCloseAlert(alert.id)}
 						delay={3000}
 						autohide
+						className="toast-slide"
 					>
 						<Toast.Header>
 							<strong className="me-auto">{alert.title}</strong>
