@@ -32,8 +32,7 @@ function Home() {
 	useEffect(() => {
 		getRecentEats();
 		getMacroData();
-
-		setTimeout(() => setLoading(false), 1000);
+		setTimeout(() => setLoading(false), 500);
 		// setLoading(false);
 	}, []);
 
@@ -47,11 +46,15 @@ function Home() {
 		});
 
 		const macroJson = await macroResponse.json();
+		var chartMacros = JSON.parse(JSON.stringify(macroJson));
 
 		if (!macroResponse.ok) {
 			console.log(macroJson.error);
 		} else {
+			console.log("macros: " + macroJson);
 			setCurrentMacros(macroJson);
+			chartMacros.shift();
+			setChartData(chartMacros);
 		}
 
 		const goalResponse = await fetch(API_URL + "/api/eats/macroGoals", {
@@ -67,9 +70,9 @@ function Home() {
 		if (!goalResponse.ok) {
 			console.log(goalJson.error);
 		} else {
-			setGoals(goalJson);
-
 			if (goalJson.some((item) => item !== 0)) setHasGoals(true);
+			setGoals(goalJson);
+			console.log("goals: " + goalJson);
 		}
 
 		let diff = [];
@@ -77,8 +80,6 @@ function Home() {
 		for (var i = 0; i < macroJson.length; i++)
 			diff.push(Math.round(goalJson[i] - macroJson[i]));
 
-		macroJson.shift();
-		setChartData(macroJson);
 		setProgress(diff);
 	};
 

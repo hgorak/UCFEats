@@ -134,7 +134,7 @@ function Register() {
 							</Form.Control.Feedback>
 						</FloatingLabel>
 					</Form.Group>
-					<button type="submit">Log In</button>
+					<button type="submit">Register</button>
 					<Form.Text>
 						<Link to="/auth/login">
 							<span>Have an account?</span>
