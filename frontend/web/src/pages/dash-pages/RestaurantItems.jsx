@@ -19,7 +19,15 @@ function RestaurantItems() {
 	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
-		fetchItems();
+		if (restaurantName === "favorites") {
+			fetchFavorites();
+			console.log("in favorites)");
+		} else fetchItems();
+
+		// setTimeout(() => {
+		// 	setLoading(false);
+		// }, 5000); // Adjust the delay (in milliseconds) as needed
+		setLoading(false);
 
 		const hideAlerts = () => {
 			setTimeout(() => {
@@ -30,8 +38,48 @@ function RestaurantItems() {
 		if (alerts.length > 0) {
 			hideAlerts();
 		}
-		setLoading(false);
-	}, [alerts]);
+	}, [restaurantName]);
+
+	const fetchFavorites = async () => {
+		const response = await fetch(API_URL + "/api/items/all", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+		});
+
+		const allItems = await response.json();
+
+		if (!response.ok) {
+			console.log("ERROR IN FETCHING ALL");
+		}
+
+		if (response.ok) {
+			const response = await fetch(API_URL + "/api/eats/favorite", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/JSON",
+					Authorization: "Bearer " + currentUser.token,
+				},
+			});
+
+			const favoriteIDs = await response.json();
+			console.log(favoriteIDs);
+
+			if (!response.ok) {
+				console.log("ERROR IN FETCHING favorites");
+			}
+
+			if (response.ok) {
+				let favoriteItems = allItems.filter((item) => favoriteIDs.includes(item._id));
+				favoriteItems.forEach((item) => {
+					item.favorited = true;
+				});
+				setItems(favoriteItems);
+			}
+		}
+	};
 
 	const fetchItems = async () => {
 		const response = await fetch(API_URL + "/api/items/", {
@@ -215,75 +263,83 @@ function RestaurantItems() {
 				))}
 			</ToastContainer>
 			<input class="search-bar" onChange={handleChange}></input>
-			<div className="grid-container">
-				{searchQuery ? (
-					<>
-						{searchResults.map((item, index) => (
-							<div className="item">
-								<strong>{item.Name}</strong>
-								<p>Calories: {item.Calories}</p>
-								<p>Carbs: {item.Carbs}g</p>
-								<p>Protein: {item.Protein}g</p>
-								<p>Fat: {item.Fat}g</p>
-								<div>
-									<IconContext.Provider value={{ color: "black", size: "25px" }}>
-										<button
-											onClick={() => {
-												addEat(index);
-											}}
-											className="add"
+			{loading ? (
+				<div>LOADINGGN</div>
+			) : (
+				<div className="grid-container">
+					{searchQuery ? (
+						<>
+							{searchResults.map((item, index) => (
+								<div className="item">
+									<strong>{item.Name}</strong>
+									<p>Calories: {item.Calories}</p>
+									<p>Carbs: {item.Carbs}g</p>
+									<p>Protein: {item.Protein}g</p>
+									<p>Fat: {item.Fat}g</p>
+									<div>
+										<IconContext.Provider
+											value={{ color: "black", size: "25px" }}
 										>
-											<AiOutlinePlus />
-										</button>
-										<button
-											onClick={() => {
-												item.favorited = !item.favorited;
-												handleFavorite(!item.favorited, index);
-											}}
-											className="add"
-										>
-											{item.favorited ? <FaHeart /> : <FaRegHeart />}
-										</button>
-									</IconContext.Provider>
+											<button
+												onClick={() => {
+													addEat(index);
+												}}
+												className="add"
+											>
+												<AiOutlinePlus />
+											</button>
+											<button
+												onClick={() => {
+													item.favorited = !item.favorited;
+													handleFavorite(!item.favorited, index);
+												}}
+												className="add"
+											>
+												{item.favorited ? <FaHeart /> : <FaRegHeart />}
+											</button>
+										</IconContext.Provider>
+									</div>
 								</div>
-							</div>
-						))}
-					</>
-				) : (
-					<>
-						{items.map((item, index) => (
-							<div className="item">
-								<strong>{item.Name}</strong>
-								<p>Calories: {item.Calories}</p>
-								<p>Carbs: {item.Carbs}g</p>
-								<p>Protein: {item.Protein}g</p>
-								<p>Fat: {item.Fat}g</p>
-								<div>
-									<IconContext.Provider value={{ color: "black", size: "25px" }}>
-										<button
-											onClick={() => {
-												addEat(index);
-											}}
-											className="add"
+							))}
+						</>
+					) : (
+						<>
+							{items.map((item, index) => (
+								<div className="item">
+									<strong>{item.Name}</strong>
+									<p>Calories: {item.Calories}</p>
+									<p>Carbs: {item.Carbs}g</p>
+									<p>Protein: {item.Protein}g</p>
+									<p>Fat: {item.Fat}g</p>
+									<div>
+										<IconContext.Provider
+											value={{ color: "black", size: "25px" }}
 										>
-											<AiOutlinePlus />
-										</button>
-										<button
-											onClick={() => {
-												item.favorited = !item.favorited;
-												handleFavorite(!item.favorited, index);
-											}}
-											className="add"
-										>
-											{item.favorited ? <FaHeart /> : <FaRegHeart />}
-										</button>
-									</IconContext.Provider>
+											<button
+												onClick={() => {
+													addEat(index);
+												}}
+												className="add"
+											>
+												<AiOutlinePlus />
+											</button>
+											<button
+												onClick={() => {
+													item.favorited = !item.favorited;
+													handleFavorite(!item.favorited, index);
+												}}
+												className="add"
+											>
+												{item.favorited ? <FaHeart /> : <FaRegHeart />}
+											</button>
+										</IconContext.Provider>
+									</div>
 								</div>
-							</div>
-						))}
-					</>
-				)}
-			</div>
+							))}
+						</>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }

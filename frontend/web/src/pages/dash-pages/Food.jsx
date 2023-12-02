@@ -278,6 +278,9 @@ function Food() {
 	return (
 		<div className="food">
 			<div className="restaurants">
+				<NavLink to="/dashboard/food/favorites">
+					<button className="restaurant-container">Favorites</button>
+				</NavLink>
 				{restaurants.map((restaurant) => (
 					<NavLink to={`/dashboard/food/${restaurant.Name}`}>
 						<button className="restaurant-container">{restaurant.Name}</button>
