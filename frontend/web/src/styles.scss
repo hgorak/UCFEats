@@ -875,6 +875,25 @@ body {
 
                         .items {
                             flex: 3;
+                            display: flex;
+                            flex-direction: column;
+                            // justify-content: center;
+                            align-items: center;
+
+                            .grid-container {
+                                display: grid;
+                                grid-template-columns: repeat(3, 1fr);
+                                gap: 16px; /* Adjust as needed */
+
+                                .item {
+                                    background-color: $nearly-white;
+                                    height: 250px;
+                                    width: 250px;
+                                    border-radius: 20px;
+                                    padding: 10px;
+                                }   
+                            }
+                            
                         }
                         
                         // .toast-slide {

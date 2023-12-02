@@ -12,6 +12,7 @@ import Loading from "./components/Loading.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/dash-pages/Home.jsx";
 import Food from "./pages/dash-pages/Food.jsx";
+import RestaurantItems from "./pages/dash-pages/RestaurantItems.jsx";
 import Goals from "./pages/dash-pages/Goals.jsx";
 import Favorites from "./pages/dash-pages/Favorites.jsx";
 import Error from "./components/Error.jsx";
@@ -63,7 +64,12 @@ function App() {
 							element={currentUser ? <Dashboard /> : <Navigate to="/" />}
 						>
 							<Route path="/dashboard/" element={<Home />} />
-							<Route path="/dashboard/food" element={<Food />} />
+							<Route path="/dashboard/food" element={<Food />}>
+								<Route
+									path="/dashboard/food/:restaurantName"
+									element={<RestaurantItems />}
+								/>
+							</Route>
 							<Route path="/dashboard/favorites" element={<Favorites />} />
 							<Route path="/dashboard/goals" element={<Goals />} />
 						</Route>

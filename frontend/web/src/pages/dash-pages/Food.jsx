@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
@@ -158,6 +158,7 @@ function Food() {
 	const addEat = async (items, itemIndex) => {
 		const itemName = items[itemIndex].Name;
 		console.log(itemName);
+
 		const response = await fetch(API_URL + "/api/eats/add", {
 			method: "POST",
 			headers: {
@@ -278,10 +279,14 @@ function Food() {
 		<div className="food">
 			<div className="restaurants">
 				{restaurants.map((restaurant) => (
-					<div className="restaurant-container">{restaurant.Name}</div>
+					<NavLink to={`/dashboard/food/${restaurant.Name}`}>
+						<button className="restaurant-container">{restaurant.Name}</button>
+					</NavLink>
 				))}
 			</div>
-			<Outlet />
+			<div className="items">
+				<Outlet context={AuthContext} />
+			</div>
 		</div>
 	);
 	// old restaurants page
