@@ -93,6 +93,36 @@ function Food() {
 		}
 	};
 
+	const addFavorite = async (items, itemIndex) => {
+		const itemName = items[itemIndex].Name;
+		console.log(itemName);
+
+		const response = await fetch(API_URL + "/api/eats/favorite", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({ name: itemName }),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		}
+
+		if (response.ok) {
+			const newAlert = {
+				id: Date.now(),
+				title: "Eat Favorited!",
+				body: itemName + " has been favorited!",
+			};
+
+			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+		}
+	};
+
 	const handleCloseAlert = (id) => {
 		setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
 	};
@@ -189,9 +219,9 @@ function Food() {
 															<AiOutlinePlus />
 														</button>
 														<button
-															// onClick={() => {
-															// 	addEat(items, itemIndex);
-															// }}
+															onClick={() => {
+																addFavorite(items, itemIndex);
+															}}
 															className="add"
 														>
 															<FaRegHeart />
