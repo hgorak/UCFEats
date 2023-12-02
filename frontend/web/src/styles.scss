@@ -848,156 +848,180 @@ body {
 
                     .food {
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
                         justify-content: center;
                         width: 100%;
                         gap: 20px;
-                        
-                        .toast-slide {
-                            transform: translateY(0);
-                            transition: transform 0.5s ease-in-out;
-                            
-                            .toast-enter {
-                                transform: translateY(100%);
-                            }
-                              
-                            .toast-exit {
-                                transform: translateY(0);
-                            }
-                          }
-                          
-                          
-                        .food-header {
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            justify-content: center;
-                            height: 40vh;
 
-                            .food-hero {
+                        .restaurants {
+                            height: 100%;
+                            flex: 1;
+                            gap: 20px;
+                            display: flex;
+                            flex-direction: column;
+
+                            .restaurant-container {
+                                overflow: auto;
+                                width: 100%;
+                                height: 100px;
                                 display: flex;
                                 flex-direction: column;
-                                background-image: linear-gradient(to top right, $primary-color, #E09E34);
-                                width: 60%;
-                                height: 90%;
-                                border-radius: 25px;
                                 justify-content: center;
                                 align-items: center;
-                                color: $nearly-white;
+                                background-color: $nearly-white;
+                                border-radius: 20px;
+                            }
+                        }
 
-                                h2 {
-                                    font-size: 3rem;
-                                }
-                            }
-                            
-                            h1 {
-                                font-weight: 300;
-                                font-size: 48px;
-                                margin: 10px;
-                                margin-left: 0px;
-                            }
-
-                            input {
-                                padding-left: 20px;
-                                border: none;
-                                height: 50px;
-                                width: 200px;
-                                border-radius: 25px;
-                            }
+                        .items {
+                            flex: 3;
                         }
                         
-                        .search-bar {
-                            background-color: $nearly-white;
-                            border: none;
-                            align-self: first baseline;
-                            width: 30%;
-                            height: 40px;
-                            border-radius: 25px;
-                            padding-left: 20px;
-                        }
+                        // .toast-slide {
+                        //     transform: translateY(0);
+                        //     transition: transform 0.5s ease-in-out;
+                            
+                        //     .toast-enter {
+                        //         transform: translateY(100%);
+                        //     }
+                              
+                        //     .toast-exit {
+                        //         transform: translateY(0);
+                        //     }
+                        //   }
+                          
+                          
+                        // .food-header {
+                        //     display: flex;
+                        //     flex-direction: row;
+                        //     align-items: center;
+                        //     justify-content: center;
+                        //     height: 40vh;
 
-                        .accordion {
-                            margin-bottom: 50px;
-                            border-radius: 25px;
+                        //     .food-hero {
+                        //         display: flex;
+                        //         flex-direction: column;
+                        //         background-image: linear-gradient(to top right, $primary-color, #E09E34);
+                        //         width: 60%;
+                        //         height: 90%;
+                        //         border-radius: 25px;
+                        //         justify-content: center;
+                        //         align-items: center;
+                        //         color: $nearly-white;
 
-                            .accordion-header {
-                                font-weight: 300;
-                                background-color: $secondary-color;
-                            }
+                        //         h2 {
+                        //             font-size: 3rem;
+                        //         }
+                        //     }
+                            
+                        //     h1 {
+                        //         font-weight: 300;
+                        //         font-size: 48px;
+                        //         margin: 10px;
+                        //         margin-left: 0px;
+                        //     }
 
-                            .accordion-body {
+                        //     input {
+                        //         padding-left: 20px;
+                        //         border: none;
+                        //         height: 50px;
+                        //         width: 200px;
+                        //         border-radius: 25px;
+                        //     }
+                        // }
+                        
+                        // .search-bar {
+                        //     background-color: $nearly-white;
+                        //     border: none;
+                        //     align-self: first baseline;
+                        //     width: 30%;
+                        //     height: 40px;
+                        //     border-radius: 25px;
+                        //     padding-left: 20px;
+                        // }
 
-                                .food-table {
-                                    width: 100%;
-                                    justify-self: center;
-                                    align-self: center;
-                                    border-spacing: 50px 0px;
+                        // .accordion {
+                        //     margin-bottom: 50px;
+                        //     border-radius: 25px;
 
-                                    th,
-                                    td {
-                                        padding: 10px;
-                                    }
+                        //     .accordion-header {
+                        //         font-weight: 300;
+                        //         background-color: $secondary-color;
+                        //     }
 
-                                    .name {
-                                        width: 40%;
-                                    }
+                        //     .accordion-body {
 
-                                    .price {
-                                        width: 10%;
-                                    }
+                        //         .food-table {
+                        //             width: 100%;
+                        //             justify-self: center;
+                        //             align-self: center;
+                        //             border-spacing: 50px 0px;
 
-                                    .calories {
-                                        width: 10%
-                                    }
+                        //             th,
+                        //             td {
+                        //                 padding: 10px;
+                        //             }
 
-                                    .protein {
-                                        width: 10%
-                                    }
+                        //             .name {
+                        //                 width: 40%;
+                        //             }
 
-                                    .carbs {
-                                        width: 10%
-                                    }
+                        //             .price {
+                        //                 width: 10%;
+                        //             }
 
-                                    .fats {
-                                        width: 10%
-                                    }
+                        //             .calories {
+                        //                 width: 10%
+                        //             }
 
-                                    .buttons {
-                                        width: 5%;
-                                        display: flex;
-                                        flex-direction: row;
-                                        gap: 5px;
+                        //             .protein {
+                        //                 width: 10%
+                        //             }
 
-                                        button {
-                                            border: none;
-                                            background-color: white;
-                                        }
+                        //             .carbs {
+                        //                 width: 10%
+                        //             }
+
+                        //             .fats {
+                        //                 width: 10%
+                        //             }
+
+                        //             .buttons {
+                        //                 width: 5%;
+                        //                 display: flex;
+                        //                 flex-direction: row;
+                        //                 gap: 5px;
+
+                        //                 button {
+                        //                     border: none;
+                        //                     background-color: white;
+                        //                 }
                                         
-                                        .add:hover {
-                                            background-color: #e6e6e6;
-                                            border-radius: 5px;
-                                        }
-                                    }
+                        //                 .add:hover {
+                        //                     background-color: #e6e6e6;
+                        //                     border-radius: 5px;
+                        //                 }
+                        //             }
 
 
-                                }
-                            }
-                        }
+                        //         }
+                        //     }
+                        // }
 
-                        .list-group-item {
-                            background-color: $nearly-white;
+                        // .list-group-item {
+                        //     background-color: $nearly-white;
 
-                            .item {
-                                display: flex;
-                                flex-direction: row;
-                                justify-content: space-between;
+                        //     .item {
+                        //         display: flex;
+                        //         flex-direction: row;
+                        //         justify-content: space-between;
 
-                                .subheading {
-                                    display: flex;
-                                    flex-direction: column;
-                                }
-                            }
-                        }
+                        //         .subheading {
+                        //             display: flex;
+                        //             flex-direction: column;
+                        //         }
+                        //     }
+                        // }
                               
                     }
 
