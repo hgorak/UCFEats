@@ -200,6 +200,40 @@ function Food() {
 		}
 	};
 
+	const deleteFavorite = async (items, itemIndex) => {
+		const itemName = items[itemIndex].Name;
+		console.log(itemName);
+
+		const response = await fetch(API_URL + "/api/eats/favorite", {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({ name: itemName }),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		}
+
+		if (response.ok) {
+			const newAlert = {
+				id: Date.now(),
+				title: "Eat Unfavorited!",
+				body: itemName + " has been removed from favorites!",
+			};
+
+			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+		}
+	};
+
+	const handleFavorite = (favorited, items, itemIndex) => {
+		favorited ? deleteFavorite(items, itemIndex) : addFavorite(items, itemIndex);
+	};
+
 	const handleCloseAlert = (id) => {
 		setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
 	};
@@ -300,7 +334,11 @@ function Food() {
 														<button
 															onClick={() => {
 																item.favorited = !item.favorited;
-																addFavorite(items, itemIndex);
+																handleFavorite(
+																	!item.favorited,
+																	items,
+																	itemIndex
+																);
 															}}
 															className="add"
 														>
