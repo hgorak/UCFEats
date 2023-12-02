@@ -6,7 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import ListGroup from "react-bootstrap/ListGroup";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 
@@ -75,6 +75,17 @@ function Food() {
 		}
 
 		if (restaurantResponse.ok) {
+			const favoritesResponse = await fetch(API_URL + "/api/eats/favorite", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/JSON",
+					Authorization: "Bearer " + currentUser.token,
+				},
+			});
+
+			const favoriteIDs = await favoritesResponse.json();
+			console.log(favoriteIDs);
+
 			const promises = restaurants.map(async (restaurant) => {
 				const itemResponse = await fetch(API_URL + "/api/items/", {
 					method: "POST",
@@ -89,10 +100,16 @@ function Food() {
 
 				const items = await itemResponse.json();
 
+				items.forEach((item) => {
+					item.favorited = favoriteIDs.includes(item._id);
+				});
+
 				return { restaurant: restaurant, items: items };
 			});
 
 			const results = await Promise.all(promises);
+
+			console.log(results);
 
 			// Now 'results' array will have the items in the original order
 			const restaurantItemsMap = new Map(
@@ -251,7 +268,7 @@ function Food() {
 									<thead>
 										<th>Name</th>
 										<th>Calories</th>
-										<th>Price</th>
+										<th>Favorited</th>
 										<th>Protein</th>
 										<th>Carbohydrates</th>
 										<th>Fats</th>
@@ -262,7 +279,9 @@ function Food() {
 											<tr>
 												<td className="name">{item.Name}</td>
 												<td className="calories">{item.Calories}</td>
-												<td className="price">${item.Price}</td>
+												<td className="price">
+													{item.favorited ? "true" : "false"}
+												</td>
 												<td className="protein">{item.Protein}g</td>
 												<td className="carbs">{item.Carbs}g</td>
 												<td className="fats">{item.Fat}g</td>
@@ -280,11 +299,16 @@ function Food() {
 														</button>
 														<button
 															onClick={() => {
+																item.favorited = !item.favorited;
 																addFavorite(items, itemIndex);
 															}}
 															className="add"
 														>
-															<FaRegHeart />
+															{item.favorited ? (
+																<FaHeart />
+															) : (
+																<FaRegHeart />
+															)}
 														</button>
 													</IconContext.Provider>
 												</td>
