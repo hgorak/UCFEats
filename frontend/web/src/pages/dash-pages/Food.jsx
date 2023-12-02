@@ -6,7 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import ListGroup from "react-bootstrap/ListGroup";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 
@@ -14,7 +14,8 @@ import { API_URL } from "../../../api.js";
 
 function Food() {
 	const { currentUser } = useContext(AuthContext);
-	const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
+	//const { restaurantItems, setRestaurantItems } = useContext(ItemsContext);
+	const [restaurantItems, setRestaurantItems] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alerts, setAlerts] = useState([]);
@@ -23,6 +24,7 @@ function Food() {
 	const [allItems, setAllItems] = useState([]);
 
 	useEffect(() => {
+		fetchRestaurants();
 		fetchRawItems();
 
 		// Automatically hide toasts after a delay
@@ -54,6 +56,81 @@ function Food() {
 
 		if (response.ok) {
 			setAllItems(json);
+		}
+	};
+
+	const fetchRestaurants = async (event) => {
+		const restaurantResponse = await fetch(API_URL + "/api/stores/all", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+		});
+
+		const restaurants = await restaurantResponse.json();
+
+		if (!restaurantResponse.ok) {
+			console.log("ERROR: failed to fetch restaurants");
+		}
+
+		if (restaurantResponse.ok) {
+			const favoritesResponse = await fetch(API_URL + "/api/eats/favorite", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/JSON",
+					Authorization: "Bearer " + currentUser.token,
+				},
+			});
+
+			const favoriteIDs = await favoritesResponse.json();
+			console.log(favoriteIDs);
+
+			const promises = restaurants.map(async (restaurant) => {
+				const itemResponse = await fetch(API_URL + "/api/items/", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/JSON",
+						Authorization: "Bearer " + currentUser.token,
+					},
+					body: JSON.stringify({
+						name: restaurant.Name,
+					}),
+				});
+
+				const items = await itemResponse.json();
+
+				items.forEach((item) => {
+					item.favorited = favoriteIDs.includes(item._id);
+				});
+
+				return { restaurant: restaurant, items: items };
+			});
+
+			const results = await Promise.all(promises);
+
+			console.log(results);
+
+			// Now 'results' array will have the items in the original order
+			const restaurantItemsMap = new Map(
+				results.map((result) => [result.restaurant.Name, result.items])
+			);
+
+			// Map associating restaurants with their items
+			setRestaurantItems(Array.from(restaurantItemsMap.entries()));
+
+			// console.log(
+			// 	"Data before storing in localStorage:",
+			// 	Array.from(restaurantItemsMap.entries())
+			// );
+
+			// localStorage.setItem(
+			// 	"restaurantItems",
+			// 	JSON.stringify(Array.from(restaurantItemsMap.entries()))
+			// );
+
+			// // localStorage.setItem("restaurantItems", restaurantItemsMap);
+			// navigate("/dashboard/");
 		}
 	};
 
@@ -91,6 +168,70 @@ function Food() {
 
 			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
 		}
+	};
+
+	const addFavorite = async (items, itemIndex) => {
+		const itemName = items[itemIndex].Name;
+		console.log(itemName);
+
+		const response = await fetch(API_URL + "/api/eats/favorite", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({ name: itemName }),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		}
+
+		if (response.ok) {
+			const newAlert = {
+				id: Date.now(),
+				title: "Eat Favorited!",
+				body: itemName + " has been favorited!",
+			};
+
+			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+		}
+	};
+
+	const deleteFavorite = async (items, itemIndex) => {
+		const itemName = items[itemIndex].Name;
+		console.log(itemName);
+
+		const response = await fetch(API_URL + "/api/eats/favorite", {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({ name: itemName }),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		}
+
+		if (response.ok) {
+			const newAlert = {
+				id: Date.now(),
+				title: "Eat Unfavorited!",
+				body: itemName + " has been removed from favorites!",
+			};
+
+			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+		}
+	};
+
+	const handleFavorite = (favorited, items, itemIndex) => {
+		favorited ? deleteFavorite(items, itemIndex) : addFavorite(items, itemIndex);
 	};
 
 	const handleCloseAlert = (id) => {
@@ -161,7 +302,7 @@ function Food() {
 									<thead>
 										<th>Name</th>
 										<th>Calories</th>
-										<th>Price</th>
+										<th>Favorited</th>
 										<th>Protein</th>
 										<th>Carbohydrates</th>
 										<th>Fats</th>
@@ -172,7 +313,9 @@ function Food() {
 											<tr>
 												<td className="name">{item.Name}</td>
 												<td className="calories">{item.Calories}</td>
-												<td className="price">${item.Price}</td>
+												<td className="price">
+													{item.favorited ? "true" : "false"}
+												</td>
 												<td className="protein">{item.Protein}g</td>
 												<td className="carbs">{item.Carbs}g</td>
 												<td className="fats">{item.Fat}g</td>
@@ -189,12 +332,21 @@ function Food() {
 															<AiOutlinePlus />
 														</button>
 														<button
-															// onClick={() => {
-															// 	addEat(items, itemIndex);
-															// }}
+															onClick={() => {
+																item.favorited = !item.favorited;
+																handleFavorite(
+																	!item.favorited,
+																	items,
+																	itemIndex
+																);
+															}}
 															className="add"
 														>
-															<FaRegHeart />
+															{item.favorited ? (
+																<FaHeart />
+															) : (
+																<FaRegHeart />
+															)}
 														</button>
 													</IconContext.Provider>
 												</td>

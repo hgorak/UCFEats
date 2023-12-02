@@ -34,7 +34,7 @@ function Dashboard() {
 					<div className="buttons">
 						<NavLink to="/dashboard/">
 							{({ isActive }) => (
-								<button className={isActive ? "clicked" : ""}>Your Eats</button>
+								<button className={isActive ? "clicked" : ""}>Home</button>
 							)}
 						</NavLink>
 						<NavLink to="/dashboard/food">
@@ -45,6 +45,11 @@ function Dashboard() {
 						<NavLink to="favorites">
 							{({ isActive }) => (
 								<button className={isActive ? "clicked" : ""}>Favorites</button>
+							)}
+						</NavLink>
+						<NavLink to="/dashboard/goals">
+							{({ isActive }) => (
+								<button className={isActive ? "clicked" : ""}>Goals</button>
 							)}
 						</NavLink>
 					</div>
