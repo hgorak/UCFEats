@@ -137,9 +137,6 @@ function Goals() {
 					<button type="submit">Update</button>
 				</Form>
 			</div>
-			<div className="calculator">
-				<h3>Goal Calculator</h3>
-			</div>
 		</div>
 	);
 }

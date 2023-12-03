@@ -822,7 +822,6 @@ body {
 
                             .record-data {
                                 .list-group {
-                                    
                                     background-color: $nearly-white;
                                     
                                     .list-group-item {
@@ -837,6 +836,26 @@ body {
                                                 display: flex;
                                                 flex-direction: column;
                                             }
+                                            
+                                            .subsubheading {
+                                                display: flex;
+                                                flex-direction: column;
+                                                justify-content: space-evenly;
+
+                                                .trash {
+                                                    visibility: none;
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                    align-items: last baseline;
+
+                                                    button {
+                                                        border: none;
+                                                        background-color: $nearly-white;
+                                                    }
+                                                }
+                                            }
+                                            
+                                           
                                         }
                                     }
                                     
@@ -1115,6 +1134,8 @@ body {
                                     display: flex;
                                     flex-direction: column;
                                 }
+
+                                
                             }
                         }
                               

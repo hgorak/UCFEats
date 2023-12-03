@@ -54,7 +54,6 @@ function Dashboard() {
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu>
-							<Dropdown.Item onClick={handleProfile}>Goals</Dropdown.Item>
 							<Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>
