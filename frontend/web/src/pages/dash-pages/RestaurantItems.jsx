@@ -19,7 +19,7 @@ function RestaurantItems() {
 	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
-		if (restaurantName === "favorites") {
+		if (restaurantName === "Favorites") {
 			fetchFavorites();
 			console.log("in favorites)");
 		} else fetchItems();
@@ -262,7 +262,11 @@ function RestaurantItems() {
 					</Toast>
 				))}
 			</ToastContainer>
-			<input class="search-bar" onChange={handleChange}></input>
+			<input
+				class="search-bar"
+				onChange={handleChange}
+				placeholder={`Search ${restaurantName}`}
+			></input>
 			{loading ? (
 				<div>LOADINGGN</div>
 			) : (
