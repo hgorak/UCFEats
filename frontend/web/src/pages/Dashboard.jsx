@@ -42,11 +42,6 @@ function Dashboard() {
 								<button className={isActive ? "clicked" : ""}>Restaurants</button>
 							)}
 						</NavLink>
-						<NavLink to="favorites">
-							{({ isActive }) => (
-								<button className={isActive ? "clicked" : ""}>Favorites</button>
-							)}
-						</NavLink>
 						<NavLink to="/dashboard/goals">
 							{({ isActive }) => (
 								<button className={isActive ? "clicked" : ""}>Goals</button>
@@ -59,7 +54,6 @@ function Dashboard() {
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu>
-							<Dropdown.Item onClick={handleProfile}>Goals</Dropdown.Item>
 							<Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>

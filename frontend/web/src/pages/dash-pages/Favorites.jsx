@@ -57,7 +57,7 @@ const Favorites = () => {
 	};
 
 	return (
-		<div className="food">
+		<div className="favorites">
 			<div className="food-header">
 				<div class="food-hero">
 					<h2>Favorites</h2>

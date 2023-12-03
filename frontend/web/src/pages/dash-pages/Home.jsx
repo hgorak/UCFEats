@@ -12,6 +12,7 @@ import {
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { FaRegTrashAlt } from "react-icons/fa";
 import "react-circular-progressbar/dist/styles.css";
 
 import { API_URL } from "../../../api.js";
@@ -34,7 +35,7 @@ function Home() {
 		getMacroData();
 		setTimeout(() => setLoading(false), 500);
 		// setLoading(false);
-	}, []);
+	}, [recentEats]);
 
 	const getMacroData = async () => {
 		const macroResponse = await fetch(API_URL + "/api/eats/dailyMacros", {
@@ -104,6 +105,27 @@ function Home() {
 		}
 	};
 
+	const deleteEat = async (itemName) => {
+		const response = await fetch(API_URL + "/api/eats/", {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/JSON",
+				Authorization: "Bearer " + currentUser.token,
+			},
+			body: JSON.stringify({
+				name: itemName,
+			}),
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		} else {
+			console.log("deleted: " + itemName);
+			recentEats = recentEats.filter((eat) => eat.Name !== itemName);
+		}
+	};
 	return (
 		<div className="home">
 			<div className="charts">
@@ -275,8 +297,18 @@ function Home() {
 											<strong>{item.itemName}</strong>
 											{item.locationName}
 										</div>
-										<div>
+										<div className="subsubheading">
 											<TimeSince timestamp={item.timestamp} />
+											<div className="trash">
+												<button
+													onClick={() => {
+														deleteEat(item.itemName);
+													}}
+													className="add"
+												>
+													<FaRegTrashAlt />
+												</button>
+											</div>
 										</div>
 									</div>
 								</ListGroup.Item>
