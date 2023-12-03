@@ -236,7 +236,7 @@ function RestaurantItems() {
 	};
 
 	return (
-		<div>
+		<div className="items-container">
 			<ToastContainer
 				position="top-end"
 				className="p-3"
@@ -272,13 +272,18 @@ function RestaurantItems() {
 							{searchResults.map((item, index) => (
 								<div className="item">
 									<strong>{item.Name}</strong>
-									<p>Calories: {item.Calories}</p>
-									<p>Carbs: {item.Carbs}g</p>
-									<p>Protein: {item.Protein}g</p>
-									<p>Fat: {item.Fat}g</p>
-									<div>
+									<div className="item-desc">
+										<span>Calories: {item.Calories}</span> <br />
+										<span>Carbs: {item.Carbs}g</span>
+										<br />
+										<span>Protein: {item.Protein}g</span>
+										<br />
+										<span>Fats: {item.Fat}g</span>
+										<br />
+									</div>
+									<div className="button">
 										<IconContext.Provider
-											value={{ color: "black", size: "25px" }}
+											value={{ color: "black", size: "35px" }}
 										>
 											<button
 												onClick={() => {
@@ -307,32 +312,40 @@ function RestaurantItems() {
 							{items.map((item, index) => (
 								<div className="item">
 									<strong>{item.Name}</strong>
-									<p>Calories: {item.Calories}</p>
-									<p>Carbs: {item.Carbs}g</p>
-									<p>Protein: {item.Protein}g</p>
-									<p>Fat: {item.Fat}g</p>
-									<div>
-										<IconContext.Provider
-											value={{ color: "black", size: "25px" }}
-										>
-											<button
-												onClick={() => {
-													addEat(index);
-												}}
-												className="add"
+									<div className="item-desc">
+										<span>Calories: {item.Calories}</span> <br />
+										<span>Carbs: {item.Carbs}g</span>
+										<br />
+										<span>Protein: {item.Protein}g</span>
+										<br />
+										<span>Fats: {item.Fat}g</span>
+										<br />
+									</div>
+
+									<div className="button">
+										<div>
+											<IconContext.Provider
+												value={{ color: "black", size: "25px" }}
 											>
-												<AiOutlinePlus />
-											</button>
-											<button
-												onClick={() => {
-													item.favorited = !item.favorited;
-													handleFavorite(!item.favorited, index);
-												}}
-												className="add"
-											>
-												{item.favorited ? <FaHeart /> : <FaRegHeart />}
-											</button>
-										</IconContext.Provider>
+												<button
+													onClick={() => {
+														addEat(index);
+													}}
+													className="add"
+												>
+													<AiOutlinePlus />
+												</button>
+												<button
+													onClick={() => {
+														item.favorited = !item.favorited;
+														handleFavorite(!item.favorited, index);
+													}}
+													className="add"
+												>
+													{item.favorited ? <FaHeart /> : <FaRegHeart />}
+												</button>
+											</IconContext.Provider>
+										</div>
 									</div>
 								</div>
 							))}

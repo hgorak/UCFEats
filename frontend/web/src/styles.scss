@@ -852,6 +852,7 @@ body {
                         justify-content: center;
                         width: 100%;
                         gap: 20px;
+                        padding: 20px;
 
                         .restaurants {
                             height: 100%;
@@ -860,6 +861,9 @@ body {
                             display: flex;
                             flex-direction: column;
 
+                            a {
+                                text-decoration: none;
+                            }
                             .restaurant-container {
                                 overflow: auto;
                                 width: 100%;
@@ -870,6 +874,22 @@ body {
                                 align-items: center;
                                 background-color: $nearly-white;
                                 border-radius: 20px;
+                                border: none;
+                            }
+
+                            .clicked {
+                                transition: 0.3s;
+                                overflow: auto;
+                                width: 100%;
+                                height: 100px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: $primary-color;
+                                color: $nearly-white;
+                                border-radius: 20px;
+                                border: none;
                             }
                         }
 
@@ -880,19 +900,75 @@ body {
                             // justify-content: center;
                             align-items: center;
 
-                            .grid-container {
-                                display: grid;
-                                grid-template-columns: repeat(3, 1fr);
-                                gap: 16px; /* Adjust as needed */
+                            
 
-                                .item {
-                                    background-color: $nearly-white;
-                                    height: 250px;
-                                    width: 250px;
-                                    border-radius: 20px;
-                                    padding: 10px;
-                                }   
+                            .items-container {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 20px;
+                                width: 100%;
+
+                                .search-bar {
+                                    align-self: last baseline;
+                                }
+
+                                .grid-container {
+                                    display: grid;
+                                    grid-template-columns: repeat(3, 1fr);
+                                    gap: 16px; /* Adjust as needed */
+    
+                                    .item {
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-evenly;
+                                        background-color: $nearly-white;
+                                        height: 250px;
+                                        width: 250px;
+                                        border-radius: 20px;
+                                        padding: 20px;
+    
+                                        .button {
+                                            visibility: hidden;
+                                            justify-content:end;
+                                            background-color: $nearly-white;
+                                            border: none;
+
+                                            button {
+                                                border: none;
+                                                background-color: $nearly-white;
+                                            }
+                                        }
+    
+                                        strong {
+                                            text-align: center;
+                                        }
+                                    }  
+                                    
+                                    .item:hover {
+                                        transition-duration: 0.3s;
+                                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+                                        .button {
+                                            visibility: visible;
+                                            display: flex;
+                                            justify-content:end;
+                                            background-color: $nearly-white;
+                                            border: none;
+
+                                            button {
+                                                border: none;
+                                                background-color: $nearly-white;
+                                            }
+
+                                            button:hover {
+                                                background-color: #e6e6e6;
+                                                border-radius: 5px;
+                                            }
+                                        }
+                                    }
+                                }
                             }
+                            
                             
                         }
                         
