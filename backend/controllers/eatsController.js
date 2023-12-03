@@ -179,10 +179,12 @@ const deleteEat = async (req, res) => {
 /* Eats by Time Period */
 const dayEats = async (req, res) => {
   let start = new Date();
-  start.setHours(0,0,0,0);
+  start.setHours(0, 0, 0, 0);
+  start.setMinutes(start.getMinutes());
 
   let end = new Date();
-  end.setHours(23,59,59,999);
+  end.setHours(23, 59, 59, 999);
+  end.setMinutes(end.getMinutes());
   
   const eats = await EatsList.find({user_id: req.user._id, updatedAt: {$gte: start, $lt: end}}).sort({updatedAt: 1});
 

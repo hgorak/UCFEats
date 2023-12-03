@@ -34,7 +34,7 @@ const loginUser = async (req, res) => {
     const dayEats = await EatsList.find({user_id: user._id, updatedAt: {$gte: start, $lt: end}});
 
     if (dayEats.length === 0)
-      user.dayProgress = [0, 0, 0, 0];
+      await User.findByIdAndUpdate(user._id, {$set: {dayProgress: [0, 0, 0, 0]}});
 
     // Create token for user
     const token = createToken(user._id);
