@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Outlet, Link, NavLink } from "react-router-dom";
+import { Outlet, Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { ItemsContext } from "../../context/ItemsContext.jsx";
 import Accordion from "react-bootstrap/Accordion";
@@ -24,22 +24,12 @@ function Food() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 	const [allItems, setAllItems] = useState([]);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		fetchRestaurants();
-		fetchRawItems();
-
-		// Automatically hide toasts after a delay
-		const hideAlerts = () => {
-			setTimeout(() => {
-				setAlerts((prevAlerts) => prevAlerts.slice(1));
-			}, 3000); // Adjust the delay (in milliseconds) as needed
-		};
-
-		if (alerts.length > 0) {
-			hideAlerts();
-		}
-	}, [alerts]);
+		navigate("/dashboard/food/Favorites");
+	}, []);
 
 	const fetchRawItems = async () => {
 		const response = await fetch(API_URL + "/api/items/all", {
@@ -278,7 +268,7 @@ function Food() {
 	return (
 		<div className="food">
 			<div className="restaurants">
-				<NavLink to="/dashboard/food/favorites">
+				<NavLink to="/dashboard/food/Favorites">
 					{({ isActive }) => (
 						<button className={isActive ? "clicked" : "restaurant-container"}>
 							Favorites
@@ -300,125 +290,6 @@ function Food() {
 			</div>
 		</div>
 	);
-	// old restaurants page
-	// return (
-	// 	<div className="food">
-	// 		<div className="food-header">
-	// 			<div class="food-hero">
-	// 				<h2>Restaurants</h2>
-	// 				<span>All of UCF's food options. All in one place.</span>
-	// 			</div>
-	// 		</div>
-	// 		<ToastContainer
-	// 			position="top-end"
-	// 			className="p-3"
-	// 			style={{
-	// 				position: "fixed",
-	// 				top: "10px",
-	// 				right: "10px",
-	// 			}}
-	// 		>
-	// 			{alerts.map((alert) => (
-	// 				<Toast
-	// 					key={alert.id}
-	// 					show
-	// 					onClose={() => handleCloseAlert(alert.id)}
-	// 					delay={3000}
-	// 					autohide
-	// 					className="toast-slide"
-	// 				>
-	// 					<Toast.Header>
-	// 						<strong className="me-auto">{alert.title}</strong>
-	// 					</Toast.Header>
-	// 					<Toast.Body>{alert.body}</Toast.Body>
-	// 				</Toast>
-	// 			))}
-	// 		</ToastContainer>
-	// 		<input class="search-bar" onChange={handleChange}></input>
-	// 		{!searchQuery ? (
-	// 			<Accordion>
-	// 				{restaurantItems.map(([restaurant, items], index) => (
-	// 					<Accordion.Item eventKey={index} key={index}>
-	// 						<Accordion.Header>{restaurant}</Accordion.Header>
-	// 						<Accordion.Body>
-	// 							<table className="food-table">
-	// 								<thead>
-	// 									<th>Name</th>
-	// 									<th>Calories</th>
-	// 									<th>Favorited</th>
-	// 									<th>Protein</th>
-	// 									<th>Carbohydrates</th>
-	// 									<th>Fats</th>
-	// 									<th></th>
-	// 								</thead>
-	// 								<tbody>
-	// 									{items.map((item, itemIndex) => (
-	// 										<tr>
-	// 											<td className="name">{item.Name}</td>
-	// 											<td className="calories">{item.Calories}</td>
-	// 											<td className="price">
-	// 												{item.favorited ? "true" : "false"}
-	// 											</td>
-	// 											<td className="protein">{item.Protein}g</td>
-	// 											<td className="carbs">{item.Carbs}g</td>
-	// 											<td className="fats">{item.Fat}g</td>
-	// 											<td className="buttons">
-	// 												<IconContext.Provider
-	// 													value={{ color: "black", size: "25px" }}
-	// 												>
-	// 													<button
-	// 														onClick={() => {
-	// 															addEat(items, itemIndex);
-	// 														}}
-	// 														className="add"
-	// 													>
-	// 														<AiOutlinePlus />
-	// 													</button>
-	// 													<button
-	// 														onClick={() => {
-	// 															item.favorited = !item.favorited;
-	// 															handleFavorite(
-	// 																!item.favorited,
-	// 																items,
-	// 																itemIndex
-	// 															);
-	// 														}}
-	// 														className="add"
-	// 													>
-	// 														{item.favorited ? (
-	// 															<FaHeart />
-	// 														) : (
-	// 															<FaRegHeart />
-	// 														)}
-	// 													</button>
-	// 												</IconContext.Provider>
-	// 											</td>
-	// 										</tr>
-	// 									))}
-	// 								</tbody>
-	// 							</table>
-	// 						</Accordion.Body>
-	// 					</Accordion.Item>
-	// 				))}
-	// 			</Accordion>
-	// 		) : (
-	// 			<div>
-	// 				<ListGroup>
-	// 					{searchResults.map((result) => (
-	// 						<ListGroup.Item>
-	// 							<div className="item">
-	// 								<div className="subheading">
-	// 									<strong>{result.Name}</strong>
-	// 									{result.locationName}
-	// 								</div>
-	// 							</div>
-	// 						</ListGroup.Item>
-	// 					))}
-	// 				</ListGroup>
-	// 			</div>
-	// 		)}
-	// 	</div>
-	// );
 }
 
 export default Food;

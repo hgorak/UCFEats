@@ -835,6 +835,7 @@ body {
                                             .subheading {
                                                 display: flex;
                                                 flex-direction: column;
+                                                width: 300px;
                                             }
                                             
                                             .subsubheading {
@@ -851,6 +852,12 @@ body {
                                                     button {
                                                         border: none;
                                                         background-color: $nearly-white;
+                                                    }
+
+                                                    button:hover {
+                                                        // #e6e6e6;
+                                                        background-color: pink;
+                                                        border-radius: 5px;
                                                     }
                                                 }
                                             }
@@ -910,6 +917,16 @@ body {
                                 border-radius: 20px;
                                 border: none;
                             }
+
+                            .restaurant-container:hover {
+                                transition-duration: 0.3s;
+                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                            }
+
+                            .clicked:hover {
+                                transition-duration: 0.2s;
+                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                            }
                         }
 
                         .items {
@@ -928,7 +945,7 @@ body {
                                 width: 100%;
 
                                 .search-bar {
-                                    align-self: last baseline;
+                                    align-self: first baseline;
                                 }
 
                                 .grid-container {

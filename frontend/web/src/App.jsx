@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, redirect } from "react-router-dom";
 
 import Register from "./components/Register.jsx";
 import Verification from "./components/Verification.jsx";
@@ -70,7 +70,6 @@ function App() {
 									element={<RestaurantItems />}
 								/>
 							</Route>
-							<Route path="/dashboard/favorites" element={<Favorites />} />
 							<Route path="/dashboard/goals" element={<Goals />} />
 						</Route>
 					</Routes>
