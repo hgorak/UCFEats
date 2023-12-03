@@ -19,6 +19,8 @@ function RestaurantItems() {
 	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
+		setItems([]); // Reset items when restaurant changes
+		setSearchQuery(""); // Clear search query when restaurant changes
 		if (restaurantName === "Favorites") {
 			fetchFavorites();
 			console.log("in favorites)");
@@ -265,6 +267,7 @@ function RestaurantItems() {
 			<input
 				class="search-bar"
 				onChange={handleChange}
+				value={searchQuery}
 				placeholder={`Search ${restaurantName}`}
 			></input>
 			{loading ? (
@@ -287,7 +290,7 @@ function RestaurantItems() {
 									</div>
 									<div className="button">
 										<IconContext.Provider
-											value={{ color: "black", size: "35px" }}
+											value={{ color: "black", size: "25px" }}
 										>
 											<button
 												onClick={() => {
