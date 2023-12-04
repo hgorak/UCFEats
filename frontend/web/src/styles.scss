@@ -883,17 +883,59 @@ body {
                         .restaurants {
                             height: 100%;
                             flex: 1;
-                            gap: 20px;
+                            gap: 15px;
                             display: flex;
                             flex-direction: column;
+                            overflow: hidden;
 
                             a {
                                 text-decoration: none;
+                                overflow: hidden;
+                                border-radius: 20px;
+                                
+                                // varies
+                                .img-0 {
+                                    zoom: 25%;
+                                }
+                                
+                                .img-1 {
+                                    zoom: 20%;
+                                    //width: 100%;
+                                    margin-top: 8px;
+                                }
+
+                                .img-2 {
+                                    zoom: 7%;
+                                }
+
+                                .img-3 {
+                                    zoom: 43%;
+                                }
+
+                                .img-4 {
+                                    zoom: 25%;
+                                }
+                                
+                                .img-5 {
+                                    zoom: 11%;
+                                }
+                                
+                                .img-6 {
+                                    zoom: 10%;
+                                }
+
+                                .img-7 {
+                                    zoom: 12%;
+                                }
+
+                                .img-8 {
+                                    zoom: 12%;
+                                }
                             }
+
                             .restaurant-container {
-                                overflow: auto;
                                 width: 100%;
-                                height: 100px;
+                                height: 124px;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
@@ -903,19 +945,36 @@ body {
                                 border: none;
                             }
 
+                            .restaurant-0 {
+                                background-color: white;
+                            }
+                            .restaurant-1 {
+                                background-color: white;
+                            }
+                            .restaurant-2 {
+                                background-color: white;
+                            }
+                            .restaurant-3 {
+                                background-color: white;
+                            }
+                            .restaurant-4 {
+                                background-color: white;
+                            }
+                            .restaurant-5 {
+                                background-color: white;
+                            }
+                            .restaurant-6 {
+                                background-color: white;
+                            }
+                            .restaurant-7 {
+                                background-color: white;
+                            }
+
+                            // varies
                             .clicked {
                                 transition: 0.3s;
-                                overflow: auto;
-                                width: 100%;
-                                height: 100px;
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: center;
-                                align-items: center;
-                                background-color: $primary-color;
-                                color: $nearly-white;
-                                border-radius: 20px;
-                                border: none;
+                                // varies
+                                background-color: white;
                             }
 
                             .restaurant-container:hover {
