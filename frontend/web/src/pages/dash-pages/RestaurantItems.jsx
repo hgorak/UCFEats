@@ -269,7 +269,7 @@ function RestaurantItems() {
 			<input
 				class="search-bar"
 				onChange={handleChange}
-				// value={searchQuery}
+				value={searchQuery}
 				placeholder={`Search ${restaurantName}`}
 			></input>
 			{loading ? (
