@@ -34,7 +34,7 @@ function Login() {
 
 		try {
 			await login(email, password);
-			navigate("/dashboard");
+			navigate("/dashboard/");
 		} catch (err) {
 			setError(err);
 			setAlert(true);
