@@ -118,8 +118,10 @@ function RestaurantItems() {
 	};
 
 	// record an eat and show success or error alert
-	const addEat = async (index) => {
-		const itemName = items[index].Name;
+	const addEat = async (index, searched) => {
+		if (searched) var itemName = searchResults[index].Name;
+		else var itemName = items[index].Name;
+
 		console.log(itemName);
 		const response = await fetch(API_URL + "/api/eats/add", {
 			method: "POST",
@@ -294,7 +296,7 @@ function RestaurantItems() {
 										>
 											<button
 												onClick={() => {
-													addEat(index);
+													addEat(index, true);
 												}}
 												className="add"
 											>
@@ -336,7 +338,7 @@ function RestaurantItems() {
 											>
 												<button
 													onClick={() => {
-														addEat(index);
+														addEat(index, false);
 													}}
 													className="add"
 												>
