@@ -97,24 +97,10 @@ const addEat = async (req, res) => {
     // Update progress for the day
     await User.findByIdAndUpdate(userID, {$set: {dayProgress: progress}});
 
-    // If the user already has the item: Don't add
-    if (user.eats.includes(itemID))
-    {
-      await EatsList.findOneAndUpdate({user_id: userID, item_id: itemID}, {$inc: {Quantity: 1}});
-      return res.status(200).json({message: 'Quantity has been updated'});
-    }
-
-    // Adds store to user
-    await User.findByIdAndUpdate(userID, {$push: {eats: itemID}});
-
     // Add to the records
-    await EatsList.create({user_id: userID, item_id: itemID});
+    const response = await EatsList.create({user_id: userID, item_id: itemID});
 
-    /* Get an updated list of the stores to return */
-    const updatedUser = await User.findById(req.user._id);
-    const finalEats = updatedUser.eats;
-
-    res.status(200).json(finalEats);
+    res.status(200).json(response);
   }
 
   catch (error)
@@ -125,12 +111,15 @@ const addEat = async (req, res) => {
 
 // Deletes an Eat 
 const deleteEat = async (req, res) => {
-  const { name } = req.body;
+  const { name, time } = req.body;
   let emptyFields = [];
 
   /* Ensure fields aren't empty */
   if (!name)
     emptyFields.push('name');
+
+  if (!time)
+    emptyFields.push('time');
 
   if (emptyFields.length > 0)
     return res.status(400).json({ error: 'Please fill in the required fields', emptyFields });
@@ -150,12 +139,11 @@ const deleteEat = async (req, res) => {
   // Gets user
   const user = await User.findById(req.user._id);
 
-  // If the user doesn't have the Eat: Throw error
-  if (!user.eats.includes(itemID))
-    return res.status(401).json({error: 'User Does Not Have This Eat'});
+  // Delete the Eat from the records
+  const updateResponse = await EatsList.findOneAndDelete({user_id: req.user._id, item_id: itemID, createdAt: time});
 
-  // Delete the Eat
-  await User.findByIdAndUpdate(req.user._id, {$pull: {eats: itemID}});
+  if (updateResponse === null)
+    return res.status(401).json({error: 'User Does Not Have This Eat'});
 
   // Remove the macros
   let progress = user.dayProgress;
@@ -166,14 +154,7 @@ const deleteEat = async (req, res) => {
 
   await User.findByIdAndUpdate(req.user._id, {$set: {dayProgress: progress}});
 
-  // Delete the Eat from the records
-  await EatsList.findOneAndDelete({user_id: req.user._id, item_id: itemID});
-
-  /* Get an updated list of the Eats to return */
-  const updatedUser = await User.findById(req.user._id);
-  const finalEats = updatedUser.eats;
-
-  res.status(200).json(finalEats);
+  res.status(200).json(updateResponse);
 };
 
 /* Eats by Time Period */
