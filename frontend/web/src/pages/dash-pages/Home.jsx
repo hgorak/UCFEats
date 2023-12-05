@@ -105,7 +105,7 @@ function Home() {
 		}
 	};
 
-	const deleteEat = async (itemName) => {
+	const deleteEat = async (itemName, timestamp) => {
 		const response = await fetch(API_URL + "/api/eats/", {
 			method: "DELETE",
 			headers: {
@@ -114,6 +114,7 @@ function Home() {
 			},
 			body: JSON.stringify({
 				name: itemName,
+				time: timestamp,
 			}),
 		});
 
@@ -302,7 +303,7 @@ function Home() {
 											<div className="trash">
 												<button
 													onClick={() => {
-														deleteEat(item.itemName);
+														deleteEat(item.itemName, item.timestamp);
 													}}
 													className="add"
 												>
