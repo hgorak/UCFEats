@@ -2,7 +2,7 @@
 @import '../node_modules/bootstrap/scss/bootstrap/';
 
 $primary-color: #e03440;
-// $primary-color: #8D021F;
+//$primary-color: #8D021F;
 $secondary-color: #F5ece4;
 $dashboard-color: #f1efee;
 $nearly-white: #fbfbfb;
@@ -675,12 +675,13 @@ body {
 
             .dashboard {
                 color: black;
-                min-height: 100vh;
+                height: 100vh;
                 width: 100%;
                 background-color: $dashboard-color;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                // background-image: url("../src/images/background.png");
 
                 .container {
                     padding: 0;
@@ -688,7 +689,9 @@ body {
                     flex-direction: column;
                     align-items: center;
                     width: 80%;
-                    height: 100%;
+                    flex-grow: 1;
+                    overflow-y: auto;
+                    
 
                     .home {
                         display: flex;
@@ -885,8 +888,10 @@ body {
                             flex: 1;
                             gap: 15px;
                             display: flex;
+                            padding: 10px 20px;
                             flex-direction: column;
                             overflow: hidden;
+                            transition-duration: 0.3s;
 
                             a {
                                 text-decoration: none;
@@ -933,14 +938,26 @@ body {
                                 }
                             }
 
+                            a:hover {
+                                transition-duration: 0.3s;
+                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                            }
+
+                            .active {
+                                transition-duration: 0.3s;
+                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                            }
+
+                            
+
                             .restaurant-container {
                                 width: 100%;
-                                height: 124px;
+                                height: 120px;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: center;
-                                background-color: $nearly-white;
+                                background-color: $white;
                                 border-radius: 20px;
                                 border: none;
                             }
@@ -970,22 +987,6 @@ body {
                                 background-color: white;
                             }
 
-                            // varies
-                            .clicked {
-                                transition: 0.3s;
-                                // varies
-                                background-color: white;
-                            }
-
-                            .restaurant-container:hover {
-                                transition-duration: 0.3s;
-                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                            }
-
-                            .clicked:hover {
-                                transition-duration: 0.2s;
-                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                            }
                         }
 
                         .items {
@@ -1015,18 +1016,39 @@ body {
                                     .item {
                                         display: flex;
                                         flex-direction: column;
-                                        justify-content: space-evenly;
+                                        justify-content: space-between;
                                         background-color: $nearly-white;
-                                        height: 250px;
-                                        width: 250px;
+                                        height: 284px;
+                                        width: 260px;
                                         border-radius: 20px;
-                                        padding: 20px;
-    
+                                        padding: 15px;
+                                        
+                                        .item-desc {
+                                            display: flex;
+                                            flex-direction: column;
+                                            // justify-content: center;
+                                            align-items: center;
+                                        }
+
                                         .button {
-                                            visibility: hidden;
+                                            display: flex;
+                                            flex-direction: row;
+                                            // visibility: hidden;
                                             justify-content:end;
                                             background-color: $nearly-white;
                                             border: none;
+
+                                            .add {
+                                                visibility: hidden;
+                                            }
+
+                                            .unfavorited {
+                                                visibility: hidden;
+                                            }
+
+                                            .favorited {
+                                                visibility: visible;
+                                            }
 
                                             button {
                                                 border: none;
@@ -1036,20 +1058,34 @@ body {
     
                                         strong {
                                             text-align: center;
+                                            font-size: 16px;
                                         }
                                     }  
                                     
                                     .item:hover {
+                                        display: flex;
+                                        flex-direction: column;
                                         transition-duration: 0.3s;
                                         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
                                         .button {
-                                            visibility: visible;
+                                            // visibility: visible;
                                             display: flex;
                                             justify-content:end;
                                             background-color: $nearly-white;
                                             border: none;
 
+                                            .add {
+                                                visibility: visible;
+                                            }
+
+                                            .unfavorited {
+                                                visibility: visible;
+                                            }
+
+                                            .favorited {
+                                                visibility: visible;
+                                            }
                                             button {
                                                 border: none;
                                                 background-color: $nearly-white;
