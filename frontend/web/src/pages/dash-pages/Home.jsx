@@ -4,6 +4,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import TimeSince from "../../components/TimeSince.jsx";
 import Placeholder from "react-bootstrap/Placeholder";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import {
 	CircularProgressbar,
 	CircularProgressbarWithChildren,
@@ -27,6 +29,9 @@ function Home() {
 	const [currentMacros, setCurrentMacros] = useState([0, 0, 0, 0]);
 	const [progress, setProgress] = useState([0, 0, 0, 0]);
 	const [error, setError] = useState("");
+	const [showDelete, setShowDelete] = useState(false);
+	const [deleteName, setDeleteName] = useState("");
+	const [deleteTimestamp, setDeleteTimestamp] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [chartData, setChartData] = useState([]);
 
@@ -127,8 +132,40 @@ function Home() {
 			recentEats = recentEats.filter((eat) => eat.Name !== itemName);
 		}
 	};
+
+	const handleDelete = (itemName, timestamp) => {
+		setDeleteName(itemName);
+		setDeleteTimestamp(timestamp);
+
+		setShowDelete(true);
+	};
+
+	const handleClose = () => {
+		setDeleteName(null);
+		setDeleteTimestamp(null);
+
+		setShowDelete(false);
+	};
+
 	return (
 		<div className="home">
+			<Modal show={showDelete} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Delete Eat</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>Are you sure you want to delete {deleteName}?</Modal.Body>
+				<Modal.Footer>
+					<Button
+						variant="primary"
+						onClick={() => {
+							deleteEat(deleteName, deleteTimestamp);
+							handleClose();
+						}}
+					>
+						Delete
+					</Button>
+				</Modal.Footer>
+			</Modal>
 			<div className="charts">
 				<div className="charts-hero">
 					{!loading ? (
@@ -303,7 +340,8 @@ function Home() {
 											<div className="trash">
 												<button
 													onClick={() => {
-														deleteEat(item.itemName, item.timestamp);
+														handleDelete(item.itemName, item.timestamp);
+														// deleteEat(item.itemName, item.timestamp);
 													}}
 													className="add"
 												>
