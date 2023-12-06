@@ -155,9 +155,9 @@ function RestaurantItems() {
 		}
 	};
 
-	const addFavorite = async (index) => {
-		const itemName = items[index].Name;
-		console.log(itemName);
+	const addFavorite = async (index, searched) => {
+		if (searched) var itemName = searchResults[index].Name;
+		else var itemName = items[index].Name;
 
 		const response = await fetch(API_URL + "/api/eats/favorite", {
 			method: "POST",
@@ -185,9 +185,9 @@ function RestaurantItems() {
 		}
 	};
 
-	const deleteFavorite = async (index) => {
-		const itemName = items[index].Name;
-		console.log(itemName);
+	const deleteFavorite = async (index, searched) => {
+		if (searched) var itemName = searchResults[index].Name;
+		else var itemName = items[index].Name;
 
 		const response = await fetch(API_URL + "/api/eats/favorite", {
 			method: "DELETE",
@@ -215,8 +215,8 @@ function RestaurantItems() {
 		}
 	};
 
-	const handleFavorite = (favorited, index) => {
-		favorited ? deleteFavorite(index) : addFavorite(index);
+	const handleFavorite = (favorited, index, searched) => {
+		favorited ? deleteFavorite(index, searched) : addFavorite(index, searched);
 	};
 
 	const handleCloseAlert = (id) => {
@@ -310,7 +310,7 @@ function RestaurantItems() {
 											<button
 												onClick={() => {
 													item.favorited = !item.favorited;
-													handleFavorite(!item.favorited, index);
+													handleFavorite(!item.favorited, index, true);
 												}}
 												className={
 													item.favorited ? "favorited" : "unfavorited"
@@ -358,7 +358,7 @@ function RestaurantItems() {
 											<button
 												onClick={() => {
 													item.favorited = !item.favorited;
-													handleFavorite(!item.favorited, index);
+													handleFavorite(!item.favorited, index, false);
 												}}
 												className={
 													item.favorited ? "favorited" : "unfavorited"

@@ -909,6 +909,7 @@ body {
                         .restaurants {
                             // height: 100%;
                             flex: 1;
+                            min-width: 300px; 
                             gap: 15px;
                             display: flex;
                             padding: 10px 20px;
@@ -968,10 +969,9 @@ body {
 
                             .active {
                                 transition-duration: 0.3s;
-                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                            }
-
-                            
+                                // border: solid 2px #e2e2e2;
+                                // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                            }       
 
                             .restaurant-container {
                                 width: 100%;
@@ -1126,59 +1126,6 @@ body {
                             
                         }
                         
-                        // .toast-slide {
-                        //     transform: translateY(0);
-                        //     transition: transform 0.5s ease-in-out;
-                            
-                        //     .toast-enter {
-                        //         transform: translateY(100%);
-                        //     }
-                              
-                        //     .toast-exit {
-                        //         transform: translateY(0);
-                        //     }
-                        //   }
-                          
-                          
-                        .food-header {
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            justify-content: center;
-                            height: 40vh;
-
-                            .food-hero {
-                                display: flex;
-                                flex-direction: column;
-                                background-image: linear-gradient(to top right, $primary-color, #E09E34);
-                                width: 60%;
-                                height: 90%;
-                                border-radius: 25px;
-                                justify-content: center;
-                                align-items: center;
-                                color: $nearly-white;
-
-                                h2 {
-                                    font-size: 3rem;
-                                }
-                            }
-                            
-                            h1 {
-                                font-weight: 300;
-                                font-size: 48px;
-                                margin: 10px;
-                                margin-left: 0px;
-                            }
-
-                            input {
-                                padding-left: 20px;
-                                border: none;
-                                height: 50px;
-                                width: 200px;
-                                border-radius: 25px;
-                            }
-                        }
-                        
                         .search-bar {
                             background-color: $nearly-white;
                             border: none;
@@ -1187,93 +1134,7 @@ body {
                             height: 40px;
                             border-radius: 25px;
                             padding-left: 20px;
-                        }
-
-                        .accordion {
-                            margin-bottom: 50px;
-                            border-radius: 25px;
-
-                            .accordion-header {
-                                font-weight: 300;
-                                background-color: $secondary-color;
-                            }
-
-                            .accordion-body {
-
-                                .food-table {
-                                    width: 100%;
-                                    justify-self: center;
-                                    align-self: center;
-                                    border-spacing: 50px 0px;
-
-                                    th,
-                                    td {
-                                        padding: 10px;
-                                    }
-
-                                    .name {
-                                        width: 40%;
-                                    }
-
-                                    .price {
-                                        width: 10%;
-                                    }
-
-                                    .calories {
-                                        width: 10%
-                                    }
-
-                                    .protein {
-                                        width: 10%
-                                    }
-
-                                    .carbs {
-                                        width: 10%
-                                    }
-
-                                    .fats {
-                                        width: 10%
-                                    }
-
-                                    .buttons {
-                                        width: 5%;
-                                        display: flex;
-                                        flex-direction: row;
-                                        gap: 5px;
-
-                                        button {
-                                            border: none;
-                                            background-color: white;
-                                        }
-                                        
-                                        .add:hover {
-                                            background-color: #e6e6e6;
-                                            border-radius: 5px;
-                                        }
-                                    }
-
-
-                                }
-                            }
-                        }
-
-                        .list-group-item {
-                            background-color: $nearly-white;
-
-                            .item {
-                                display: flex;
-                                flex-direction: row;
-                                justify-content: space-between;
-
-                                .subheading {
-                                    display: flex;
-                                    flex-direction: column;
-                                }
-
-                                
-                            }
-                        }
-                              
+                        }    
                     }
 
                     .goals {
