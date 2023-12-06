@@ -282,13 +282,14 @@ function RestaurantItems() {
 								<div className="item">
 									<strong>{item.Name}</strong>
 									<div className="item-desc">
-										<span>Calories: {item.Calories}</span> <br />
-										<span>Carbs: {item.Carbs}g</span>
-										<br />
-										<span>Protein: {item.Protein}g</span>
-										<br />
-										<span>Fats: {item.Fat}g</span>
-										<br />
+										<strong style={{ color: "#966fd6" }}>Calories</strong>
+										<span>{item.Calories}</span>
+										<strong style={{ color: "#ff6182" }}>Carbs</strong>
+										<span>{item.Carbs}g</span>
+										<strong style={{ color: "#ff9f40" }}>Protein</strong>
+										<span>{item.Protein}g</span>
+										<strong style={{ color: "#35a1ec" }}>Fats</strong>
+										<span>{item.Fat}g</span>
 									</div>
 									<div className="button">
 										<IconContext.Provider
@@ -296,18 +297,24 @@ function RestaurantItems() {
 										>
 											<button
 												onClick={() => {
-													addEat(index, true);
+													addEat(index, false);
 												}}
 												className="add"
 											>
 												<AiOutlinePlus />
 											</button>
+										</IconContext.Provider>
+										<IconContext.Provider
+											value={{ color: "#e03440", size: "25px" }}
+										>
 											<button
 												onClick={() => {
 													item.favorited = !item.favorited;
 													handleFavorite(!item.favorited, index);
 												}}
-												className="add"
+												className={
+													item.favorited ? "favorited" : "unfavorited"
+												}
 											>
 												{item.favorited ? <FaHeart /> : <FaRegHeart />}
 											</button>
@@ -322,39 +329,44 @@ function RestaurantItems() {
 								<div className="item">
 									<strong>{item.Name}</strong>
 									<div className="item-desc">
-										<span>Calories: {item.Calories}</span> <br />
-										<span>Carbs: {item.Carbs}g</span>
-										<br />
-										<span>Protein: {item.Protein}g</span>
-										<br />
-										<span>Fats: {item.Fat}g</span>
-										<br />
+										<strong style={{ color: "#966fd6" }}>Calories</strong>
+										<span>{item.Calories}</span>
+										<strong style={{ color: "#ff6182" }}>Carbs</strong>
+										<span>{item.Carbs}g</span>
+										<strong style={{ color: "#ff9f40" }}>Protein</strong>
+										<span>{item.Protein}g</span>
+										<strong style={{ color: "#35a1ec" }}>Fats</strong>
+										<span>{item.Fat}g</span>
 									</div>
 
 									<div className="button">
-										<div>
-											<IconContext.Provider
-												value={{ color: "black", size: "25px" }}
+										<IconContext.Provider
+											value={{ color: "black", size: "25px" }}
+										>
+											<button
+												onClick={() => {
+													addEat(index, false);
+												}}
+												className="add"
 											>
-												<button
-													onClick={() => {
-														addEat(index, false);
-													}}
-													className="add"
-												>
-													<AiOutlinePlus />
-												</button>
-												<button
-													onClick={() => {
-														item.favorited = !item.favorited;
-														handleFavorite(!item.favorited, index);
-													}}
-													className="add"
-												>
-													{item.favorited ? <FaHeart /> : <FaRegHeart />}
-												</button>
-											</IconContext.Provider>
-										</div>
+												<AiOutlinePlus />
+											</button>
+										</IconContext.Provider>
+										<IconContext.Provider
+											value={{ color: "#e03440", size: "25px" }}
+										>
+											<button
+												onClick={() => {
+													item.favorited = !item.favorited;
+													handleFavorite(!item.favorited, index);
+												}}
+												className={
+													item.favorited ? "favorited" : "unfavorited"
+												}
+											>
+												{item.favorited ? <FaHeart /> : <FaRegHeart />}
+											</button>
+										</IconContext.Provider>
 									</div>
 								</div>
 							))}
