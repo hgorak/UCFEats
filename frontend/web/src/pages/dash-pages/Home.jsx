@@ -149,7 +149,7 @@ function Home() {
 											styles={buildStyles({
 												// textSize: "10px",
 												// textColor: progress[0] <= 0 ? "#28a745" : "",
-												pathColor: progress[0] <= 0 ? "#28a745" : "",
+												pathColor: progress[0] <= 0 ? "#28a745" : "#966fd6",
 											})}
 										>
 											<div className="dial-content">
@@ -166,8 +166,8 @@ function Home() {
 											maxValue={goals[2]}
 											styles={buildStyles({
 												textSize: "10px",
-												textColor: progress[2] <= 0 ? "#28a745" : "",
-												pathColor: progress[2] <= 0 ? "#28a745" : "",
+												// textColor: progress[2] <= 0 ? "#28a745" : "",
+												pathColor: progress[2] <= 0 ? "#28a745" : "#ff6182",
 											})}
 										>
 											<div className="dial-content">
@@ -184,8 +184,8 @@ function Home() {
 											maxValue={goals[3]}
 											styles={buildStyles({
 												textSize: "10px",
-												textColor: progress[3] <= 0 ? "#28a745" : "",
-												pathColor: progress[3] <= 0 ? "#28a745" : "",
+												// textColor: progress[3] <= 0 ? "#28a745" : "",
+												pathColor: progress[3] <= 0 ? "#28a745" : "#ff9f40",
 											})}
 										>
 											<div className="dial-content">
@@ -202,8 +202,8 @@ function Home() {
 											maxValue={goals[1]}
 											styles={buildStyles({
 												textSize: "10px",
-												textColor: progress[1] <= 0 ? "#28a745" : "",
-												pathColor: progress[1] <= 0 ? "#28a745" : "",
+												// textColor: progress[1] <= 0 ? "#28a745" : "",
+												pathColor: progress[1] <= 0 ? "#28a745" : "#35a1ec",
 											})}
 										>
 											<div className="dial-content">
