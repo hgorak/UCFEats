@@ -139,12 +139,6 @@ const deleteEat = async (req, res) => {
   // Gets user
   const user = await User.findById(req.user._id);
 
-  // Delete the Eat from the records
-  const updateResponse = await EatsList.findOneAndDelete({user_id: req.user._id, item_id: itemID, createdAt: time});
-
-  if (updateResponse === null)
-    return res.status(401).json({error: 'User Does Not Have This Eat'});
-
   // Set time
   let start = new Date();
   start.setHours(0, 0, 0, 0);
@@ -153,10 +147,16 @@ const deleteEat = async (req, res) => {
   let end = new Date();
   end.setHours(23, 59, 59, 999);
   end.setMinutes(end.getMinutes());
-  
+
   // Get current day eats
   const dayEat = await EatsList.findOne({user_id: req.user._id, item_id: itemID, createdAt: time,  updatedAt: {$gte: start, $lt: end}});
 
+  // Delete the Eat from the records
+  const updateResponse = await EatsList.findOneAndDelete({user_id: req.user._id, item_id: itemID, createdAt: time});
+
+  if (updateResponse === null)
+    return res.status(401).json({error: 'User Does Not Have This Eat'});
+  
   // If the eat isn't from today, don't affect dayProgress of user
   if (dayEat === null)
     return res.status(200).json(updateResponse);
