@@ -8,6 +8,13 @@ import Footer from "../components/Footer.jsx";
 import Phone from "../images/phone.png";
 
 import darrenHead from "../images/darren.jpg";
+import brendanHead from "../images/brendan.jpg";
+import haileyHead from "../images/hailey.jpg";
+import alexHead from "../images/alex.png";
+import akilHead from "../images/akil.png";
+import joseHead from "../images/jose.png";
+import jacobHead from "../images/jacob.jpg";
+
 import "../styles.scss";
 
 // root page of the application
@@ -65,7 +72,11 @@ function Landing() {
 						<div className="member-row">
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img
+										className="darren"
+										src={darrenHead}
+										alt="darren headshot"
+									/>
 								</div>
 								<div className="desc">
 									<h2>Darren Bansil</h2>
@@ -74,7 +85,7 @@ function Landing() {
 							</div>
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img className="akil" src={akilHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
 									<h2>Akil Mohideen</h2>
@@ -83,7 +94,7 @@ function Landing() {
 							</div>
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img className="jose" src={joseHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
 									<h2>Jose Cuyugan</h2>
@@ -92,7 +103,7 @@ function Landing() {
 							</div>
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img className="jacob" src={jacobHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
 									<h2>Jacob Dioso</h2>
@@ -103,7 +114,11 @@ function Landing() {
 						<div className="member-row">
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img
+										className="hailey"
+										src={haileyHead}
+										alt="darren headshot"
+									/>
 								</div>
 								<div className="desc">
 									<h2>Hailey Gorak</h2>
@@ -112,7 +127,11 @@ function Landing() {
 							</div>
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img
+										className="brendan"
+										src={brendanHead}
+										alt="darren headshot"
+									/>
 								</div>
 								<div className="desc">
 									<h2>Brendan Smith</h2>
@@ -121,7 +140,7 @@ function Landing() {
 							</div>
 							<div className="member">
 								<div className="head">
-									<img src={darrenHead} alt="darren headshot" />
+									<img className="alex" src={alexHead} alt="darren headshot" />
 								</div>
 								<div className="desc">
 									<h2>Alex Cruz</h2>
