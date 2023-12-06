@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 import { API_URL } from "../../../api.js";
 
 function Goals() {
@@ -10,9 +12,20 @@ function Goals() {
 	const [protein, setProtein] = useState(0);
 	const [fats, setFats] = useState(0);
 	const [carbs, setCarbs] = useState(0);
+	const [alerts, setAlerts] = useState([]);
 
 	useEffect(() => {
 		fetchGoals();
+
+		const hideAlerts = () => {
+			setTimeout(() => {
+				setAlerts((prevAlerts) => prevAlerts.slice(1));
+			}, 3000); // Adjust the delay (in milliseconds) as needed
+		};
+
+		if (alerts.length > 0) {
+			hideAlerts();
+		}
 	}, []);
 
 	const fetchGoals = async () => {
@@ -61,12 +74,41 @@ function Goals() {
 		}
 
 		if (response.ok) {
-			console.log("update successful");
+			const newAlert = {
+				id: Date.now(),
+				title: "Goals Updated!",
+			};
+
+			setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
 		}
 	};
 
 	return (
 		<div className="goals">
+			<ToastContainer
+				position="top-end"
+				className="p-3"
+				style={{
+					position: "fixed",
+					top: "10px",
+					right: "10px",
+				}}
+			>
+				{alerts.map((alert) => (
+					<Toast
+						key={alert.id}
+						show
+						onClose={() => handleCloseAlert(alert.id)}
+						delay={3000}
+						autohide
+						className="toast-slide"
+					>
+						<Toast.Header>
+							<strong className="me-auto">{alert.title}</strong>
+						</Toast.Header>
+					</Toast>
+				))}
+			</ToastContainer>
 			<div className="update">
 				<h3>Update your Goals</h3>
 				<span>
