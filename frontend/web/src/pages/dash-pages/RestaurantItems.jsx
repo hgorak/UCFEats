@@ -297,7 +297,7 @@ function RestaurantItems() {
 										>
 											<button
 												onClick={() => {
-													addEat(index, false);
+													addEat(index, true);
 												}}
 												className="add"
 											>
