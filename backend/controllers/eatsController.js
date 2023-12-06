@@ -145,6 +145,22 @@ const deleteEat = async (req, res) => {
   if (updateResponse === null)
     return res.status(401).json({error: 'User Does Not Have This Eat'});
 
+  // Set time
+  let start = new Date();
+  start.setHours(0, 0, 0, 0);
+  start.setMinutes(start.getMinutes());
+
+  let end = new Date();
+  end.setHours(23, 59, 59, 999);
+  end.setMinutes(end.getMinutes());
+  
+  // Get current day eats
+  const dayEat = await EatsList.findOne({user_id: req.user._id, item_id: itemID, createdAt: time,  updatedAt: {$gte: start, $lt: end}});
+
+  // If the eat isn't from today, don't affect dayProgress of user
+  if (dayEat === null)
+    return res.status(200).json(updateResponse);
+
   // Remove the macros
   let progress = user.dayProgress;
   progress[0] -= item.Calories;
@@ -152,9 +168,9 @@ const deleteEat = async (req, res) => {
   progress[2] -= item.Carbs;
   progress[3] -= item.Protein;
 
-  await User.findByIdAndUpdate(req.user._id, {$set: {dayProgress: progress}});
+  const updateProgressResponse = await User.findByIdAndUpdate(req.user._id, {$set: {dayProgress: progress}});
 
-  res.status(200).json(updateResponse);
+  res.status(200).json(updateProgressResponse);
 };
 
 /* Eats by Time Period */
