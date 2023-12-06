@@ -6,6 +6,7 @@ import TimeSince from "../../components/TimeSince.jsx";
 import Placeholder from "react-bootstrap/Placeholder";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 import {
 	CircularProgressbar,
 	CircularProgressbarWithChildren,
@@ -169,7 +170,7 @@ function Home() {
 			<div className="charts">
 				<div className="charts-hero">
 					{!loading ? (
-						<div>
+						<>
 							{!hasGoals ? (
 								<div className="no-goals">
 									<h2>Time to set some goals!</h2>
@@ -253,14 +254,17 @@ function Home() {
 									</div>
 								</div>
 							)}
-						</div>
+						</>
 					) : (
-						<div></div>
+						<div className="loading">
+							<Spinner animation="border" />
+						</div>
 					)}
 				</div>
 				<div className="chart">
 					{!loading && (
 						<div className="chart-container">
+							<h3>Macronutrient Breakdown</h3>
 							<Doughnut
 								data={{
 									labels: ["Fats", "Carbs", "Protein"],
@@ -274,7 +278,7 @@ function Home() {
 								options={{
 									plugins: {
 										title: {
-											display: true,
+											display: false,
 											text: "Breakdown of Macronutrients",
 										},
 									},
@@ -290,39 +294,75 @@ function Home() {
 					<ListGroup variant="flush">
 						{loading ? (
 							<div>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>
-								<Placeholder as={ListGroup.Item} animation="glow">
+								<Placeholder
+									as={ListGroup.Item}
+									animation="glow"
+									style={{ border: "none" }}
+								>
 									<Placeholder xs={12} />
 									<Placeholder xs={4} />
 								</Placeholder>

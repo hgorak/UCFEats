@@ -18,17 +18,13 @@ function Dashboard() {
 		navigate("/");
 	};
 
-	const handleProfile = () => {
-		navigate("/dashboard/goals");
-	};
-
 	return (
 		<div className="dashboard">
 			<div className="navbar-container navbar-container-dash">
 				<div className="navbar navbar-dash">
 					<div className="title">
 						<Link to="/" className="dash-title">
-							<h1>UCFEats</h1>
+							<h1 style={{ color: "white" }}>UCFEats</h1>
 						</Link>
 					</div>
 					<div className="buttons">
