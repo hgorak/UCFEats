@@ -15,6 +15,7 @@ class AppTheme {
     useMaterial3: true,
     colorSchemeSeed: AppColors.primaryColor,
     scaffoldBackgroundColor: Colors.white,
+    fontFamily: "Roboto",
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontWeight: FontWeight.bold,
@@ -30,7 +31,7 @@ class AppTheme {
         letterSpacing: 0.5,
       ),
       bodySmall: TextStyle(
-        color: Colors.grey,
+        color: Color.fromARGB(255, 255, 255, 255),
         fontSize: 14,
         letterSpacing: 0.5,
       ),

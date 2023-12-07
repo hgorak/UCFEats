@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:ucfeats/models/food_model.dart';
+import 'package:ucfeats/utils/api_functions.dart';
 import 'package:ucfeats/utils/indicator.dart';
 
 import 'dashboard_page.dart';
@@ -16,13 +18,40 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
+  static List<FoodModel>? getDailyEats() {}
 }
 
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
+  List<FoodModel>? dailyEats;
 
-  double calorieGoal = 2000, proteinGoal = 200, carbGoal = 100, fatGoal = 80;
-  double calorieTotal = 1800, proteinTotal = 100, carbTotal = 50, fatTotal = 80;
+  double calorieGoal = 2000, proteinGoal = 200, carbGoal = 150, fatGoal = 80;
+  double calorieTotal = 0, proteinTotal = 0, carbTotal = 0, fatTotal = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getDailyEats();
+  }
+
+  getDailyEats() async {
+    try {
+      final dailyEats = await ApiFunctions().getDailyEats();
+      setState(() {
+        this.dailyEats = dailyEats;
+        for (int i = 0; i < dailyEats.length; i++) {
+          this.calorieTotal += dailyEats![i].calories;
+          this.proteinTotal += dailyEats![i].protein;
+          this.carbTotal += dailyEats![i].carbs;
+          this.fatTotal += dailyEats![i].fat;
+        }
+      });
+    } catch (e) {
+      debugPrint("Error during daily search");
+      debugPrint('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                             height: 16,
                           ),
                           const Indicator(
-                            color: Colors.blue,
+                            color: Color(0xFFFF9F40),
                             text: 'Protein',
                             isSquare: true,
                           ),
@@ -76,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                             height: 4,
                           ),
                           const Indicator(
-                            color: Colors.yellow,
+                            color: Color(0xFFFF6182),
                             text: 'Carbohydrates',
                             isSquare: true,
                           ),
@@ -84,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                             height: 4,
                           ),
                           const Indicator(
-                            color: Colors.purple,
+                            color: Color(0xFF35A1EC),
                             text: 'Fats',
                             isSquare: true,
                           ),
@@ -96,24 +125,44 @@ class _HomePageState extends State<HomePage> {
             color: Color.fromRGBO(224, 224, 224, 1),
           ),
           Expanded(
-            child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    ElevatedButton(
+            child: ListView.builder(
+              itemCount: dailyEats?.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('${dailyEats?[index].name}'),
+                  subtitle: Text(
+                    '${dailyEats?[index].locationName}\t\t|\t\t${dailyEats?[index].calories} calories - ${dailyEats?[index].protein}g protein - ${dailyEats?[index].carbs}g carbs - ${dailyEats?[index].fat}g fat',
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.black,
+                          size: 15,
+                        ),
                         onPressed: () {
-                          setState(() {
-                            proteinTotal += 5;
+                          setState(() async {
+                            await ApiFunctions()
+                                .deleteEat(dailyEats?[index].name);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: const Duration(seconds: 1),
+                                content: Text(
+                                  '${dailyEats?[index].name} deleted from your eats',
+                                ),
+                              ),
+                            );
                           });
                         },
-                        child: const Text("Press me")),
-                    const Text(
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-                    const Text(
-                        "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.")
-                  ],
-                )),
-          )
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -124,7 +173,7 @@ class _HomePageState extends State<HomePage> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Colors.blue,
+            color: Color(0xFFFF9F40),
             value: proteinTotal,
             title: "${proteinTotal.toInt()}\n(of ${proteinGoal.toInt()})",
             radius: 55,
@@ -136,7 +185,7 @@ class _HomePageState extends State<HomePage> {
           );
         case 1:
           return PieChartSectionData(
-            color: Colors.yellow,
+            color: Color(0xFFFF6182),
             value: carbTotal,
             title: "${carbTotal.toInt()}\n(of ${carbGoal.toInt()})",
             radius: 55,
@@ -148,7 +197,7 @@ class _HomePageState extends State<HomePage> {
           );
         case 2:
           return PieChartSectionData(
-            color: Colors.purple,
+            color: Color(0xFF35A1EC),
             value: fatTotal,
             title: "${fatTotal.toInt()}\n(of ${fatGoal.toInt()})",
             radius: 55,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:ucfeats/utils/api_functions.dart';
 import 'package:ucfeats/values/app_routes.dart';
 import 'package:ucfeats/models/login_model.dart';
 
@@ -22,35 +23,31 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  Future<LoginModel>? _setUser;
+  LoginModel? setUser;
 
   bool isObscure = true;
 
-  Future<LoginModel> login(String email, password) async {
-    debugPrint(passwordController.text.toString());
-    final response = await http.post(
-      Uri.parse(ApiConstants.baseUrl + ApiConstants.loginEndpoint),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(<String, String>{'email': email, 'password': password}),
-    );
-
-    if (response.statusCode == 200) {
-      debugPrint("Login successful");
-      // ignore: use_build_context_synchronously
+  getUser(String email, password) async {
+    try {
+      final setUser = await ApiFunctions().login(email, password);
+      LoginModel user = LoginModel(
+          email: setUser.email,
+          firstName: setUser.firstName,
+          lastName: setUser.lastName,
+          token: setUser.token);
+      await user.saveToSharedPreferences('user_key');
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Login Successful')));
-      Timer(const Duration(seconds: 2), () {
-        Navigator.pushReplacementNamed(context, AppRoutes.dashboardScreen);
+      Timer(const Duration(seconds: 1), () {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        Timer(const Duration(milliseconds: 75), () {
+          Navigator.pushReplacementNamed(context, AppRoutes.dashboardScreen);
+        });
       });
-      return LoginModel.fromJson(
-          jsonDecode(response.body) as Map<String, dynamic>);
-    } else {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Login Failed')));
-      throw Exception('Login failed :(');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: const Duration(seconds: 1), content: Text('Login Failed')));
+      debugPrint('Error: $e');
     }
   }
 
@@ -166,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                     FilledButton(
                       onPressed: () {
                         setState(() {
-                          _setUser = login(emailController.text.toString(),
+                          getUser(emailController.text.toString(),
                               passwordController.text.toString());
                         });
                       },

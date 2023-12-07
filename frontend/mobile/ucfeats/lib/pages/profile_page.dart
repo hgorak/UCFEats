@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:ucfeats/models/login_model.dart';
 
 import '../components/app_text_form_field.dart';
 import '../utils/extensions.dart';
@@ -12,19 +13,31 @@ class ProfilePage extends StatefulWidget {
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
+
+  static LoginModel? getUser() {}
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController calorieController = TextEditingController();
   TextEditingController proteinController = TextEditingController();
   TextEditingController carbController = TextEditingController();
   TextEditingController fatsController = TextEditingController();
+  LoginModel? loadedUser;
 
   bool isObscure = true;
   bool isConfirmPasswordObscure = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getUser();
+  }
+
+  getUser() async {
+    loadedUser = await LoginModel.loadFromSharedPreferences('user_key');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,124 +65,18 @@ class _ProfilePageState extends State<ProfilePage> {
                               height: 12,
                               thickness: 0.5,
                             ),
-                            Text('Email: [Insert the user email in here]',
-                                style: Theme.of(context).textTheme.bodySmall),
+                            Text('Email: ${loadedUser?.email}',
+                                style: TextStyle(color: Colors.black)),
                             const SizedBox(
                               height: 18,
                             ),
-
-                            // Beginning of Password thingy
-                            AppTextFormField(
-                              labelText: 'Change Password',
-                              keyboardType: TextInputType.visiblePassword,
-                              textInputAction: TextInputAction.next,
-                              onChanged: (_) =>
-                                  _formKey.currentState?.validate(),
-                              validator: (value) {
-                                return value!.isEmpty
-                                    ? 'Please, Enter Password'
-                                    : AppConstants.passwordRegex.hasMatch(value)
-                                        ? null
-                                        : 'Invalid Password';
-                              },
-                              controller: passwordController,
-                              obscureText: isObscure,
-                              // onEditingComplete: () {
-                              //   FocusScope.of(context).unfocus();
-                              //   FocusScope.of(context).requestFocus(confirmFocusNode);
-                              // },
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.only(right: 15),
-                                child: Focus(
-                                  /// If false,
-                                  ///
-                                  /// disable focus for all of this node's descendants
-                                  descendantsAreFocusable: false,
-
-                                  /// If false,
-                                  ///
-                                  /// make this widget's descendants un-traversable.
-                                  // descendantsAreTraversable: false,
-                                  child: IconButton(
-                                    onPressed: () => setState(() {
-                                      isObscure = !isObscure;
-                                    }),
-                                    style: ButtonStyle(
-                                      minimumSize: MaterialStateProperty.all(
-                                        const Size(48, 48),
-                                      ),
-                                    ),
-                                    icon: Icon(
-                                      isObscure
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility_outlined,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                            Text('First Name: ${loadedUser?.firstName}',
+                                style: TextStyle(color: Colors.black)),
+                            const SizedBox(
+                              height: 18,
                             ),
-                            AppTextFormField(
-                              labelText: 'Confirm Password',
-                              keyboardType: TextInputType.visiblePassword,
-                              textInputAction: TextInputAction.done,
-                              // focusNode: confirmFocusNode,
-                              onChanged: (value) {
-                                _formKey.currentState?.validate();
-                              },
-                              validator: (value) {
-                                return value!.isEmpty
-                                    ? 'Please, Re-Enter Password'
-                                    : AppConstants.passwordRegex.hasMatch(value)
-                                        ? passwordController.text ==
-                                                confirmPasswordController.text
-                                            ? null
-                                            : 'Password not matched!'
-                                        : 'Invalid Password!';
-                              },
-                              controller: confirmPasswordController,
-                              obscureText: isConfirmPasswordObscure,
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.only(right: 15),
-                                child: Focus(
-                                  /// If false,
-                                  ///
-                                  /// disable focus for all of this node's descendants.
-                                  descendantsAreFocusable: false,
-
-                                  /// If false,
-                                  ///
-                                  /// make this widget's descendants un-traversable.
-                                  // descendantsAreTraversable: false,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        isConfirmPasswordObscure =
-                                            !isConfirmPasswordObscure;
-                                      });
-                                    },
-                                    style: ButtonStyle(
-                                      minimumSize: MaterialStateProperty.all(
-                                        const Size(48, 48),
-                                      ),
-                                    ),
-                                    icon: Icon(
-                                      isConfirmPasswordObscure
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility_outlined,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            // Password reset button
-                            FilledButton(
-                                onPressed: () {
-                                  setState(() {});
-                                },
-                                child: const Text('Reset Password')),
+                            Text('Last Name: ${loadedUser?.lastName}',
+                                style: TextStyle(color: Colors.black)),
                             const SizedBox(
                               height: 26,
                             ),
@@ -179,23 +86,40 @@ class _ProfilePageState extends State<ProfilePage> {
                               height: 12,
                               thickness: 0.5,
                             ),
-                            Text('Calories [Form that has Cal Goal]',
-                                style: Theme.of(context).textTheme.bodySmall),
-                            const SizedBox(
-                              height: 18,
+                            SizedBox(height: 10),
+                            AppTextFormField(
+                              keyboardType: TextInputType.number,
+                              labelText: 'Calories',
+                              autofocus: true,
+                              textInputAction: TextInputAction.next,
+                              controller: calorieController,
                             ),
-                            Text('Protein [Form that has Protein Goal]',
-                                style: Theme.of(context).textTheme.bodySmall),
-                            const SizedBox(
-                              height: 18,
+                            AppTextFormField(
+                              keyboardType: TextInputType.number,
+                              labelText: 'Protein',
+                              autofocus: true,
+                              textInputAction: TextInputAction.next,
+                              controller: proteinController,
                             ),
-                            Text('Carbohydrates [Form that has Carb Goal]',
-                                style: Theme.of(context).textTheme.bodySmall),
-                            const SizedBox(
-                              height: 18,
+                            AppTextFormField(
+                              keyboardType: TextInputType.number,
+                              labelText: 'Carbohydrates',
+                              autofocus: true,
+                              textInputAction: TextInputAction.next,
+                              controller: carbController,
                             ),
-                            Text('Total Fats [Form that has Fat Goal]',
-                                style: Theme.of(context).textTheme.bodySmall),
+                            AppTextFormField(
+                              keyboardType: TextInputType.number,
+                              labelText: 'Total Fats',
+                              autofocus: true,
+                              textInputAction: TextInputAction.next,
+                              controller: fatsController,
+                            ),
+                            FilledButton(
+                                onPressed: () {
+                                  setState(() {});
+                                },
+                                child: const Text('Update Goals')),
                           ]),
                     )
                   ],

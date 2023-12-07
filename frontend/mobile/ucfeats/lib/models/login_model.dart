@@ -1,13 +1,5 @@
-// To parse this JSON data, do
-//
-//     final loginModel = loginModelFromJson(jsonString);
-
 import 'dart:convert';
-
-LoginModel loginModelFromJson(String str) =>
-    LoginModel.fromJson(json.decode(str));
-
-String loginModelToJson(LoginModel data) => json.encode(data.toJson());
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginModel {
   String email;
@@ -35,4 +27,26 @@ class LoginModel {
         "last_name": lastName,
         "token": token,
       };
+
+  // Serialize the LoginModel to a JSON string
+  String toSharedPreferencesString() => jsonEncode(toJson());
+
+  // Deserialize a JSON string from SharedPreferences into a LoginModel
+  factory LoginModel.fromSharedPreferencesString(String jsonString) =>
+      LoginModel.fromJson(jsonDecode(jsonString));
+
+  // Save the LoginModel to SharedPreferences
+  Future<void> saveToSharedPreferences(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, toSharedPreferencesString());
+  }
+
+  // Load a LoginModel from SharedPreferences
+  static Future<LoginModel?> loadFromSharedPreferences(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString(key);
+    return jsonString != null
+        ? LoginModel.fromSharedPreferencesString(jsonString)
+        : null;
+  }
 }
